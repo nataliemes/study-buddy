@@ -46,13 +46,13 @@
 
             $filename = $base . "." . $pathinfo["extension"];
 
-            $destination = "{$_SERVER['DOCUMENT_ROOT']}/PROJECT1/uploads/{$filename}";
+            $destination = "{$_SERVER['DOCUMENT_ROOT']}/web/uploads/{$filename}";
 
             // Add a numeric suffix if the file already exists
             $i = 1;
             while (file_exists($destination)) {
                 $filename = $base . " ($i)." . $pathinfo["extension"];
-                $destination = "{$_SERVER['DOCUMENT_ROOT']}/PROJECT1/uploads/{$filename}";
+                $destination = "{$_SERVER['DOCUMENT_ROOT']}/web/uploads/{$filename}";
                 $i++;
             }
 

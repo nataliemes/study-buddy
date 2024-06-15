@@ -2,7 +2,7 @@
     // tu shemosulia, loginis gverdze agar unda shediodes
     session_start();
     if (isset($_SESSION['EMAIL'])) {
-        header("Location: http://localhost/PROJECT1/index.php");
+        header("Location: http://localhost/web/index.php");
         die();
     }
 
@@ -25,7 +25,7 @@
         else {
             $message = "ERROR: such verification code does not exist.
                         <br> You will be redirected to sign-up page.";
-            header("refresh: 3, url= http://localhost/PROJECT1/sign-up.php");
+            header("refresh: 3, url= http://localhost/web/sign-up.php");
         }
     }
 
@@ -57,7 +57,7 @@
                 $_SESSION['IS_ADMIN'] = $row['is_admin'];
                 // $_SESSION['CREATED']   // vada rom gauvides ragac drois mere
 
-                header("Location: http://localhost/PROJECT1/index.php");
+                header("Location: http://localhost/web/index.php");
             }
         }
     } 
@@ -70,7 +70,7 @@
     <h2> Log in </h2>
     <?php echo $message; ?>
     
-    <form action="http://localhost/PROJECT1/log-in.php" method="post">
+    <form action="http://localhost/web/log-in.php" method="post">
         Email: <input type="email" class="email" name="email" required> <br>
         Password: <input type="password" class="password" name="password" required>
         <p><a href="forgot-password.php">Forgot Password?</a></p>
