@@ -94,7 +94,7 @@
 
 	<?php echo $message; ?>
 
-	<a href='log-out.php'> Log out </a>
+	<a href='auth/log-out.php'> Log out </a>
 
 
     <div class="tab">

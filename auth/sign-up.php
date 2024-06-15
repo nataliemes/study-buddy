@@ -2,7 +2,7 @@
     // tu shemosulia, registraciis gverdze agar unda shediodes
     session_start();
     if (isset($_SESSION['EMAIL'])) {
-        header("location: index.php");
+        header("location: http://localhost/web/index.php");
         die();
     }
 
@@ -13,9 +13,9 @@
     use PHPMailer\PHPMailer\Exception;
 
     //Load Composer's autoloader
-    require_once 'vendor/autoload.php';
+    require_once '../vendor/autoload.php';
 
-    include_once 'connection.php';
+    include_once '../connection.php';
     $message="";
 
     if (isset($_POST['submit'])) {
@@ -33,10 +33,10 @@
                         Password and confirm password do not match. </div>";
         }
         else {
-            $result_email = secureQuery("SELECT * FROM user WHERE email=?", "s", [$email]);
-            $result_email = $result_email->get_result();
-            $result_username = secureQuery("SELECT * FROM user WHERE username=?", "s", [$username]);
-            $result_username = $result_username->get_result();
+            $result_email = secureQuery("SELECT * FROM user WHERE email=?", "s", [$email])
+                            ->get_result();
+            $result_username = secureQuery("SELECT * FROM user WHERE username=?", "s", [$username])
+                            ->get_result();
 
             // if email or username is taken
             if ($result_email->num_rows > 0) {
@@ -85,7 +85,7 @@
                     // Content
                     $mail->isHTML(true);                                // Set email format to HTML
                     $mail->Subject = 'no reply';
-                    $mail->Body    = '<b><a href="http://localhost/web/log-in.php/?verification='. $code. '">
+                    $mail->Body    = '<b><a href="http://localhost/web/auth/log-in.php/?verification='. $code. '">
                                     Click here to verify your account </a></b>';
 
                     $mail->send();

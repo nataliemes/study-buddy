@@ -19,7 +19,7 @@
     }
     else if (!isset($_SESSION['EMAIL'])){
         $msg = "You have to be logged in to send feedback!
-                <a href=log-in.php> Log in </a> ";
+                <a href=auth/log-in.php> Log in </a> ";
     }
 ?>
 

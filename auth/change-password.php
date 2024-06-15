@@ -1,7 +1,7 @@
 <?php
 
 $message = "";
-include 'connection.php';
+include '../connection.php';
 
 if (isset($_GET['reset'])) {
 
@@ -22,17 +22,17 @@ if (isset($_GET['reset'])) {
                 $message = "<div class='alert alert-danger'>
                         Password updated successfully. <br>
                         You will be redirected to log in page. </div>";
-                header("refresh: 3, url=http://localhost/web/log-in.php");
+                header("refresh: 3, url=http://localhost/web/auth/log-in.php");
             }
         }
     }
     else {
         $message = "ERROR: such reset code does not exist.
                     <br> You will be redirected to sign-up page.";
-        header("refresh: 3, url= http://localhost/web/sign-up.php");
+        header("refresh: 3, url= http://localhost/web/auth/sign-up.php");
     }
 } else {
-    header("Location: forgot-password.php"); 
+    header("Location: http://localhost/web/auth/forgot-password.php"); 
 }
 
 ?>
@@ -49,6 +49,6 @@ if (isset($_GET['reset'])) {
         <button name="submit" class="btn" type="submit">Change Password</button>
     </form>
     
-    <p>Back to: <a href="index.php"> Login </a></p>
+    <p>Back to: <a href="http://localhost/web/index.php"> Login </a></p>
 </body>
 </html>

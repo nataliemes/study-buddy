@@ -5,7 +5,7 @@
     $link_address = "";
     if (!isset($_SESSION['EMAIL'])) {
         $link_name = "Log in";
-        $link_address = "log-in.php";
+        $link_address = "auth/log-in.php";
     }
     else {
         // TO-DO: bazis magivrad $_SESSION-shi sheinaxe username & is_admin
