@@ -2,7 +2,7 @@
 
 	session_start();
 	if (!isset($_SESSION['SESSION_EMAIL'])) {
-		header("Location: log-in.php");
+		header("Location: auth/log-in.php");
 		die();
 	}
 	

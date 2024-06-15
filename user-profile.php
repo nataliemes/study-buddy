@@ -10,7 +10,7 @@
     }
 
 	echo "<h1 style='color: blue'> USER PAGE </h1>";
-    echo "<a href='log-out.php'> Log out </a>";
+    echo "<a href='auth/log-out.php'> Log out </a>";
 
 	require_once "connection.php";
 ?>
