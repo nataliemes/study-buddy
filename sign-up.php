@@ -85,7 +85,7 @@
                     // Content
                     $mail->isHTML(true);                                // Set email format to HTML
                     $mail->Subject = 'no reply';
-                    $mail->Body    = '<b><a href="http://localhost/PROJECT1/log-in.php/?verification='. $code. '">
+                    $mail->Body    = '<b><a href="http://localhost/web/log-in.php/?verification='. $code. '">
                                     Click here to verify your account </a></b>';
 
                     $mail->send();

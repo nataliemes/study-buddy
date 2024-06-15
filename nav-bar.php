@@ -20,10 +20,10 @@
             $link_name = "{$row['username']}";
 
             if ($row['is_admin']){   // === TRUE da === 1 ar mushaobs ratomgac
-                $link_address = "http://localhost/PROJECT1/admin-profile.php";
+                $link_address = "http://localhost/web/admin-profile.php";
             }
             else {
-                $link_address = "http://localhost/PROJECT1/user-profile.php";
+                $link_address = "http://localhost/web/user-profile.php";
             }
         }
         else {
@@ -35,11 +35,11 @@
     echo "
         <nav>
             <h1> NAME </h1>
-            <a href='http://localhost/PROJECT1/index.php'> Home </a>
-            <a href='http://localhost/PROJECT1/about.php'> About </a>
+            <a href='http://localhost/web/index.php'> Home </a>
+            <a href='http://localhost/web/about.php'> About </a>
             <a href='#'> Posts </a>
-            <a href='http://localhost/PROJECT1/contact.php'> Contact </a>
-            <a href='http://localhost/PROJECT1/faq.php'> FAQ </a>
+            <a href='http://localhost/web/contact.php'> Contact </a>
+            <a href='http://localhost/web/faq.php'> FAQ </a>
             <a href='{$link_address}'> {$link_name} </a>
         </nav>
     ";

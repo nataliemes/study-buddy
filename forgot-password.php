@@ -54,7 +54,7 @@
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'no reply';
                 $mail->Body    = 'Here is the link to change password
-                <b><a href="http://localhost/PROJECT1/change-password.php?reset='.$code.'">
+                <b><a href="http://localhost/web/change-password.php?reset='.$code.'">
                             Click here to change password </a></b>';
 
                 $mail->send();

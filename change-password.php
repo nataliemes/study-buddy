@@ -22,14 +22,14 @@ if (isset($_GET['reset'])) {
                 $message = "<div class='alert alert-danger'>
                         Password updated successfully. <br>
                         You will be redirected to log in page. </div>";
-                header("refresh: 3, url=http://localhost/PROJECT1/log-in.php");
+                header("refresh: 3, url=http://localhost/web/log-in.php");
             }
         }
     }
     else {
         $message = "ERROR: such reset code does not exist.
                     <br> You will be redirected to sign-up page.";
-        header("refresh: 3, url= http://localhost/PROJECT1/sign-up.php");
+        header("refresh: 3, url= http://localhost/web/sign-up.php");
     }
 } else {
     header("Location: forgot-password.php"); 
