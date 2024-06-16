@@ -1,32 +1,33 @@
 <?php
     // tu shemosulia, registraciis gverdze agar unda shediodes
     session_start();
-    if (isset($_SESSION['EMAIL'])) {
+    if (isset($_SESSION['USERNAME'])) {
         header("location: http://localhost/web/index.php");
         die();
     }
 
-    //Import PHPMailer classes into the global namespace
-    //These must be at the top of your script, not inside a function
+    // import PHPMailer classes into the global namespace
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    //Load Composer's autoloader
+    // load Composer's autoloader
     require_once '../vendor/autoload.php';
 
-    include_once '../connection.php';
-    $message="";
+    require_once '../nav-bar.php';
+    require_once '../connection.php';
+    $message = "";
 
     if (isset($_POST['submit'])) {
+        
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
         $password = md5($_POST['password']);
         $confirmPassword = md5($_POST['confirm-password']);
 
-        if (empty($username) || empty($password) || empty($confirmPassword)){
+        if (empty($username)){  // password may contain spaces
             $message = "<div class='alert alert-danger'>
-                        Invalid input. Make sure no fields are empty. </div>";
+                        Invalid username: it only contains spaces. </div>";
         }
         else if ($password !== $confirmPassword) {
             $message = "<div class='alert alert-danger'>
@@ -41,13 +42,18 @@
             // if email or username is taken
             if ($result_email->num_rows > 0) {
                 $result_email = $result_email->fetch_assoc();
-                if ($result_email['code'] == ''){  // if user with this email is already registered
+
+                // if user with this email is already registered
+                if ($result_email['code'] == ''){
                     $message = "<div class='alert alert-danger'>
                                 Account with this email address already exists. </div>";
                 }
-                else {  // if user with this email tried to register, but isn't verified
+
+                // if user with this email tried to register, but isn't verified
+                else {
                     $message = "<div class='alert alert-danger'>
-                                You have already tried to register. Check the email to verify your account. </div>";
+                                You have already tried to register. <br>
+                                Check the email to verify your account. </div>";
                 }
             } 
             else if ($result_username->num_rows > 0){
@@ -55,7 +61,8 @@
                             Account with this username already exists. </div>";
             }
 
-            else {   // if email & username are available
+            // if email & username are available
+            else {
 
                 $code = md5($email);  // unique & random verification code 
 
@@ -64,8 +71,7 @@
 
                 secureQuery($sql, "ssss", [$username, $email, $password, $code]);
 
-                //Create an instance; passing `true` enables exceptions
-                $mail = new PHPMailer(true);
+                $mail = new PHPMailer(true);   // passing `true` enables exceptions
 
                 try {
                     // Server settings
@@ -83,7 +89,7 @@
                     $mail->addAddress($email);
 
                     // Content
-                    $mail->isHTML(true);                                // Set email format to HTML
+                    $mail->isHTML(true);
                     $mail->Subject = 'no reply';
                     $mail->Body    = '<b><a href="http://localhost/web/auth/log-in.php/?verification='. $code. '">
                                     Click here to verify your account </a></b>';
@@ -93,10 +99,10 @@
                 catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
-                echo "</div>";
+                
                 $message = "<div class='alert alert-info'>
                             A verification link has been sent on your email address. </div>";
-                
+
             }
         }
     }
@@ -104,7 +110,12 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Project Demo</title>
 
+</head>
 <body>    
     <h2> Register </h2>
     <?php echo $message; ?>
@@ -117,8 +128,7 @@
         <button name="submit" class="btn" type="submit">Register</button>
     </form>
     
-    <p> Have an account? <a href="log-in.php"> Log in </a> </p>
+    <p> Have an account? <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
 
 </body>
-
 </html>

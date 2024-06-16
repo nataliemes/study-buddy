@@ -10,25 +10,30 @@
     $message="";
     
 
+    // verifying account
     if (isset($_GET['verification'])) {
 
-        $selectResult = (secureQuery("SELECT * FROM user WHERE code=? AND password_hash!=''", "s", [$_GET['verification']]))
+        $selectResult = (secureQuery("SELECT * FROM user WHERE code=? AND registration_date=0000-00-00", "s", [$_GET['verification']]))
                         ->get_result();
     
         if ($selectResult->num_rows > 0) {
+
+            $sql = "UPDATE user
+                    SET registration_date = current_date(), 
+                        code = ''
+                    WHERE registration_date = 0000-00-00 AND code = ?";
             
-            secureQuery("UPDATE user SET code='' WHERE code=? AND password_hash!=''", "s", [$_GET['verification']]);
-            $message = "<div class='alert alert-success'>Account verification has been successfully completed.</div>";
-            $mysqli->query("UPDATE user SET registration_date=current_date()
-                        WHERE code='' AND registration_date=0000-00-00");
+            secureQuery($sql, "s", [$_GET['verification']]);
         } 
         else {
             $message = "ERROR: such verification code does not exist.
                         <br> You will be redirected to sign-up page.";
             header("refresh: 3, url=http://localhost/web/auth/sign-up.php");
+            die();
         }
     }
 
+    // logging into an existing account
     if (isset($_POST['submit'])) {
         
         $email = trim($_POST['email']);
@@ -40,8 +45,9 @@
         $result = (secureQuery($sql, "ss", [$email, $password]))
                     ->get_result();
         
-        if ($result->num_rows !== 1) {
-            $message = "<div class='alert alert-danger'> Wrong email or password </div>";
+        if ($result->num_rows === 0) {
+            $message = "<div class='alert alert-danger'>
+                        Wrong email or password </div>";
         }
         else {
             $row = $result->fetch_assoc();
@@ -56,9 +62,9 @@
                 $_SESSION['USERNAME'] = $row['username'];
                 $_SESSION['IS_ADMIN'] = $row['is_admin'];
                 // $_SESSION['CREATED']   // vada rom gauvides ragac drois mere
-
-               
+   
                 header("Location: http://localhost/web/index.php");
+                die();
             }
         }
     } 
