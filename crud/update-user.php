@@ -1,77 +1,93 @@
 <?php
 
 	session_start();
-	if (!isset($_SESSION['SESSION_EMAIL'])) {
-		header("Location: auth/log-in.php");
-		die();
-	}
-	
-	// admini tu araa ar unda ixsnebodes es gverdi
 
-	require_once "connection.php";
-
-	$id = $_GET['id'];
-	$sql = "SELECT * FROM user
-            WHERE user_id = ?";
-
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("i", $id);
-
-    if (!$stmt->execute()){
-        die ("ERROR: could not find the user");
+	// if not logged in, shouldn't have access
+    if (!isset($_SESSION['EMAIL'])) {
+        header("Location: http://localhost/web/index.php");
+        die();
     }
-    
-    $row = ($stmt->get_result())->fetch_assoc();
 
+	// if logged in & normal user, shouldn't have access
+    if (!$_SESSION['IS_ADMIN']) {
+        header("Location: http://localhost/web/user-profile.php");
+        die();
+    }
+
+	//////////////////////////////////////////////////////////////////
+
+	require_once "../connection.php";
+	$message = "";
+
+	$id = $_POST['user_id'];
+
+	$queryResult = $mysqli->query("SELECT * FROM user WHERE user_id = {$id}");
+	$row = $queryResult->fetch_assoc();
+	// not checking if query is successful, cause i'm giving id from db, user must exist
+	
 	$username = $row['username'];
 	$email = $row['email'];
 	$is_admin = $row['is_admin'];
 
-	if(isset($_POST['submit'])) {
-		$user = trim($_POST['user']);
-		$mail = trim($_POST['mail']);
+	if (isset($_POST['saveUpdate'])) {
 
-		$sql = "UPDATE user
-				SET username=?, email=?
-				WHERE user_id = ?";
+		$new_username = trim($_POST['user']);
+		$new_email = trim($_POST['mail']);
 
-		$stmt = $mysqli->prepare($sql);
-		$stmt->bind_param("ssi", $user, $mail, $id);
-		$stmt->execute();
+		if ($new_username !== $username) {
+			$sql = "UPDATE user
+				SET username=?
+				WHERE user_id = $id";
 
-        if (isset($_POST['user-role']) && !$is_admin){
+			secureQuery($sql, "s", [$new_username]);
+
+			global $username;
+			$username = $new_username;
+		}
+
+		if ($new_email !== $email) {
+			$sql = "UPDATE user
+				SET email=?
+				WHERE user_id = $id";
+
+			secureQuery($sql, "s", [$new_email]);
+
+			global $email;
+			$email = $new_email;
+		}
+
+        if ($_POST['user-role'] !== $is_admin){
             $sql = "UPDATE user
-				SET is_admin=1
-				WHERE user_id = ?";
+				SET is_admin = {$_POST['user-role']}
+				WHERE user_id = {$id}";
 
-            $stmt = $mysqli->prepare($sql);
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
+			$mysqli->query($sql);
         }
 
-		echo("Record updated successfully!");
-		header("refresh:5, url=admin-profile.php");
+		$message = "Record updated successfully!";
 	}
-	else {
+
 ?>
 
+	<?php include_once "../nav-bar.php"; ?>
 	<h2>Update Record</h2>
+	<?php echo $message; ?>
+	
+
 	<form action="" method="post" >
 
 	Username: <br> <input type="text" value="<?php echo $username; ?>" name="user"> <br>
 	Email: <br> <input type="text" value="<?php echo $email; ?>"name="mail"> <br>
 	Role: <br>
-	<select name="user-role" id="user-role">        <!-- TO-DO: default-ad rom axlandeli role iyos (JQuerry) -->
-		<option value="admin"> Admin </option>
-		<option value="user"> User </option>
+	<select name="user-role" id="user-role">
+		<option value="1"> Admin </option>
+		<option value="0"> User </option>
 	</select>
 
 	<!--  formas vayolebt id-s, rom submit-ze dacheris mere php-shi gvqondes id  -->
-	<input type="hidden" value="<?php echo $id; ?>">
+	<input type="hidden" value="<?php echo $id; ?>" name="user_id">
 
-	<input type="submit" value="Update" name="submit">
+	<input type="submit" name="saveUpdate" value="Update">
 	</form>
 
-<?php
-	}
-?>	
+	<a href='http://localhost/web/admin-profile.php'> Back to profile </a>

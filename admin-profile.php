@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 
 	// if not logged in, shouldn't have access to admin profile
@@ -13,26 +12,107 @@
         header("Location: http://localhost/web/user-profile.php");
         die();
     }
-	
 
-	require_once "connection.php";
 	$message = "";
-
-	if (isset($_POST['Delete'])){
-        $mysqli->query("DELETE FROM user WHERE user_id={$_POST['user_id']}");
+	require_once "connection.php";
+	
+	if (isset($_POST['delete'])){
+        $mysqli->query("DELETE FROM user WHERE user_id = {$_POST['user_id']}");
 		$message = "User deleted successfully.";
     }
-	
-	if (isset($_POST['Download'])){
+
+	if (isset($_POST['download'])){
         // download file with user data in it
 
+		$id = $_POST['user_id'];
 
-		$file = "user-info.txt";
+		$sql = "SELECT username, email, is_admin, registration_date FROM user
+                WHERE user_id = {$id}";
+		$user = ($mysqli->query($sql))->fetch_assoc();    // only 1 row
+
+		$file = "{$user['username']}-info.txt";
 		$txt = fopen($file, "w") or die("Unable to open file!");
 
-		$info = "here's some info"; // write everything here
+		$output = "User Information:\n";
+		$output .= "------------------\n";
+		$output .= "Username: {$user['username']}\n";
+		$output .= "Email: {$user['email']}\n";
+		$output .= "Is Admin: " . ($user['is_admin'] ? 'Yes' : 'No') . "\n";
+		$output .= "Registration Date: {$user['registration_date']}\n\n";
 
-		fwrite($txt, $info);
+
+
+		// feedbacks
+		$sql = "SELECT name, description, creation_date FROM feedback
+                WHERE user_id = {$id}";
+		
+		$feedbacks = ($mysqli->query($sql))->fetch_all(MYSQLI_ASSOC);
+		$output .= "Feedbacks:\n";
+		$output .= "----------\n";
+		
+		if ($feedbacks) {
+			foreach ($feedbacks as $feedback) {
+				$output .= "Name: {$feedback['name']}\n";
+				$output .= "Description: {$feedback['description']}\n";
+				$output .= "Creation Date: {$feedback['creation_date']}\n\n";
+			}
+		} else {
+			$output .= "No feedbacks found.\n\n";
+		}
+
+		// categories
+		$sql = "SELECT name, description, creation_date FROM category
+                WHERE user_id = {$id}";
+		
+		$categories = ($mysqli->query($sql))->fetch_all(MYSQLI_ASSOC);
+		$output .= "Categories:\n";
+		$output .= "----------\n";
+		
+		if ($feedbacks) {
+			foreach ($categories as $category) {
+				$output .= "Name: {$category['name']}\n";
+				$output .= "Description: {$category['description']}\n";
+				$output .= "Creation Date: {$category['creation_date']}\n\n";
+			}
+		} else {
+			$output .= "No categories found.\n\n";
+		}
+
+
+		// posts
+		$sql = "SELECT p.name as post_name, p.description, p.file_path, p.creation_date,
+					GROUP_CONCAT(c.name SEPARATOR ', ') as cat_names
+				FROM post p JOIN post_category pc ON pc.post_id = p.post_id
+				JOIN category c ON c.category_id = pc.category_id
+				WHERE p.user_id = {$id}
+				GROUP BY p.post_id";	
+		
+
+		$posts = ($mysqli->query($sql))->fetch_all(MYSQLI_ASSOC);
+		$output .= "Posts:\n";
+		$output .= "------\n";
+
+		if ($posts) {
+			
+			foreach ($posts as $post) {
+				$output .= "Name: {$post['post_name']}\n";
+				$output .= "Description: {$post['description']}\n";
+				$output .= "File: {$post['file_path']}\n";
+				$output .= "Creation Date: {$post['creation_date']}\n";
+				$output .= "Categories: {$post['cat_names']}\n\n";
+			}
+		} else {
+			$output .= "No posts found.\n\n";
+		}
+	
+
+		
+		
+
+
+
+
+		fwrite($txt, $output);
 		fclose($txt);
 
 		header('Content-Description: File Transfer');
@@ -43,9 +123,8 @@
 		header('Content-Length: ' . filesize($file));
 		header("Content-Type: text/plain");
 		readfile($file);
-		die(); // smth wrong cause it keeps outputing navbar code in file
+		die();
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -79,52 +158,33 @@
 
 	<div id="users" class="tabcontent first">
         
-        
-
         <?php
-            //Select records from table 
+            require_once "connection.php";
 			$queryResult = $mysqli->query("SELECT * FROM user");
 
 			if($queryResult) {
-				if($queryResult->num_rows > 0) {
-
-					// Display results into a table
-					echo "
-					<table border=1>
-					<tr>
-						<th> user_id </th>
-						<th> username </th>
-						<th> email </th>
-						<th> is_admin </th>
-						<th> registration date </th>
-						<th> operations </th>
-					</tr>
-					";
+				if($queryResult->num_rows > 0) {					
 
 					while($row = $queryResult->fetch_assoc()) {
-						echo "<tr>
-							<td>". $row['user_id'] ."</td>
-							<td>". $row['username']. "</td>
-							<td>". $row['email']."</td>
-							<td>". $row['is_admin']."</td>
-							<td>". $row['registration_date']."</td>";
-						echo '<td>
-							<a href="view-user.php?id='. $row['user_id'] .'" > View Posts </a>';
+						echo "<br><br> user_id: " . $row['user_id'] .
+								"<br> username: " . $row['username'] .
+								"<br> email: " . $row['email'] .
+								"<br> is_admin: " . $row['is_admin'] .
+								"<br> registration date: " . $row['registration_date'];
+						
 						if ($_SESSION['EMAIL'] !== $row['email']) {  // tavisi tavi rom ar shecvalos
-							// echo '<a href="update-user.php?id='. $row['user_id'] .'" > Update </a>
-							// <a href="delete-user.php?id='. $row['user_id'] .'" > Delete </a>
-							// <a href="download-user-data.php?id='. $row['user_id'] .'" > Download data </a>';
 							echo "<form action='' method='POST'>
-									<input type='submit' value='Update' name='Update'>
-									<input type='submit' value='Delete' name='Delete'>
-									<input type='submit' value='Download' name='Download'>
+									<input type='submit' value='Delete' name='delete'>
+									<input type='submit' value='Download' name='download'>
 									<input type='hidden' value='{$row['user_id']}' name='user_id'>
 								</form>";
+							echo "<form action='crud/update-user.php' method='POST'>
+								<input type='submit' value='Update' name='update'>
+								VIEW POSTS?
+								<input type='hidden' value='{$row['user_id']}' name='user_id'>
+							</form>";
 						}
-					echo '</td>
-						</tr>';
-					}
-					echo "</table>";			
+					}			
 				}			
 				else {
 					echo "No users found";

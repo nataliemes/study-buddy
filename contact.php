@@ -11,7 +11,7 @@
         $subject = trim($_POST['subject']);
         $feedback = trim($_POST['feedback-text']);
         
-        $sql = "INSERT INTO feedback (user_id, upload_date, subject, text)
+        $sql = "INSERT INTO feedback (user_id, creation_date, name, description)
                     VALUES ({$_SESSION['USER_ID']}, current_date(), ?, ?)";
 
         secureQuery($sql, "ss", [$subject, $feedback]);
