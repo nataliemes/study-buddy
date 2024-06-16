@@ -1,7 +1,10 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['EMAIL'])) {
+        header("Location: http://localhost/web/index.php");
+        die();
+    }
 
-	// nav-bar-shi mowmdeba user shemosulia tu ara
-	include 'nav-bar.php';
     $message = "";
 
     if(isset($_POST['submit'])) {
@@ -13,17 +16,19 @@
             $message = "Category could not be added. Make sure not to leave any empty fields!";
         }
         else {
-            require_once "connection.php";
+            $name = str_replace(' ', '_', $name);
+
+            require_once "../connection.php";
 
             $selectResult = secureQuery("SELECT * FROM category WHERE name=?", "s", [$name])
-                        ->get_result();
+                            ->get_result();
         
             if ($selectResult->num_rows > 0){
                 $message = "Category already exists";
             }
             else {            
                 $sql = "INSERT INTO category (user_id, name, description, creation_date)
-                            VALUES ({$_SESSION['USER_ID']}, ?, ?, current_date())";
+                        VALUES ({$_SESSION['USER_ID']}, ?, ?, current_date())";
 
                 secureQuery($sql, "ss", [$name, $description]);
 
@@ -35,12 +40,13 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 </head>
 <body>
+    <?php include '../nav-bar.php'; ?>
     <h2> Create new category </h2>
     <?php echo $message ?>
 
@@ -55,10 +61,10 @@
 
     <?php
         if ($_SESSION['IS_ADMIN']) {
-            $link = "admin-profile.php";
+            $link = "http://localhost/web/admin-profile.php";
         }
         else {
-            $link = "user-profile.php";
+            $link = "http://localhost/web/user-profile.php";
         }
         echo "<a href={$link}> Back to profile </a>";
     ?>

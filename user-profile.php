@@ -4,13 +4,13 @@
 
     // if not logged in, shouldn't have access to user profile
     if (!isset($_SESSION['EMAIL'])) {
-        header("Location: index.php");
+        header("Location: http://localhost/web/index.php");
         die();
     }
 
     // if logged in & admin, should go to admin profile instead
     if ($_SESSION['IS_ADMIN']) {
-        header("Location: admin-profile.php");
+        header("Location: http://localhost/web/admin-profile.php");
         die();
     }
 
@@ -45,17 +45,17 @@
     </div>
 
     <div id="posts" class="tabcontent first">
-        <a href="create-post.php"> Create new post </a>    
+        <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
         <?php showDBdata("post", "user"); ?>
     </div>
 
     <div id="categories" class="tabcontent">
-        <a href="create-category.php"> Create new category </a>
+        <a href="http://localhost/web/crud/create-category.php"> Create new category </a>
         <?php showDBdata("category", "user"); ?>
     </div>
 
     <div id="feedback" class="tabcontent">
-        <a href="contact.php"> Create new feedback </a>
+        <a href="http://localhost/web/contact.php"> Create new feedback </a>
         <?php showDBdata("feedback", "user"); ?>
     </div>
    
