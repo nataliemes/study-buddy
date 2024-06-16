@@ -1,9 +1,16 @@
 <?php
 
-	// nav-bar-shi mowmdeba user shemosulia tu ara
 	include 'nav-bar.php';
 	
 	// sesias dawyeba agar unda, nav-bar-shi daiwyo
+
+    // if not logged in, shouldn't have access to user profile
+    if (!isset($_SESSION['EMAIL'])) {
+        header("Location: index.php");
+        die();
+    }
+
+    // if logged in & admin, should go to admin profile instead
     if ($_SESSION['IS_ADMIN']) {
         header("Location: admin-profile.php");
         die();

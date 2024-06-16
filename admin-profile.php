@@ -1,13 +1,21 @@
 <?php
 
-	// nav-bar-shi mowmdeba user shemosulia tu ara
 	include 'nav-bar.php';
 	
 	// sesias dawyeba agar unda, nav-bar-shi daiwyo
+
+	// if not logged in, shouldn't have access to admin profile
+    if (!isset($_SESSION['EMAIL'])) {
+        header("Location: index.php");
+        die();
+    }
+
+	// if logged in & normal user, should go to user profile instead
     if (!$_SESSION['IS_ADMIN']) {
         header("Location: user-profile.php");
         die();
     }
+	
 
 	require_once "connection.php";
 	$message = "";
@@ -24,7 +32,7 @@
 		$file = "user-info.txt";
 		$txt = fopen($file, "w") or die("Unable to open file!");
 
-		$info = "here's some info"; // write everythign here
+		$info = "here's some info"; // write everything here
 
 		fwrite($txt, $info);
 		fclose($txt);

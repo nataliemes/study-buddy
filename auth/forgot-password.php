@@ -6,8 +6,7 @@
         die();
     }
 
-    //Import PHPMailer classes into the global namespace
-    //These must be at the top of your script, not inside a function
+    // import PHPMailer classes into the global namespace
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
@@ -15,6 +14,7 @@
     //Load Composer's autoloader
     require_once '../vendor/autoload.php';
 
+    require_once '../nav-bar.php';
     include_once '../connection.php';
     $message="";
 
@@ -38,7 +38,6 @@
             else {
                 secureQuery("UPDATE user SET code=? WHERE email=?", "ss", [$code, $email]);
 
-                //Create an instance; passing `true` enables exceptions
                 $mail = new PHPMailer(true);
 
                 try {
@@ -67,9 +66,6 @@
                     $message = "<div class='alert alert-info'> A password reset link has been sent to your email address.
                                 <br> You will no longer be able to log in with your old password. </div>";
 
-                    // setting empty password, so that user can no longer log in
-                    // & the reset code cannot be used as a verification code
-                    secureQuery("UPDATE user SET password_hash='' WHERE email=?", "s", [$email]);
                 }
                 catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -78,7 +74,8 @@
             }
             
         } else {
-            $message = "<div class='alert alert-danger'> Your email address was not found.</div>";
+            $message = "<div class='alert alert-danger'>
+                        Your email address was not found.</div>";
         }
     }
 
