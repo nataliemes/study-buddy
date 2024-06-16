@@ -1,6 +1,6 @@
 <?php
 
-    include 'nav-bar.php';
+    session_start();
     $msg = "";
     
     // sesias dawyeba agar unda, nav-bar-shi daiwyo
@@ -28,9 +28,14 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav-bar.css">
 </head>
 <body>
-    <?php echo "<p> {$msg} </p>"; ?>
+    <?php
+        include 'nav-bar.php';
+        echo "<p> {$msg} </p>";
+    ?>
+
     <form action="" method="post">
         Subject: <br> <input type="text" name="subject" required> <br>
         Text: <br> <textarea rows="8" cols="60" id="feedback-text" name="feedback-text"

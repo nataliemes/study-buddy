@@ -1,8 +1,6 @@
 <?php
 
-	include 'nav-bar.php';
-	
-	// sesias dawyeba agar unda, nav-bar-shi daiwyo
+    session_start();
 
     // if not logged in, shouldn't have access to user profile
     if (!isset($_SESSION['EMAIL'])) {
@@ -16,9 +14,6 @@
         die();
     }
 
-	echo "<h1 style='color: blue'> USER PAGE </h1>";
-    echo "<a href='auth/log-out.php'> Log out </a>";
-
 	require_once "connection.php";
 ?>
 
@@ -26,54 +21,22 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- <link rel="stylesheet" href="style.css"> -->
-
-    <style>
     
-
-        .tab {
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-            height: 50px;
-            
-        }
-
-        .tab button {
-            border: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            font-size: 17px;
-            transition: 0.3s;
-        }
-
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-
-            border: 1px solid #ccc;
-            border-top: none;
-            background-color: lightblue;
-        }
-
-        .tabcontent.first {
-            display: block;
-        }
-
-    </style>
+	<!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="nav-bar.css">
+    <link rel="stylesheet" href="profile.css">
 
     <script src="profile.js" ></script>
 
     </head>
 <body>
 
+    <?php
+        include 'nav-bar.php';
+    ?>
+
+    <h1 style='color: blue'> USER PAGE </h1>
+    <a href='auth/log-out.php'> Log out </a>
 
     <div class="tab">
         <button class="tablinks active" onclick="openTab(event, 'posts')">My posts</button>
@@ -117,7 +80,6 @@
         <a href="create-category.php"> Create new category </a>
         
         <?php
-            //Select records from table 
             $myQuery = "SELECT * FROM category
                         WHERE user_id={$_SESSION['USER_ID']}";
             $queryResult = $mysqli->query($myQuery);
@@ -146,7 +108,6 @@
         <a href="contact.php"> Create new feedback </a>
     
         <?php
-            //Select records from table 
             $myQuery = "SELECT * FROM feedback
                         WHERE user_id={$_SESSION['USER_ID']}";
             $queryResult = $mysqli->query($myQuery);
@@ -167,10 +128,7 @@
             else {
                 echo "Something went wrong with query";
             }
-        
-
         ?>
-    
     </div>
    
 </body>

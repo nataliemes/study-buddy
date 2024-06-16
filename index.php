@@ -1,6 +1,5 @@
-<?php
-    // nav-bar-shi mowmdeba user shemosulia tu ara
-    include 'nav-bar.php';
+<?php 
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +14,8 @@
     <!-- <script src="https://kit.fontawesome.com/92d78ba0ea.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
+    <!-- nav-bar-shi mowmdeba user shemosulia tu ara -->
+    <?php include 'nav-bar.php'; ?>
 
     <main id="landing-page">
         <img src="images/img2.png" alt="image">
