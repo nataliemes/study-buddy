@@ -1,6 +1,5 @@
 <?php
-    // nav-bar-shi mowmdeba user shemosulia tu ara
-    include 'nav-bar.php';
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -9,9 +8,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav-bar.css">
 </head>
 
 <body>
+    <?php
+        include 'nav-bar.php';
+    ?>
+
     <h1> About us </h1>
 
     <p>

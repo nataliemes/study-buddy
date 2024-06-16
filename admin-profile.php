@@ -1,8 +1,6 @@
 <?php
 
-	include 'nav-bar.php';
-	
-	// sesias dawyeba agar unda, nav-bar-shi daiwyo
+	session_start();
 
 	// if not logged in, shouldn't have access to admin profile
     if (!isset($_SESSION['EMAIL'])) {
@@ -55,48 +53,15 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<style>
-        .tab {
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-            height: 50px;
-            
-        }
-
-        .tab button {
-            border: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            font-size: 17px;
-            transition: 0.3s;
-        }
-
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-
-            border: 1px solid #ccc;
-            border-top: none;
-            background-color: lightblue;
-        }
-
-        .tabcontent.first {
-            display: block;
-        }
-
-    </style>
+	<!-- <link rel="stylesheet" href="style.css"> -->
+	<link rel="stylesheet" href="nav-bar.css">
+	<link rel="stylesheet" href="profile.css">
 
     <script src="profile.js" ></script>
 </head>
 <body>
+
+	<?php include 'nav-bar.php'; ?>
 
 	<h1 style='color: red'> ADMIN PAGE </h1>
 
