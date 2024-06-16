@@ -32,7 +32,7 @@
         <h1> LOGO </h1>
         <a href='http://localhost/web/index.php'> Home </a>
         <a href='http://localhost/web/about.php'> About </a>
-        <a href='#'> Posts </a>
+        <a href='http://localhost/web/posts.php'> Posts </a>
         <a href='http://localhost/web/contact.php'> Contact </a>
         <a href='http://localhost/web/faq.php'> FAQ </a>
         <?php echo "<a href={$link_address}> {$link_name} </a>"; ?>

@@ -1,17 +1,21 @@
 <?php
 
-	// nav-bar-shi mowmdeba user shemosulia tu ara
-	include 'nav-bar.php';
+    session_start();
+    if (!isset($_SESSION['EMAIL'])) {
+        header("Location: http://localhost/web/index.php");
+        die();
+    }
+
     $message = "";
 
-    require_once "connection.php";
+    require_once "../connection.php";
     $categories = $mysqli->query("SELECT name from category");
     $categories = array_column($categories->fetch_all(MYSQLI_ASSOC), 'name');
 
 
     if(isset($_POST['submit'])) {
 
-		$title = trim($_POST['title']);
+		$name = trim($_POST['name']);
 		$description = trim($_POST['description']);
         $filename = "";
         $chosen_categories = array();
@@ -25,7 +29,7 @@
         if (empty($chosen_categories)){
             $message = "ERROR: you must choose at least one category.";
         }
-        else if (empty($title) || empty($description)){
+        else if (empty($name) || empty($description)){
             $message = "Post could not be added. Make sure not to leave any empty fields!";
         }
         // empty($_FILES) - might be file_uploads set to "Off" in php.ini
@@ -61,9 +65,9 @@
             }
             else {   // file uploaded successfully
 
-                $sql = "INSERT INTO post (user_id, title, description, file_path, upload_date)
+                $sql = "INSERT INTO post (user_id, name, description, file_path, creation_date)
                         VALUES ({$_SESSION['USER_ID']}, ?, ?, ?, current_date())";
-                secureQuery($sql, "sss", [$title, $description, $filename]);
+                secureQuery($sql, "sss", [$name, $description, $filename]);
                 $post_id = $mysqli->insert_id;
 
 
@@ -72,7 +76,7 @@
                     $category_id = $category_id->fetch_assoc()['category_id'];
 
                     $query = "INSERT INTO post_category (post_id, category_id)
-                        VALUES ($post_id, $category_id)";
+                            VALUES ($post_id, $category_id)";
                     $mysqli->query($query);    
                 }
 
@@ -84,18 +88,19 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 </head>
 <body>
+    <?php include '../nav-bar.php'; ?>
     <h2> Create new post </h2>
     <?php echo $message ?>
 
 	<form action="" method="post" enctype="multipart/form-data">
 
-        Title: <br> <input type="text" name="title" required> <br>
+        Name: <br> <input type="text" name="name" required> <br>
         Description: <br> <textarea rows="8" cols="60" id="description" name="description"
                         placeholder="write description here..." required></textarea><br>
         Upload File: <br> <input type="file" id="file" name="file"> <br>
@@ -114,10 +119,10 @@
 
     <?php
         if ($_SESSION['IS_ADMIN']) {
-            $link = "admin-profile.php";
+            $link = "http://localhost/web/admin-profile.php";
         }
         else {
-            $link = "user-profile.php";
+            $link = "http://localhost/web/user-profile.php";
         }
         echo "<a href={$link}> Back to profile </a>";
     ?>

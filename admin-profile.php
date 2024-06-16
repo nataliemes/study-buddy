@@ -4,13 +4,13 @@
 
 	// if not logged in, shouldn't have access to admin profile
     if (!isset($_SESSION['EMAIL'])) {
-        header("Location: index.php");
+        header("Location: http://localhost/web/index.php");
         die();
     }
 
 	// if logged in & normal user, should go to user profile instead
     if (!$_SESSION['IS_ADMIN']) {
-        header("Location: user-profile.php");
+        header("Location: http://localhost/web/user-profile.php");
         die();
     }
 	
@@ -67,7 +67,7 @@
 
 	<?php echo $message; ?>
 
-	<a href='auth/log-out.php'> Log out </a>
+	<a href='http://localhost/web/auth/log-out.php'> Log out </a>
 
 
     <div class="tab">
@@ -137,7 +137,7 @@
     </div>
 
     <div id="posts" class="tabcontent">
-        <a href="create-post.php"> Create new post </a>    
+        <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
 
         <!-- TO-DO: download file when clicked the file_path -->
 		<?php showDBdata("post", "admin"); ?>   
@@ -145,12 +145,12 @@
 
     <div id="categories" class="tabcontent">
 
-        <a href="create-category.php"> Create new category </a>
+        <a href="http://localhost/web/crud/create-category.php"> Create new category </a>
         <?php showDBdata("category", "admin"); ?>
     </div>
 
     <div id="feedback" class="tabcontent">
-		<a href="contact.php"> Create new feedback </a>
+		<a href="http://localhost/web/contact.php"> Create new feedback </a>
 		<?php showDBdata("feedback", "admin"); ?>
     </div>
    
