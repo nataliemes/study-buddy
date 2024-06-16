@@ -137,83 +137,21 @@
     </div>
 
     <div id="posts" class="tabcontent">
-        
         <a href="create-post.php"> Create new post </a>    
 
-        <?php  // TO-DO: download file when clicked the file_path
-		    $queryResult = $mysqli->query("
-				SELECT p.title, p.description, p.file_path, p.upload_date, u.username
-				FROM post p	JOIN user u ON p.user_id = u.user_id");
-			
-			if ($queryResult) {
-				if ($queryResult->num_rows > 0) {
-					while ($row = $queryResult->fetch_assoc()) {
-						echo "<h3> {$row['title']} </h3>
-							<p> {$row['description']} </p>
-							<h5> {$row['file_path']} </h5>
-							<h5> {$row['username']} </h5>
-							<h5> {$row['upload_date']} </h5>";
-					}
-				} else {
-					echo "No categories found";
-				}
-			} else {
-				echo "Something went wrong with query";
-			}  
-        ?>   
+        <!-- TO-DO: download file when clicked the file_path -->
+		<?php showDBdata("post", "admin"); ?>   
     </div>
 
     <div id="categories" class="tabcontent">
 
         <a href="create-category.php"> Create new category </a>
-        
-        <?php
-			$queryResult = $mysqli->query("
-				SELECT c.name, c.description, c.creation_date, u.username
-				FROM category c	JOIN user u ON c.user_id = u.user_id");
-			
-			if ($queryResult) {
-				if ($queryResult->num_rows > 0) {
-					while ($row = $queryResult->fetch_assoc()) {
-						echo "<h3> {$row['name']} </h3>
-							<p> {$row['description']} </p>
-							<h5> {$row['username']} </h5>
-							<h5> {$row['creation_date']} </h5>";
-					}
-				} else {
-					echo "No categories found";
-				}
-			} else {
-				echo "Something went wrong with query";
-			}   
-        ?>
+        <?php showDBdata("category", "admin"); ?>
     </div>
 
     <div id="feedback" class="tabcontent">
-
 		<a href="contact.php"> Create new feedback </a>
-		
-		<?php
-			$queryResult = $mysqli->query("
-				SELECT f.subject, f.text, f.upload_date, u.username
-				FROM feedback f JOIN user u ON f.user_id = u.user_id");
-			
-			if ($queryResult) {
-				if ($queryResult->num_rows > 0) {
-					while ($row = $queryResult->fetch_assoc()) {
-						echo "<h3> {$row['subject']} </h3>
-							<p> {$row['text']} </p>
-							<h5> {$row['username']} </h5>
-							<h5> {$row['upload_date']} </h5>";
-					}
-				} else {
-					echo "No feedback found";
-				}
-			} else {
-				echo "Something went wrong with query";
-			}
-        ?>
-    
+		<?php showDBdata("feedback", "admin"); ?>
     </div>
    
 </body>

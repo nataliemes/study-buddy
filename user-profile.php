@@ -45,90 +45,18 @@
     </div>
 
     <div id="posts" class="tabcontent first">
-        
         <a href="create-post.php"> Create new post </a>    
-
-        <?php
-            //Select records from table 
-            $myQuery = "SELECT * FROM post
-                        WHERE user_id={$_SESSION['USER_ID']}";
-            $queryResult = $mysqli->query($myQuery);
-
-
-            if($queryResult) {
-                if($queryResult->num_rows > 0) {
-                    while($row = $queryResult->fetch_assoc()) {
-                        echo "<h3> {$row['title']} </h3>
-                            <p> {$row['description']} </p>
-                            <p> {$row['file_path']} </p>
-                            <h5> {$row['upload_date']} </h5>";
-                    }
-                }
-                else {
-                    echo "No posts found";
-                }
-            } 
-            else {
-                echo "Something went wrong with query";
-            }
-
-        ?>   
+        <?php showDBdata("post", "user"); ?>
     </div>
 
     <div id="categories" class="tabcontent">
-
         <a href="create-category.php"> Create new category </a>
-        
-        <?php
-            $myQuery = "SELECT * FROM category
-                        WHERE user_id={$_SESSION['USER_ID']}";
-            $queryResult = $mysqli->query($myQuery);
-
-
-            if($queryResult) {
-                if($queryResult->num_rows > 0) {
-                    while($row = $queryResult->fetch_assoc()) {
-                        echo "<h3> {$row['name']} </h3>
-                            <p> {$row['description']} </p>
-                            <h5> {$row['creation_date']} </h5>";
-                    }
-                }
-                else {
-                    echo "No categories found";
-                }
-            } 
-            else {
-                echo "Something went wrong with query";
-            }
-        ?>
+        <?php showDBdata("category", "user"); ?>
     </div>
 
     <div id="feedback" class="tabcontent">
-
         <a href="contact.php"> Create new feedback </a>
-    
-        <?php
-            $myQuery = "SELECT * FROM feedback
-                        WHERE user_id={$_SESSION['USER_ID']}";
-            $queryResult = $mysqli->query($myQuery);
-
-
-            if($queryResult) {
-                if($queryResult->num_rows > 0) {
-                    while($row = $queryResult->fetch_assoc()) {
-                        echo "<h3> {$row['subject']} </h3>
-                            <p> {$row['text']} </p>
-                            <h5> {$row['upload_date']} </h5>";
-                    }
-                }
-                else {
-                    echo "No feedback found";
-                }
-            } 
-            else {
-                echo "Something went wrong with query";
-            }
-        ?>
+        <?php showDBdata("feedback", "user"); ?>
     </div>
    
 </body>
