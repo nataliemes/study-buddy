@@ -113,22 +113,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="auth.css">
     <title>Web Project Demo</title>
-
 </head>
 <body>    
-    <h2> Register </h2>
-    <?php echo $message; ?>
+    <?php require_once "../nav-bar.php"; ?>
 
-    <form action="" method="post">
-        Username: <input type="text" class="username" name="username" required> <br>
-        Email: <input type="email" class="email" name="email" required> <br>
-        Password: <input type="password" class="password" name="password" required> <br>
-        Confirm password: <input type="password" class="confirm-password" name="confirm-password" required> <br>
-        <button name="submit" class="btn" type="submit">Register</button>
-    </form>
-    
-    <p> Have an account? <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
+    <aside>
+        <img src="../images/img.png" alt="image">
+    </aside>
+
+    <main>
+        <form action="" method="post">
+            <h2> Sign up </h2>
+            <?php echo $message; ?>
+            
+            <label for="username"> Username: </label> <br>
+            <input type="text" name="username" id="username" required> <br>
+            
+            <label for="email"> Email: </label> <br>
+            <input type="email" name="email" id="email" required> <br>
+
+            <label for="password"> Password: </label> <br>
+            <input type="password" name="password" id="password" required> <br>
+
+            <label for="confirm-password"> Password: </label> <br>
+            <input type="password" name="confirm-password" id="confirm-password" required> <br>
+
+            <p><a href="forgot-password.php">Forgot Password?</a></p>
+            <button name="submit" class="btn" type="submit"> Sign up </button>
+
+            <p> Have an account? <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
+        </form>
+
+
+    </main>
+
+    <?php include_once "../footer.php"; ?>
 
 </body>
 </html>

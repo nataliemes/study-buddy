@@ -43,16 +43,39 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://localhost/web/style.css">
+    <link rel="stylesheet" href="http://localhost/web/auth/auth.css">
+    <title>Web Project Demo</title>
+</head>
 <body>
-    <h2> Change Password </h2>
-    <?php echo $message; ?>
 
-    <form action="" method="post">
-        <input type="password" class="password" name="password" placeholder="Enter Your Password" required>
-        <input type="password" class="confirm-password" name="confirm-password" placeholder="Enter Your Confirm Password" required>
-        <button name="submit" class="btn" type="submit">Change Password</button>
-    </form>
+    <?php require_once "../nav-bar.php"; ?>
+
+    <aside>
+        <img src="http://localhost/web/images/img.png" alt="image">
+    </aside>
+
+    <main>
+        <form action="" method="post">
+            <h2> Change Password </h2>
+            <?php echo $message; ?>
+
+            <label for="password"> Enter new password: </label> <br>
+            <input type="password" name="password" id="password" required> <br>
+
+            <label for="confirm-password"> Confirm new password: </label> <br>
+            <input type="password" name="confirm-password" id="confirm-password" required> <br>
+
+            <button name="submit" class="btn" type="submit"> Update </button>
+
+            <p> Back to: <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
+        </form>
+    </main>
+
+    <?php include_once "../footer.php"; ?>    
     
-    <p>Back to: <a href="http://localhost/web/index.php"> Login </a></p>
 </body>
 </html>

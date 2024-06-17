@@ -72,19 +72,37 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
 <body>
+    <?php require_once "../nav-bar.php"; ?>
 
-    <h2> Log in </h2>
-    <?php echo $message; ?>
-    
-    <form action="http://localhost/web/auth/log-in.php" method="post">
-        Email: <input type="email" class="email" name="email" required> <br>
-        Password: <input type="password" class="password" name="password" required>
-        <p><a href="forgot-password.php">Forgot Password?</a></p>
-        <button name="submit" name="submit" class="btn" type="submit">Login</button>
-    </form>
-    
-    <p> Don't have an account? <a href="http://localhost/web/auth/sign-up.php"> Sign up </a></p>
+    <aside>
+        <img src="../images/img.png" alt="image">
+    </aside>
+
+    <main>
+        
+        <form action="http://localhost/web/auth/log-in.php" method="post">
+            <h2> Log in </h2>
+            <?php echo $message; ?>
+
+            <label for="email"> Email: </label> <br>
+            <input type="email" name="email" id="email" required> <br>
+
+            <label for="password"> Password: </label> <br>
+            <input type="password" name="password" id="password" required> <br>
+
+            <p><a href="forgot-password.php"> Forgot Password? </a></p>
+            <button name="submit" class="btn" type="submit"> Log in </button>
+
+            <p> Don't have an account? <a href="http://localhost/web/auth/sign-up.php"> Sign up </a></p>
+        </form>
+    </main>
+
+    <?php include_once "../footer.php"; ?>
     
 </body>
 </html>

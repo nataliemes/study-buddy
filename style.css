@@ -5,17 +5,53 @@
     /* resize: none; */
 }
 
-html,body{
-    min-height: 100%;
-    height: 100%;
-}
-
 body{
     display: flex;
     flex-wrap: wrap;
+    min-height: 100vh;
 }
 
 nav, footer {
     flex: 100%;
 } 
 
+
+/* NAV ************************************/
+
+nav {
+    background-color: lightblue;
+    border: 1px solid black;
+    height: 12vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16vmin;
+}
+
+nav a {
+    padding: 2vmin; 
+    /* border: 1px solid black; */
+}
+
+
+/* FOOTER *******************************/
+
+footer {
+    background-color: lightgray;
+    border: 1px solid blue;
+    height: 20vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 16vmin;
+}
+
+#more-info a, #socials a{
+    font-size: 3vmin;
+    padding: 2vmin;
+    /* text-decoration: none; */
+}

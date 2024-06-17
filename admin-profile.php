@@ -15,10 +15,11 @@
 
 	$message = "";
 	require_once "connection.php";
-	
+
 	if (isset($_POST['delete'])){
-        $mysqli->query("DELETE FROM user WHERE user_id = {$_POST['user_id']}");
-		$message = "User deleted successfully.";
+		$table = $_POST['table'];
+        $mysqli->query("DELETE FROM {$table} WHERE {$table}_id = {$_POST['id']}");
+		$message = "{$table} deleted successfully.";
     }
 
 	if (isset($_POST['download'])){
@@ -39,7 +40,6 @@
 		$output .= "Email: {$user['email']}\n";
 		$output .= "Is Admin: " . ($user['is_admin'] ? 'Yes' : 'No') . "\n";
 		$output .= "Registration Date: {$user['registration_date']}\n\n";
-
 
 
 		// feedbacks
@@ -104,13 +104,6 @@
 		} else {
 			$output .= "No posts found.\n\n";
 		}
-	
-
-		
-		
-
-
-
 
 		fwrite($txt, $output);
 		fclose($txt);
@@ -132,8 +125,8 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<!-- <link rel="stylesheet" href="style.css"> -->
-	<link rel="stylesheet" href="nav-bar.css">
+	<link rel="stylesheet" href="style.css">
+	
 	<link rel="stylesheet" href="profile.css">
 
     <script src="profile.js" ></script>
@@ -150,17 +143,17 @@
 
 
     <div class="tab">
-	<button class="tablinks active" onclick="openTab(event, 'users')">All users</button>
-        <button class="tablinks" onclick="openTab(event, 'posts')">All posts</button>
-        <button class="tablinks" onclick="openTab(event, 'categories')">All categories</button>
+		<button class="tablinks active" onclick="openTab(event, 'user')">All users</button>
+        <button class="tablinks" onclick="openTab(event, 'post')">All posts</button>
+        <button class="tablinks" onclick="openTab(event, 'category')">All categories</button>
         <button class="tablinks" onclick="openTab(event, 'feedback')">All feedback</button>
     </div>
 
-	<div id="users" class="tabcontent first">
+	<div id="user" class="tabcontent first">
         
         <?php
             require_once "connection.php";
-			$queryResult = $mysqli->query("SELECT * FROM user");
+			$queryResult = $mysqli->query("SELECT * FROM user WHERE registration_date != 0000-00-00");
 
 			if($queryResult) {
 				if($queryResult->num_rows > 0) {					
@@ -176,11 +169,11 @@
 							echo "<form action='' method='POST'>
 									<input type='submit' value='Delete' name='delete'>
 									<input type='submit' value='Download' name='download'>
-									<input type='hidden' value='{$row['user_id']}' name='user_id'>
+									<input type='hidden' value='{$row['user_id']}' name='id'>
+									<input type='hidden' value='user' name='table'>
 								</form>";
 							echo "<form action='crud/update-user.php' method='POST'>
 								<input type='submit' value='Update' name='update'>
-								VIEW POSTS?
 								<input type='hidden' value='{$row['user_id']}' name='user_id'>
 							</form>";
 						}
@@ -196,14 +189,14 @@
         ?>   
     </div>
 
-    <div id="posts" class="tabcontent">
+    <div id="post" class="tabcontent">
         <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
 
         <!-- TO-DO: download file when clicked the file_path -->
 		<?php showDBdata("post", "admin"); ?>   
     </div>
 
-    <div id="categories" class="tabcontent">
+    <div id="category" class="tabcontent">
 
         <a href="http://localhost/web/crud/create-category.php"> Create new category </a>
         <?php showDBdata("category", "admin"); ?>

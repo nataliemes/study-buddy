@@ -44,5 +44,6 @@
         <button name="submit" name="submit" class="btn" type="submit"> Send </button>
     </form>
     
+    <?php include_once 'footer.php'; ?>
 </body>
 </html>

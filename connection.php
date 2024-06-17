@@ -37,8 +37,13 @@
 
         // if table is post, we need to show an extra field: file_path
         $extraField = "";
+        $extraJoin = "";
+        $extraGroupBy = "";
         if ($table === "post"){
-            $extraField = "t.file_path,";
+            $extraField = "t.file_path, GROUP_CONCAT(c.name SEPARATOR ', ') as categories, ";
+            $extraJoin = "JOIN post_category pc ON pc.post_id = t.post_id
+				        JOIN category c ON c.category_id = pc.category_id";
+            $extraGroupBy = "GROUP BY t.post_id";
         }
 
         // admin & user need to be shown different things
@@ -48,8 +53,11 @@
                     WHERE user_id={$_SESSION['USER_ID']}";
         }
         else if ($status === "admin"){
-            $sql = "SELECT t.name, t.description, t.creation_date, {$extraField} u.username
-            FROM {$table} t JOIN user u ON t.user_id = u.user_id";
+            $sql = "SELECT t.{$table}_id as id, t.name, t.description, t.creation_date, {$extraField} u.username
+            FROM {$table} t JOIN user u ON t.user_id = u.user_id
+            {$extraJoin}
+            WHERE u.registration_date != 0000-00-00
+            {$extraGroupBy}";
         }
 
         global $mysqli;
@@ -67,10 +75,19 @@
                     }
 
                     if ($table === "post") {
-                        echo "<p> {$row['file_path']} </p>";
+                        echo "<a href=uploads/{$row['file_path']} target=_blank> {$row['file_path']} </a>";
+                        echo "<p> {$row['categories']} </p>";
                     }
             
                     echo "<h5> {$row['creation_date']} </h5>";
+
+                    // deleting option
+                    echo "<form action='' method='POST'>
+                            <input type='submit' value='Delete' onclick=\"openTab(event, '$table')\" name='delete'>
+                            
+                            <input type='hidden' value= {$row['id']} name='id'>
+                            <input type='hidden' value = {$table} name='table'>
+                        </form>";
                 }
             } else {
                 echo "No {$table} found";
