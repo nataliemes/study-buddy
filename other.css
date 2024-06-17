@@ -12,7 +12,6 @@ body > * {
     padding: 12vmin 16vmin;
     padding-bottom: 2vmin;
 
-
 }
 
 #landing-page h1 {
@@ -80,23 +79,7 @@ div.post {
 
 /*************************************************/
 
-footer {
-    background-color: lightgray;
-    border: 1px solid black;
-    height: 20%;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0 16vmin;
-}
-
-#more-info a, #socials a{
-    font-size: 3vmin;
-    padding: 2vmin;
-    /* text-decoration: none; */
-}
 
 
 /*************************************************/

@@ -1,0 +1,101 @@
+/* ASIDE ****************************************/
+
+aside {
+    border: 1px solid red;
+    flex: 50%;
+    height: 78vh;
+    /* padding-right: 16vmin;
+    padding-top: 8vmin; */
+
+    display: flex;
+    align-items: flex-end;
+}
+
+img {
+    /* height: 78vmin;
+    width: 98vmin; */
+    width: 100%;
+  height: auto;
+}
+
+/* MAIN *****************************************/
+
+main {
+    border: 1px solid green;
+    flex: 50%;
+    height: 78vh;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main form {
+    /* border: 1px solid green; */
+    width: 44%;
+    
+    padding: 2vmin;
+}
+
+form h2 {
+    font-size: 22px;
+    color: #0b0217;
+    text-align: center;
+}
+
+input {
+    height: 4vmin;
+    width: 100%;
+    border-radius: 1vmin;
+    border: 1px solid gray;
+    padding: 1vmin;
+}
+
+input:focus {
+    border: 1px inset solid gray;
+    background-color: lightgray;
+}
+
+form input + p {
+    
+}
+
+form button {
+    height: 6vmin;
+    width: 32%;
+    border-radius: 3vmin;
+    border: 1px solid gray;
+    background-color: lightblue;
+    box-shadow: 0.5vmin 0.5vmin 1vmin;
+    transition: all 0.5s ease-in-out;
+    float: right;
+}
+
+form button:hover {
+    transform: scale(0.95);
+    background-color: rgb(145, 191, 206);
+}
+
+form button + p {
+    margin-top: 16vmin;
+    clear: both;
+}
+
+/* FOOTER *****************************************/
+
+footer {
+    height: 10vh;
+}
+
+
+@media only screen and (max-width: 768px) {
+    
+    body {
+        flex-direction: column;
+    }
+
+    aside {
+        display: none;
+    }
+}
+

@@ -22,8 +22,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-	<!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="nav-bar.css">
+	<link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="profile.css">
 
     <script src="profile.js" ></script>

@@ -83,16 +83,38 @@
 
 <!DOCTYPE html>
 <html>
-<body>                   
-    <h2>Forgot Password</h2>
-    <?php echo $message; ?>
-
-    <form action="" method="post">
-        <input type="email" class="email" name="email" placeholder="Enter Your Email" required>
-        <button name="submit" class="btn" type="submit">Send Reset Link</button>
-    </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="auth.css">
+    <title>Web Project Demo</title>
+</head>
+<body>
     
-    <p> Back to: <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>        
+    <?php require_once "../nav-bar.php"; ?>
+
+    <aside>
+        <img src="../images/img.png" alt="image">
+    </aside>
+
+    <main>
+        <form action="" method="post">
+            <h2>Forgot Password</h2>
+            <?php echo $message; ?>
+
+            <label for="email"> Enter your e-mail: </label> <br>
+            <input type="email" name="email" id="email" required> <br>
+
+            <button name="submit" class="btn" type="submit"> Send Link </button>
+
+            <p> Back to: <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
+        </form>
+    </main>
+
+    <?php include_once "../footer.php"; ?>
+    
+            
 </body>
 
 </html>
