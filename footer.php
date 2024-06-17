@@ -1,15 +1,11 @@
 <footer>
     <h1> NAME </h1>
 
-    <div id="more-info">
-        <a href="#"> Terms </a>
-        <a href="#"> Privacy </a>
-        <a href="#"> Cookies </a>
-    </div>
+    <h5> &copy; Natalie  2024 </h5>
 
     <div id="socials">
-        <a href="#"> fb </a>
-        <a href="#"> ln </a>
-        <a href="#"> x </a>
+        <a href="#"> <i class="fa-brands fa-facebook"></i> </a>
+        <a href="#"> <i class="fa-brands fa-github"></i> </a>
+        <a href="#"> <i class="fa-brands fa-linkedin"></i> </a>
     </div>
 </footer>
