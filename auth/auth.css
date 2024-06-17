@@ -1,7 +1,7 @@
 /* ASIDE ****************************************/
 
 aside {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     flex: 50%;
     height: 78vh;
     /* padding-right: 16vmin;
@@ -15,15 +15,16 @@ img {
     /* height: 78vmin;
     width: 98vmin; */
     width: 100%;
-  height: auto;
+    height: auto;
 }
 
 /* MAIN *****************************************/
 
 main {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     flex: 50%;
     height: 78vh;
+    padding-left: 4vmin;
     
     display: flex;
     align-items: center;
@@ -31,41 +32,56 @@ main {
 }
 
 main form {
-    /* border: 1px solid green; */
-    width: 44%;
+    border: 1px solid #9B807E;
+    width: 52%;
     
-    padding: 2vmin;
+    background-image: linear-gradient(rgba(255, 249, 249, 0.3), rgba(255, 249, 249, 0.7));
+    padding: 3vmin 6vmin;
+    border-radius: 3vmin;
 }
 
 form h2 {
-    font-size: 22px;
-    color: #0b0217;
+    font-size: 4vmin;
+    color: #785957;
     text-align: center;
+    margin: 1vmin 0 3vmin 0;
 }
 
-input {
-    height: 4vmin;
+form label {
+    color: #785957;
+    font-weight: bold;
+}
+
+form input {
+    height: 5vmin;
     width: 100%;
     border-radius: 1vmin;
-    border: 1px solid gray;
+    border: 1px solid #785957;
     padding: 1vmin;
+    margin-top: 0.5vmin;
+    margin-bottom: 2vmin;
 }
 
-input:focus {
-    border: 1px inset solid gray;
+form input:focus {
+    outline: 1px solid #785957;
     background-color: lightgray;
 }
 
-form input + p {
-    
+form p a {
+    color: #785957;
 }
 
 form button {
     height: 6vmin;
     width: 32%;
+    margin-top: 2.5vmin;
+    margin-bottom: 2.5vmin;
     border-radius: 3vmin;
-    border: 1px solid gray;
-    background-color: lightblue;
+    border: none;
+    font-size: 2.5vmin;
+    font-weight: bold;
+    color: #FFF9F9;
+    background-color: #785957;
     box-shadow: 0.5vmin 0.5vmin 1vmin;
     transition: all 0.5s ease-in-out;
     float: right;
@@ -73,11 +89,12 @@ form button {
 
 form button:hover {
     transform: scale(0.95);
-    background-color: rgb(145, 191, 206);
+    background-color: #9B807E;
+    
 }
 
 form button + p {
-    margin-top: 16vmin;
+    
     clear: both;
 }
 

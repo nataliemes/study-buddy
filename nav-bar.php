@@ -18,6 +18,9 @@
 ?>
 
 <!DOCTYPE html>
+<head>
+    <script src="https://kit.fontawesome.com/166339ffbb.js" crossorigin="anonymous"></script>
+</head>
 <html>
 <body>    
     <nav>
