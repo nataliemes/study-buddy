@@ -68,24 +68,26 @@
             if ($queryResult->num_rows > 0) {
                 while ($row = $queryResult->fetch_assoc()) {
 
+                    echo "<div class='infobox'>";
+
                     if ($page === "posts"){
                         $class = str_replace(", ", " ", $row['categories']);
-                        echo "<div class='post {$class}'> $class";
+                        echo "<div class='post {$class}'>";
                     }
                     
                     echo "<h3> {$row['name']} </h3>
                         <p> {$row['description']} </p>";
 
-                    if ($page === "admin") {
-                        echo "<h5> {$row['username']} </h5>";
+                    if ($table === "post") {
+                        echo "<h5> {$row['categories']} </h5>";
+                        echo "<a href=uploads/{$row['file_path']} target=_blank> {$row['file_path']} </a>";
                     }
 
-                    if ($table === "post") {
-                        echo "<a href=uploads/{$row['file_path']} target=_blank> {$row['file_path']} </a>";
-                        echo "<p> {$row['categories']} </p>";
+                    if ($page === "admin") {
+                        echo "<h6> by: {$row['username']} </h6>";
                     }
-            
-                    echo "<h5> {$row['creation_date']} </h5>";
+
+                    echo "<h6> {$row['creation_date']} </h6>";
 
                     if ($page === "user" || $page === "admin"){
                         // deleting option
@@ -100,6 +102,8 @@
                     if ($page === "posts"){
                         echo "</div>";
                     }
+
+                    echo "</div>";
                 }
             } else {
                 echo "No {$table} found";

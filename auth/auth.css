@@ -88,7 +88,6 @@ form button {
 form button:hover {
     transform: scale(0.95);
     background-color: #7F6774;
-    
 }
 
 form button + p {

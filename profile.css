@@ -3,12 +3,22 @@
 header{
     flex: 100%;
     /* border: 1px solid black; */
-    height: 12vh;
+    margin: 1vmin;
+}
+
+header h1 {
+    display: inline;
+}
+
+.alert {
+    width: max-content;
+    margin: 1vmin;
 }
 
 main {
     flex: 100%;
     min-height: 66vh;
+    margin: 1vmin 0;
     background-color: #DDD8DB;
     border: 1px solid #9B8892;
     border-radius: 3vmin;
@@ -44,11 +54,79 @@ main {
 
 /*******************************************/
 
+
 .infobox {
     border: 1px solid blue;
     display: inline-block;
+
+    margin: 2vmin;
+    
+    background-color: rgba(188, 175, 181, 0.5);
+    border: 1px solid rgba(188, 175, 181, 1);
+    border-radius: 2vmin;
+    box-shadow: 1vmin 1vmin 1vmin rgba(188, 175, 181, 1);
+
 }
 
 .infobox form {
     display: inline;
+}
+
+.infobox > * {
+    margin: 2vmin;
+}
+
+input[type=submit], .tabcontent > a, header a {
+    padding: 1vmin 2vmin;
+    border-radius: 2vmin;
+    border: outset 2px #7F6774;
+    font-size: 2.5vmin;
+    font-weight: bold;
+    color: #DDD8DB;
+    background-color: #7F6774;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, .tabcontent > a:hover, header a:hover {
+    opacity: 0.8;
+    border: inset 2px #7F6774;
+}
+
+.tabcontent > a {
+    display: block;
+    width: max-content;
+    margin: 1vmin;
+    text-decoration: none;
+}
+
+header a {
+    float: right;
+    margin: 0 4vmin;
+    text-decoration: none;
+    background-color: #624755;
+}
+
+.infobox a {
+    color: #624755;
+}
+
+
+/**************************************/
+
+.category-toggle {
+    background-color: #624755;
+    padding: 1.5vmin;
+    margin-top: 2vmin;
+    margin-left: 2vmin;
+    border-radius: 2vmin;
+    font-size: 2.8vmin;
+    font-weight: bold;
+    color: #DDD8DB;
+    border: 1px solid #624755;
+    cursor: pointer;
+}
+
+.category-toggle.hidden {
+    background-color: lightgray;
+    color: #624755;
 }

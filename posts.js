@@ -8,7 +8,6 @@ $(document).ready(function() {
 
         // Toggle visibility of posts in the selected category
         $('.post.' + category).toggle();
-
         
         $(this).toggleClass('hidden');
     });
