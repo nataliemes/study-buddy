@@ -135,11 +135,11 @@
 	<?php include 'nav-bar.php'; ?>
 
 	<header>
-		<h1 style='color: red'> ADMIN PAGE </h1>
+		<h1> Admin homepage </h1>
 
 		<?php echo $message; ?>
 
-		<a href='http://localhost/web/auth/log-out.php'> Log out </a>
+		<a href='http://localhost/web/auth/log-out.php'> <i class="fa-solid fa-right-from-bracket"></i> Log out </a>
 	</header>
 
 	<main>
@@ -161,24 +161,24 @@
 
 						while($row = $queryResult->fetch_assoc()) {
 							echo " <div class='infobox'>
-									user_id: " . $row['user_id'] .
-									"<br> username: " . $row['username'] .
-									"<br> email: " . $row['email'] .
-									"<br> is_admin: " . $row['is_admin'] .
-									"<br> registration date: " . $row['registration_date'];
+									<p> username: {$row['username']} </p>
+									<p> email: {$row['email']} </p>
+									<p> is_admin: {$row['is_admin']} </p>
+									<p> registration date: {$row['registration_date']} </p>";
 							
 							if ($_SESSION['EMAIL'] !== $row['email']) {  // tavisi tavi rom ar shecvalos
-								echo " <div class='profile-buttons'>
-									<form action='' method='POST'>
+								echo " <div class='buttons'>
+									<form action='crud/update-user.php' method='POST'>
+									<input type='submit' value='Update' name='update'>
+									<input type='hidden' value='{$row['user_id']}' name='user_id'>
+								</form>";
+								echo "<form action='' method='POST'>
 										<input type='submit' value='Delete' name='delete'>
 										<input type='submit' value='Download' name='download'>
 										<input type='hidden' value='{$row['user_id']}' name='id'>
 										<input type='hidden' value='user' name='table'>
-									</form>";
-								echo "<form action='crud/update-user.php' method='POST'>
-									<input type='submit' value='Update' name='update'>
-									<input type='hidden' value='{$row['user_id']}' name='user_id'>
-								</form>";
+									</form>
+								 </div>";
 							}
 							echo "</div>";
 						}			
@@ -194,7 +194,10 @@
 		</div>
 
 		<div id="post" class="tabcontent">
-			<a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
+			<a href="http://localhost/web/crud/create-post.php"> 
+			<i class="fa-solid fa-upload"></i>
+				Create new post 
+			</a>   
 
 			<!-- TO-DO: download file when clicked the file_path -->
 			<?php showDBdata("post", "admin"); ?>   
@@ -202,12 +205,18 @@
 
 		<div id="category" class="tabcontent">
 
-			<a href="http://localhost/web/crud/create-category.php"> Create new category </a>
+			<a href="http://localhost/web/crud/create-category.php">
+			<i class="fa-solid fa-upload"></i>
+				Create new category 
+			</a>
 			<?php showDBdata("category", "admin"); ?>
 		</div>
 
 		<div id="feedback" class="tabcontent">
-			<a href="http://localhost/web/contact.php"> Create new feedback </a>
+			<a href="http://localhost/web/contact.php">
+			<i class="fa-solid fa-upload"></i>
+			 Create new feedback 
+			</a> 
 			<?php showDBdata("feedback", "admin"); ?>
 		</div>
 

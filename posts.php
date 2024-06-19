@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="posts.css">
+    <link rel="stylesheet" href="profile.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="posts.js"></script>
@@ -30,10 +30,7 @@
                 echo "<button class='category-toggle' data-category='{$cat}'> {$cat} </button>";
             }
             echo "</div>";
-        ?>
-
-
-        <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
+        ?>   
 
         <?php
             showDBdata("post", "posts");
