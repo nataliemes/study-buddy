@@ -6,8 +6,8 @@ body > * {
 
 #landing-page {
     
-    border: 1px solid black;
-    min-height: 88%;
+    /* border: 1px solid red; */
+    min-height: 88vh;
 
     padding: 12vmin 16vmin;
     padding-bottom: 2vmin;
@@ -27,10 +27,10 @@ body > * {
 #landing-page img {
     float: right;
 
-    width: 80vmin;
-    height: 80vmin;
+    width: 90vmin;
+    height: 90vmin;
     margin-top: -8vmin;
-    margin-right: 8vmin;
+    
 
 }
 
@@ -40,7 +40,7 @@ body > * {
 #popular-posts {
     
     border: 1px solid black;
-    min-height: 80%;
+    min-height: 90vh;
     padding: 8vmin 16vmin;
 }
 

@@ -26,11 +26,11 @@
         $confirmPassword = md5($_POST['confirm-password']);
 
         if (empty($username)){  // password may contain spaces
-            $message = "<div class='alert alert-danger'>
+            $message = "<div class='alert'>
                         Invalid username: it only contains spaces. </div>";
         }
         else if ($password !== $confirmPassword) {
-            $message = "<div class='alert alert-danger'>
+            $message = "<div class='alert'>
                         Password and confirm password do not match. </div>";
         }
         else {
@@ -45,19 +45,19 @@
 
                 // if user with this email is already registered
                 if ($result_email['code'] == ''){
-                    $message = "<div class='alert alert-danger'>
+                    $message = "<div class='alert'>
                                 Account with this email address already exists. </div>";
                 }
 
                 // if user with this email tried to register, but isn't verified
                 else {
-                    $message = "<div class='alert alert-danger'>
+                    $message = "<div class='alert'>
                                 You have already tried to register. <br>
                                 Check the email to verify your account. </div>";
                 }
             } 
             else if ($result_username->num_rows > 0){
-                $message = "<div class='alert alert-danger'>
+                $message = "<div class='alert'>
                             Account with this username already exists. </div>";
             }
 
@@ -141,7 +141,6 @@
             <label for="confirm-password"> Password: </label> <br>
             <input type="password" name="confirm-password" id="confirm-password" required> <br>
 
-            <p><a href="forgot-password.php">Forgot Password?</a></p>
             <button name="submit" class="btn" type="submit"> Sign up </button>
 
             <p> Have an account? <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>

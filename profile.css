@@ -1,8 +1,22 @@
+
+header{
+    flex: 100%;
+    margin: 0 16vmin;
+    border: 1px solid black;
+    height: 12vh;
+}
+
+main {
+    flex: 100%;
+    margin: 0 16vmin;
+    border: 1px solid black;
+    min-height: 66vh;
+}
+
 .tab {
     border: 1px solid #ccc;
     background-color: #f1f1f1;
     height: 50px;
-    
 }
 
 .tab button {

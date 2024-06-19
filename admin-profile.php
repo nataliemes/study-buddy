@@ -126,7 +126,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link rel="stylesheet" href="style.css">
-	
 	<link rel="stylesheet" href="profile.css">
 
     <script src="profile.js" ></script>
@@ -135,77 +134,83 @@
 
 	<?php include 'nav-bar.php'; ?>
 
-	<h1 style='color: red'> ADMIN PAGE </h1>
+	<header>
+		<h1 style='color: red'> ADMIN PAGE </h1>
 
-	<?php echo $message; ?>
+		<?php echo $message; ?>
 
-	<a href='http://localhost/web/auth/log-out.php'> Log out </a>
+		<a href='http://localhost/web/auth/log-out.php'> Log out </a>
+	</header>
 
+	<main>
+		<div class="tab">
+			<button class="tablinks active" onclick="openTab(event, 'user')">All users</button>
+			<button class="tablinks" onclick="openTab(event, 'post')">All posts</button>
+			<button class="tablinks" onclick="openTab(event, 'category')">All categories</button>
+			<button class="tablinks" onclick="openTab(event, 'feedback')">All feedback</button>
+		</div>
 
-    <div class="tab">
-		<button class="tablinks active" onclick="openTab(event, 'user')">All users</button>
-        <button class="tablinks" onclick="openTab(event, 'post')">All posts</button>
-        <button class="tablinks" onclick="openTab(event, 'category')">All categories</button>
-        <button class="tablinks" onclick="openTab(event, 'feedback')">All feedback</button>
-    </div>
+		<div id="user" class="tabcontent first">
+			
+			<?php
+				require_once "connection.php";
+				$queryResult = $mysqli->query("SELECT * FROM user WHERE registration_date != 0000-00-00");
 
-	<div id="user" class="tabcontent first">
-        
-        <?php
-            require_once "connection.php";
-			$queryResult = $mysqli->query("SELECT * FROM user WHERE registration_date != 0000-00-00");
+				if($queryResult) {
+					if($queryResult->num_rows > 0) {					
 
-			if($queryResult) {
-				if($queryResult->num_rows > 0) {					
-
-					while($row = $queryResult->fetch_assoc()) {
-						echo "<br><br> user_id: " . $row['user_id'] .
-								"<br> username: " . $row['username'] .
-								"<br> email: " . $row['email'] .
-								"<br> is_admin: " . $row['is_admin'] .
-								"<br> registration date: " . $row['registration_date'];
-						
-						if ($_SESSION['EMAIL'] !== $row['email']) {  // tavisi tavi rom ar shecvalos
-							echo "<form action='' method='POST'>
-									<input type='submit' value='Delete' name='delete'>
-									<input type='submit' value='Download' name='download'>
-									<input type='hidden' value='{$row['user_id']}' name='id'>
-									<input type='hidden' value='user' name='table'>
+						while($row = $queryResult->fetch_assoc()) {
+							echo "<br><br> user_id: " . $row['user_id'] .
+									"<br> username: " . $row['username'] .
+									"<br> email: " . $row['email'] .
+									"<br> is_admin: " . $row['is_admin'] .
+									"<br> registration date: " . $row['registration_date'];
+							
+							if ($_SESSION['EMAIL'] !== $row['email']) {  // tavisi tavi rom ar shecvalos
+								echo "<form action='' method='POST'>
+										<input type='submit' value='Delete' name='delete'>
+										<input type='submit' value='Download' name='download'>
+										<input type='hidden' value='{$row['user_id']}' name='id'>
+										<input type='hidden' value='user' name='table'>
+									</form>";
+								echo "<form action='crud/update-user.php' method='POST'>
+									<input type='submit' value='Update' name='update'>
+									<input type='hidden' value='{$row['user_id']}' name='user_id'>
 								</form>";
-							echo "<form action='crud/update-user.php' method='POST'>
-								<input type='submit' value='Update' name='update'>
-								<input type='hidden' value='{$row['user_id']}' name='user_id'>
-							</form>";
-						}
+							}
+						}			
 					}			
-				}			
+					else {
+						echo "No users found";
+					}
+				} 
 				else {
-					echo "No users found";
+					echo "Something wrong with query";
 				}
-			} 
-			else {
-				echo "Something wrong with query";
-			}
-        ?>   
-    </div>
+			?>   
+		</div>
 
-    <div id="post" class="tabcontent">
-        <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
+		<div id="post" class="tabcontent">
+			<a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
 
-        <!-- TO-DO: download file when clicked the file_path -->
-		<?php showDBdata("post", "admin"); ?>   
-    </div>
+			<!-- TO-DO: download file when clicked the file_path -->
+			<?php showDBdata("post", "admin"); ?>   
+		</div>
 
-    <div id="category" class="tabcontent">
+		<div id="category" class="tabcontent">
 
-        <a href="http://localhost/web/crud/create-category.php"> Create new category </a>
-        <?php showDBdata("category", "admin"); ?>
-    </div>
+			<a href="http://localhost/web/crud/create-category.php"> Create new category </a>
+			<?php showDBdata("category", "admin"); ?>
+		</div>
 
-    <div id="feedback" class="tabcontent">
-		<a href="http://localhost/web/contact.php"> Create new feedback </a>
-		<?php showDBdata("feedback", "admin"); ?>
-    </div>
+		<div id="feedback" class="tabcontent">
+			<a href="http://localhost/web/contact.php"> Create new feedback </a>
+			<?php showDBdata("feedback", "admin"); ?>
+		</div>
+
+	</main>
+
+	<?php include 'footer.php'; ?>
    
 </body>
 </html>

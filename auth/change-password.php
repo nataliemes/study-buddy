@@ -55,7 +55,7 @@
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
-        <img src="http://localhost/web/images/img.png" alt="image">
+        <img src="http://localhost/web/images/reset.png" alt="image">
     </aside>
 
     <main>

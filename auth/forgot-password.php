@@ -95,7 +95,7 @@
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
-        <img src="../images/img.png" alt="image">
+        <img src="../images/reset.png" alt="image">
     </aside>
 
     <main>

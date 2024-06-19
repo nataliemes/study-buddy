@@ -80,11 +80,10 @@
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
-        <img src="../images/img.png" alt="image">
+        <img src="../images/login.png" alt="image">
     </aside>
 
     <main>
-        
         <form action="http://localhost/web/auth/log-in.php" method="post">
             <h2> Log in </h2>
             <?php echo $message; ?>

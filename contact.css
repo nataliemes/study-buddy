@@ -1,31 +1,19 @@
-/* ASIDE ****************************************/
 
-aside {
-    /* border: 1px solid red; */
-    flex: 50%;
-    height: 78vh;
-    /* padding-right: 16vmin;
-    padding-top: 8vmin; */
+/* TO-DO: add background image
+          take all this to auth.css
+*/
 
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-
-img {
-    /* height: 78vmin;
-    width: 98vmin; */
-    width: 80%;
-    height: auto;
+body {
+    background-image: url("images/background.png");
+    background-size: 100vw 100vh;
 }
 
 /* MAIN *****************************************/
 
 main {
     /* border: 1px solid green; */
-    flex: 50%;
+    flex: 100%;
     height: 78vh;
-    padding-left: 4vmin;
     
     display: flex;
     align-items: center;
@@ -34,7 +22,7 @@ main {
 
 main form {
     border: 1px solid #9B807E;
-    width: 52%;
+    width: 26%;
     
     background-image: linear-gradient(rgba(255, 249, 249, 0.3), rgba(255, 249, 249, 0.7));
     padding: 3vmin 6vmin;
@@ -69,10 +57,6 @@ form input:focus {
     background-color: #E6D7D6;
 }
 
-form p a {
-    color: #785957;
-}
-
 form button {
     height: 6vmin;
     width: 32%;
@@ -95,10 +79,27 @@ form button:hover {
     
 }
 
-form button + p {
-    
-    clear: both;
+textarea {
+    width: 100%;
+    height: 24vh;
+    resize: none;
+    margin-top: 0.5vmin;
+    margin-bottom: 2vmin;
+
+    width: 100%;
+    border-radius: 1vmin;
+    border: 1px solid #785957;
+    padding: 1vmin;
+    margin-top: 0.5vmin;
+    margin-bottom: 2vmin;
+    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
 }
+
+form textarea:focus {
+    outline: 1px solid #785957;
+    background-color: #E6D7D6;
+}
+
 
 /* FOOTER *****************************************/
 
@@ -113,8 +114,5 @@ footer {
         flex-direction: column;
     }
 
-    aside {
-        display: none;
-    }
 }
 
