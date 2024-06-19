@@ -1,5 +1,5 @@
 main {
-	background-color: lightgray;
+	background-color: #DDD8DB;
 	border-radius: 2vmin;
 }
 
@@ -17,7 +17,7 @@ main h3 {
 }
 
 main p {
-    margin-bottom: 1vmin;
+    margin-bottom: 4vmin;
 }
 
 main ul {
@@ -32,10 +32,14 @@ ul li:before {
     content: '\2605';
 }
 
-img {
-    height: 20vh;
+h1 + img {
+    height: 50vmin;
+    width: 80vmin;
+    float: left;
 }
 
-footer {
-    height: 10vh;
+ul + img {
+    height: 68vmin;
+    width: 76vmin;
+    float: right;
 }

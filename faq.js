@@ -10,12 +10,12 @@ $(document).ready(function() {
 
   $(question).click(function(){
       var faqClass = $(this).closest(container).attr('class');
-      console.log(faqClass);
+      
 
       if(faqClass.indexOf('close') != -1){
           //WHEN CLOSED
-          // $(container).find(answer).slideUp('slow'); //CLOSE ALL
-          // $(container).addClass('close').removeClass('open'); //set all faq as closed
+          $(container).find(answer).slideUp('slow'); //CLOSE ALL
+          $(container).addClass('close').removeClass('open'); //set all faq as closed
 
           $(this).closest(container).removeClass('close').addClass('open');
           $( this ).closest(container).find(answer).slideDown('slow');

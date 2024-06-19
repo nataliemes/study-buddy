@@ -18,7 +18,7 @@
     <?php include 'nav-bar.php'; ?>
 
     <main id="landing-page">
-        <img src="images/study.png" alt="image">
+        <!-- <img src="images/study.png" alt="image"> -->
         
         <h1> Develop skills <br>
              from the best <br>

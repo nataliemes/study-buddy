@@ -1,5 +1,5 @@
 <footer>
-    <h1> NAME </h1>
+    <h1> <i class="fa-solid fa-book"></i> Study Buddy </h1>
 
     <h5> &copy; Natalie  2024 </h5>
 
