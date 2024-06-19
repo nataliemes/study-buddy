@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* resize: none; */
 }
 
 body{
@@ -56,7 +55,7 @@ nav a:hover {
 
 footer {
     border: 1px solid blue;
-    height: 20vh;
+    height: 10vh;
 
     display: flex;
     justify-content: space-between;
@@ -81,4 +80,17 @@ footer {
 
 #socials a:hover{
     animation: anim 1s linear;
+}
+
+
+/****************************************/
+.alert {
+    background-color: #785957;
+    color: #FFF9F9;
+    font-size: 2.5vmin;
+    font-weight: bold;
+    padding: 1vmin 2vmin;
+    border-radius: 1vmin;
+    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
+    margin-bottom: 2vmin;
 }

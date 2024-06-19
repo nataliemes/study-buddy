@@ -34,29 +34,37 @@
         include 'nav-bar.php';
     ?>
 
-    <h1 style='color: blue'> USER PAGE </h1>
-    <a href='auth/log-out.php'> Log out </a>
+    <header>
+        <h1 style='color: blue'> USER PAGE </h1>
+        <a href='auth/log-out.php'> Log out </a>
+    </header>
 
-    <div class="tab">
-        <button class="tablinks active" onclick="openTab(event, 'posts')">My posts</button>
-        <button class="tablinks" onclick="openTab(event, 'categories')">My categories</button>
-        <button class="tablinks" onclick="openTab(event, 'feedback')">My feedback</button>
-    </div>
+    <main>
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'posts')">My posts</button>
+            <button class="tablinks" onclick="openTab(event, 'categories')">My categories</button>
+            <button class="tablinks" onclick="openTab(event, 'feedback')">My feedback</button>
+        </div>
 
-    <div id="posts" class="tabcontent first">
-        <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
-        <?php showDBdata("post", "user"); ?>
-    </div>
+        <div id="posts" class="tabcontent first">
+            <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
+            <?php showDBdata("post", "user"); ?>
+        </div>
 
-    <div id="categories" class="tabcontent">
-        <a href="http://localhost/web/crud/create-category.php"> Create new category </a>
-        <?php showDBdata("category", "user"); ?>
-    </div>
+        <div id="categories" class="tabcontent">
+            <a href="http://localhost/web/crud/create-category.php"> Create new category </a>
+            <?php showDBdata("category", "user"); ?>
+        </div>
 
-    <div id="feedback" class="tabcontent">
-        <a href="http://localhost/web/contact.php"> Create new feedback </a>
-        <?php showDBdata("feedback", "user"); ?>
-    </div>
+        <div id="feedback" class="tabcontent">
+            <a href="http://localhost/web/contact.php"> Create new feedback </a>
+            <?php showDBdata("feedback", "user"); ?>
+        </div>
+    </main>
+
+    <?php
+        include 'footer.php';
+    ?>
    
 </body>
 </html> 

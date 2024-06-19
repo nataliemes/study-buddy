@@ -15,11 +15,13 @@
                     VALUES ({$_SESSION['USER_ID']}, current_date(), ?, ?)";
 
         secureQuery($sql, "ss", [$subject, $feedback]);
-        $msg = "Feedback was sent successfully!";
+        $msg = "<div class='alert'>
+                Feedback was sent successfully! </div>";
     }
     else if (!isset($_SESSION['EMAIL'])){
-        $msg = "You have to be logged in to send feedback!
-                <a href=auth/log-in.php> Log in </a> ";
+        $msg = "<div class='alert'>
+                You have to be logged in to send feedback!
+                <a href=auth/log-in.php> Log in </a> </div>";
     }
 ?>
 
@@ -28,21 +30,28 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="nav-bar.css">
+    <link rel="stylesheet" href="contact.css">
 </head>
 <body>
     <?php
-        include 'nav-bar.php';
-        echo "<p> {$msg} </p>";
+        require_once 'nav-bar.php';
     ?>
 
-    <form action="" method="post">
-        Subject: <br> <input type="text" name="subject" required> <br>
-        Text: <br> <textarea rows="8" cols="60" id="feedback-text" name="feedback-text"
-                    placeholder="write feedback here..." required></textarea><br>
-        
-        <button name="submit" name="submit" class="btn" type="submit"> Send </button>
-    </form>
+    <main>
+        <form action="" method="post">
+            <h2> Send feedback </h2>
+            <?php echo "<p> {$msg} </p>"; ?>
+
+            <label for="subject"> Title: </label> <br>
+            <input type="text" name="subject" id="subject" required> <br>
+
+            <label for="feedback-text"> Text: </label> <br>
+            <textarea id="feedback-text" name="feedback-text"
+                        placeholder="write feedback here..." required></textarea>
+            
+            <button name="submit" name="submit" class="btn" type="submit"> Send </button>
+        </form>
+    </main>
     
     <?php include_once 'footer.php'; ?>
 </body>
