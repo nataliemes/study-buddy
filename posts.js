@@ -1,18 +1,15 @@
-function showCategories(evt, tabName) {
-            
-    // hiding other tabs
-    var tabcontent = document.getElementsByClassName("tabcontent");
-    for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
+$(document).ready(function() {
+    // Initially all posts are shown
+    $('.post').show();
 
-    // making other links inactive
-    var tablinks = document.getElementsByClassName("tablinks");
-    for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
+    // Handle click events for category toggle buttons
+    $('.category-toggle').click(function() {
+        var category = $(this).data('category');
 
-    // showing current tab & making current link active
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
+        // Toggle visibility of posts in the selected category
+        $('.post.' + category).toggle();
+
+        
+        $(this).toggleClass('hidden');
+    });
+});

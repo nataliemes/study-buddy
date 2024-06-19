@@ -24,15 +24,15 @@
 <html>
 <body>    
     <nav>
-        <h1> LOGO </h1>
+        <h1> <i class="fa-solid fa-book"></i> Study Buddy </h1>
         <div>
-            <a href='http://localhost/web/index.php'> Home </a>
-            <a href='http://localhost/web/about.php'> About </a>
-            <a href='http://localhost/web/posts.php'> Posts </a>
-            <a href='http://localhost/web/contact.php'> Contact </a>
-            <a href='http://localhost/web/faq.php'> FAQ </a>
-        
-            <?php echo "<a href={$link_address}> {$link_name} </a>"; ?>
+            <a href='http://localhost/web/index.php'> <i class="fa-solid fa-house"></i> Home </a>
+            <a href='http://localhost/web/about.php'> <i class="fa-solid fa-circle-info"></i> About </a>
+            <a href='http://localhost/web/posts.php'> <i class="fa-solid fa-file-lines"></i> Posts </a>
+
+            <a href='http://localhost/web/contact.php'> <i class="fa-solid fa-envelope"></i> Contact </a>
+            <a href='http://localhost/web/faq.php'> <i class="fa-solid fa-circle-question"></i> FAQ </a>
+            <?php echo "<a href={$link_address}> <i class='fa-solid fa-right-to-bracket'></i> {$link_name} </a>"; ?>
         </div>
     </nav>
 </body>

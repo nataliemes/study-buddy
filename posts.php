@@ -9,7 +9,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="posts.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="posts.js"></script>
 </head>
 <body>
     <?php require_once "nav-bar.php"; ?>
@@ -22,7 +25,9 @@
 
             echo "<div id='categories'>";
             foreach ($categories as $cat){
-                echo "<button class='category active' onclick='showCategories(event, {$cat})'>My posts</button>";
+                // echo "<button class='category active' onclick='showCategories(event, \"$cat\")'> {$cat} </button>";
+                
+                echo "<button class='category-toggle' data-category='{$cat}'> {$cat} </button>";
             }
             echo "</div>";
         ?>
@@ -31,8 +36,10 @@
         <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
 
         <?php
-            showDBdata("post", "admin");
+            showDBdata("post", "posts");
         ?>
+
+
     </main>
 
     <?php include_once 'footer.php'; ?>
