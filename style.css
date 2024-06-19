@@ -11,6 +11,7 @@ body{
     background-color: #BCAFB5;
     font-family: 'Trebuchet MS';
     color: #624755;
+    padding: 0 8vw;
 }
 
 nav, footer {
@@ -29,7 +30,6 @@ nav {
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 8vw;
     /* border: 1px solid blue; */
 }
 
@@ -76,7 +76,7 @@ footer {
     justify-content: space-between;
     align-items: center;
 
-    padding: 0 16vmin;
+    
 }
 
 footer h5 {

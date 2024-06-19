@@ -1,0 +1,119 @@
+/* MAIN 1 ***************************************/
+
+#landing-page {
+    
+    flex: 50%;
+    /* border: 1px solid red; */
+    height: 88vh;
+
+    padding-top: 4vh;
+
+}
+
+#landing-page h1 {
+    font-size: 8vmin;
+    padding: 4vmin 2vmin;
+}
+
+#landing-page p {
+
+    padding-left: 2vmin;
+    padding-right: 4vmin;
+}
+
+main a {
+    text-decoration: none;
+    color: #DDD8DB;
+    font-size: 2.5vmin;
+    font-weight: bold;
+
+    background-color: #624755;
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
+    transition: all 0.5s ease-in-out;
+    
+    
+    border-radius: 3vmin;
+    border: #624755;
+    
+    padding: 2vmin;
+
+    float: right;
+    
+}
+
+#landing-page a {
+    margin-top: 12vh;
+    margin-right: 6vw;
+}
+
+main a:hover{
+    transform: scale(0.95);
+    background-color: #7F6774;
+}
+    
+#landing-page img {
+    width: 52vmin;
+    height: 28vmin;
+    margin-top: 4vh;
+    margin-left: 2vw;
+}
+    
+
+
+/* ASIDE *****************************************/
+
+aside {
+    flex: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+aside img {
+    width: 76vmin;
+    height: 76vmin;
+}
+
+
+/*************************************************/
+
+#popular-posts {
+    border: 1px solid black;
+    height: 90vh;
+}
+
+#popular-posts h1 {
+    width: 40%;
+    font-size: 6vmin;
+    
+    
+    margin: 4vh 4vw;
+
+    border: 1px solid black;
+}
+
+#popular-posts h1 + div {
+    
+    width: 40%;
+    padding: 2vmin;
+
+    border: 1px solid black;
+}
+
+#popular-posts button {
+    margin: 1.6vmin 0;
+}
+
+
+div.post {
+    display: inline-block;
+    vertical-align: top;
+    width: 33.3%;
+    height: 40vh;
+    margin-top: 4vh;
+
+    border: 1px solid black;
+}
+
+
+

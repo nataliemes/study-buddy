@@ -1,49 +1,54 @@
 
+
 header{
     flex: 100%;
-    margin: 0 16vmin;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 12vh;
 }
 
 main {
     flex: 100%;
-    margin: 0 16vmin;
-    border: 1px solid black;
     min-height: 66vh;
+    background-color: #DDD8DB;
+    border: 1px solid #9B8892;
+    border-radius: 3vmin;
+    box-shadow: -0.5vmin -0.5vmin 1vmin 0 #9B8892;
 }
 
-.tab {
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    height: 50px;
+.tab button:nth-child(1){
+    border-top-left-radius: 3vmin;
 }
 
 .tab button {
     border: none;
     cursor: pointer;
-    padding: 14px 16px;
-    font-size: 17px;
+    padding: 2vh 2vw;
+    font-size: 3vmin;
+    background-color: #DDD8DB;
+    height: 8vh;
     transition: 0.3s;
 }
 
-.tab button:hover {
-    background-color: #ddd;
-}
-
-.tab button.active {
-    background-color: #ccc;
+.tab button.active, .tab button:hover {
+    background-color: #BCAFB5;
 }
 
 .tabcontent {
     display: none;
-    padding: 6px 12px;
-
-    border: 1px solid #ccc;
-    border-top: none;
-    background-color: lightblue;
+    padding: 1vh 1vw;
 }
 
 .tabcontent.first {
     display: block;
+}
+
+/*******************************************/
+
+.infobox {
+    border: 1px solid blue;
+    display: inline-block;
+}
+
+.infobox form {
+    display: inline;
 }

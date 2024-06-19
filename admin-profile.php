@@ -19,7 +19,7 @@
 	if (isset($_POST['delete'])){
 		$table = $_POST['table'];
         $mysqli->query("DELETE FROM {$table} WHERE {$table}_id = {$_POST['id']}");
-		$message = "{$table} deleted successfully.";
+		$message = "<div class='alert'> {$table} deleted successfully. </div>";
     }
 
 	if (isset($_POST['download'])){
@@ -160,14 +160,16 @@
 					if($queryResult->num_rows > 0) {					
 
 						while($row = $queryResult->fetch_assoc()) {
-							echo "<br><br> user_id: " . $row['user_id'] .
+							echo " <div class='infobox'>
+									user_id: " . $row['user_id'] .
 									"<br> username: " . $row['username'] .
 									"<br> email: " . $row['email'] .
 									"<br> is_admin: " . $row['is_admin'] .
 									"<br> registration date: " . $row['registration_date'];
 							
 							if ($_SESSION['EMAIL'] !== $row['email']) {  // tavisi tavi rom ar shecvalos
-								echo "<form action='' method='POST'>
+								echo " <div class='profile-buttons'>
+									<form action='' method='POST'>
 										<input type='submit' value='Delete' name='delete'>
 										<input type='submit' value='Download' name='download'>
 										<input type='hidden' value='{$row['user_id']}' name='id'>
@@ -178,6 +180,7 @@
 									<input type='hidden' value='{$row['user_id']}' name='user_id'>
 								</form>";
 							}
+							echo "</div>";
 						}			
 					}			
 					else {
