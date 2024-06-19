@@ -25,7 +25,7 @@
 	if (isset($_POST['download'])){
         // download file with user data in it
 
-		$id = $_POST['user_id'];
+		$id = $_POST['id'];
 
 		$sql = "SELECT username, email, is_admin, registration_date FROM user
                 WHERE user_id = {$id}";

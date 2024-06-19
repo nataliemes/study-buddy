@@ -32,10 +32,11 @@
 
 
     // $table   -   post/category/feedback
-    // $status  -   admin/user
-    function showDBdata($table, $status){
+    // $page  -   admin/user
+    function showDBdata($table, $page){
 
         // if table is post, we need to show an extra field: file_path
+        // also we need to get categories of that post
         $extraField = "";
         $extraJoin = "";
         $extraGroupBy = "";
@@ -48,11 +49,11 @@
 
         // admin & user need to be shown different things
         $sql = "";
-        if ($status === "user") {
+        if ($page === "user") {
             $sql = "SELECT * FROM {$table}
                     WHERE user_id={$_SESSION['USER_ID']}";
         }
-        else if ($status === "admin"){
+        else if ($page === "admin" || $page === "posts"){
             $sql = "SELECT t.{$table}_id as id, t.name, t.description, t.creation_date, {$extraField} u.username
             FROM {$table} t JOIN user u ON t.user_id = u.user_id
             {$extraJoin}
@@ -66,11 +67,16 @@
         if ($queryResult) {
             if ($queryResult->num_rows > 0) {
                 while ($row = $queryResult->fetch_assoc()) {
+
+                    if ($page === "posts"){
+                        $class = str_replace(", ", " ", $row['categories']);
+                        echo "<div class='post {$class}'> $class";
+                    }
                     
                     echo "<h3> {$row['name']} </h3>
                         <p> {$row['description']} </p>";
 
-                    if ($status === "admin") {
+                    if ($page === "admin") {
                         echo "<h5> {$row['username']} </h5>";
                     }
 
@@ -81,13 +87,19 @@
             
                     echo "<h5> {$row['creation_date']} </h5>";
 
-                    // deleting option
-                    echo "<form action='' method='POST'>
-                            <input type='submit' value='Delete' onclick=\"openTab(event, '$table')\" name='delete'>
-                            
-                            <input type='hidden' value= {$row['id']} name='id'>
-                            <input type='hidden' value = {$table} name='table'>
-                        </form>";
+                    if ($page === "user" || $page === "admin"){
+                        // deleting option
+                        echo "<form action='' method='POST'>
+                                <input type='submit' value='Delete' onclick=\"openTab(event, '$table')\" name='delete'>
+                                
+                                <input type='hidden' value= {$row['id']} name='id'>
+                                <input type='hidden' value = {$table} name='table'>
+                            </form>";
+                    }
+
+                    if ($page === "posts"){
+                        echo "</div>";
+                    }
                 }
             } else {
                 echo "No {$table} found";

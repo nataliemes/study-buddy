@@ -28,8 +28,22 @@ nav {
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 16vmin;
+    padding: 0 8vw;
+    /* border: 1px solid blue; */
 }
+
+nav h1 {
+    font-size: 4vmin;
+    color: #785957;
+    /* border: 1px solid red; */
+}
+
+nav h1 i {
+    margin-right: 1vmin;
+}
+
+
+
 
 nav a {
     padding: 1.5vmin; 
@@ -42,11 +56,11 @@ nav a {
     box-shadow: inset 0 -3px 0 -1px #785957;
     transition: all .3s ease-in-out;
     
-    line-height: 40px;
+    line-height: 12vh;
 }
   
 nav a:hover {
-    box-shadow: inset 0 -40px 0 -1px #785957;
+    box-shadow: inset 0 -12vh 0 -1px #785957;
     color: #E6D7D6;
 }
 
@@ -94,3 +108,44 @@ footer {
     box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
     margin-bottom: 2vmin;
 }
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+    
+    body {
+        flex-direction: column;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+@media only screen and (max-width: 568px) {
+    
+    body {
+        flex-direction: column;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav div {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    nav div a {
+        flex: 33.3%;
+        line-height: 4vh;
+    }
+
+}
+

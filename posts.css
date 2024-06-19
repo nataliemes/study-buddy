@@ -1,0 +1,12 @@
+.category-toggle {
+    
+    background-color: blue;
+    
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.category-toggle.hidden {
+    background-color: lightgray;
+}
