@@ -4,9 +4,11 @@
     if (!isset($_SESSION['USERNAME'])) {
         $link_name = "Log in";
         $link_address = "http://localhost/web/auth/log-in.php";
+        $link_icon = "<i class='fa-solid fa-right-to-bracket'></i>";
     }
     else {
         $link_name = $_SESSION['USERNAME'];
+        $link_icon = "<i class='fa-solid fa-user'></i>";
 
         if ($_SESSION['IS_ADMIN']){
             $link_address = "http://localhost/web/admin-profile.php";
@@ -32,7 +34,7 @@
 
             <a href='http://localhost/web/contact.php'> <i class="fa-solid fa-envelope"></i> Contact </a>
             <a href='http://localhost/web/faq.php'> <i class="fa-solid fa-circle-question"></i> FAQ </a>
-            <?php echo "<a href={$link_address}> <i class='fa-solid fa-right-to-bracket'></i> {$link_name} </a>"; ?>
+            <?php echo "<a href={$link_address}> {$link_icon} {$link_name} </a>"; ?>
         </div>
     </nav>
 </body>

@@ -21,7 +21,7 @@
 
         <h1> About us </h1>
 
-        <img src="images/img.png" alt="image">
+        <img src="images/students.png" alt="image">
 
         <h3> Welcome to Study Buddy - Your Ultimate Resource for Academic Excellence! </h3>
 
@@ -61,6 +61,8 @@
             </li>
         </ul>
 
+        <img src="images/studying.png" alt="image">
+
         <h3> Why Choose Study Buddy? </h3>
         <ul>
             <li>
@@ -87,8 +89,6 @@
         </p>
         
         <h3> Welcome to Study Buddy - Your partner in education. </h3>
-
-        <img src="images/img.png" alt="image">
     </main>
 
     <?php include_once "footer.php"; ?>

@@ -8,8 +8,9 @@ body{
     display: flex;
     flex-wrap: wrap;
     min-height: 100vh;
-    background-color: #E6D7D6;
+    background-color: #BCAFB5;
     font-family: 'Trebuchet MS';
+    color: #624755;
 }
 
 nav, footer {
@@ -22,7 +23,7 @@ nav, footer {
 nav {
     
     /* border: 1px solid black; */
-    height: 12vh;
+    min-height: 12vh;
 
     display: flex;
     align-items: center;
@@ -32,13 +33,13 @@ nav {
     /* border: 1px solid blue; */
 }
 
-nav h1 {
+nav h1, footer h1 {
     font-size: 4vmin;
-    color: #785957;
+    
     /* border: 1px solid red; */
 }
 
-nav h1 i {
+nav h1 i, footer h1 i {
     margin-right: 1vmin;
 }
 
@@ -48,27 +49,27 @@ nav h1 i {
 nav a {
     padding: 1.5vmin; 
     text-decoration: none;
-    color: #785957;
+    color: #624755;
     font-weight: bold;
     font-size: 3.3vmin;
     /* border: 1px solid black; */
 
-    box-shadow: inset 0 -3px 0 -1px #785957;
+    box-shadow: inset 0 -3px 0 -1px #624755;
     transition: all .3s ease-in-out;
     
     line-height: 12vh;
 }
   
 nav a:hover {
-    box-shadow: inset 0 -12vh 0 -1px #785957;
-    color: #E6D7D6;
+    box-shadow: inset 0 -12vh 0 -1px #624755;
+    color: #BCAFB5;
 }
 
 
 /* FOOTER *******************************/
 
 footer {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     height: 10vh;
 
     display: flex;
@@ -76,6 +77,11 @@ footer {
     align-items: center;
 
     padding: 0 16vmin;
+}
+
+footer h5 {
+    font-size: 2.5vmin;
+    
 }
 
 @keyframes anim {
@@ -87,25 +93,25 @@ footer {
 #socials a{
     font-size: 5vmin;
     padding: 2vmin;
-    color: #785957;
+    color: #624755;
     text-decoration: none;
     display: inline-block;
 }
 
 #socials a:hover{
-    animation: anim 1s linear;
+    animation: anim 0.5s linear;
 }
 
 
 /****************************************/
 .alert {
-    background-color: #785957;
-    color: #FFF9F9;
+    background-color: #624755;
+    color: #DDD8DB;
     font-size: 2.5vmin;
     font-weight: bold;
     padding: 1vmin 2vmin;
     border-radius: 1vmin;
-    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
     margin-bottom: 2vmin;
 }
 
@@ -113,33 +119,33 @@ footer {
 
 
 
-@media only screen and (max-width: 768px) {
-    
-    body {
-        flex-direction: column;
-    }
+@media only screen and (max-width: 968px) {
 
     nav {
         flex-direction: column;
         align-items: flex-start;
+        padding: 4vh 4vw;
+        width: 100%;
+    }
+
+    footer {
+        padding: 0 4vw;
     }
 
 }
 
-@media only screen and (max-width: 568px) {
-    
+@media only screen and (max-width: 768px) {
+
     body {
         flex-direction: column;
-    }
-
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
     }
 
     nav div {
         display: flex;
         flex-wrap: wrap;
+        
+        width: 100%;
+        margin-top: 2vh;
     }
     
     nav div a {

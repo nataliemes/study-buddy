@@ -3,9 +3,6 @@
 aside {
     /* border: 1px solid red; */
     flex: 50%;
-    height: 78vh;
-    /* padding-right: 16vmin;
-    padding-top: 8vmin; */
 
     display: flex;
     align-items: flex-end;
@@ -13,10 +10,9 @@ aside {
 }
 
 img {
-    /* height: 78vmin;
-    width: 98vmin; */
-    width: 80%;
-    height: auto;
+    /* border: 1px solid green; */
+    width: 76vmin;
+    height: 76vmin;
 }
 
 /* MAIN *****************************************/
@@ -24,17 +20,17 @@ img {
 main {
     /* border: 1px solid green; */
     flex: 50%;
-    height: 78vh;
-    padding-left: 4vmin;
+    
+    padding-left: 6vw;
     
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 main form {
     border: 1px solid #9B807E;
-    width: 52%;
+    width: 56vmin;
     
     background-image: linear-gradient(rgba(255, 249, 249, 0.3), rgba(255, 249, 249, 0.7));
     padding: 3vmin 6vmin;
@@ -43,13 +39,13 @@ main form {
 
 form h2 {
     font-size: 4vmin;
-    color: #785957;
+    
     text-align: center;
     margin: 1vmin 0 3vmin 0;
 }
 
 form label {
-    color: #785957;
+    
     font-weight: bold;
 }
 
@@ -57,20 +53,20 @@ form input {
     height: 5vmin;
     width: 100%;
     border-radius: 1vmin;
-    border: 1px solid #785957;
+    border: 1px solid #624755;
     padding: 1vmin;
     margin-top: 0.5vmin;
     margin-bottom: 2vmin;
-    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
 }
 
 form input:focus {
-    outline: 1px solid #785957;
-    background-color: #E6D7D6;
+    outline: 1px solid #624755;
+    background-color: #BCAFB5;
 }
 
 form p a {
-    color: #785957;
+    color: #624755;
 }
 
 form button {
@@ -79,12 +75,12 @@ form button {
     
     margin-bottom: 1vmin;
     border-radius: 3vmin;
-    border: #785957;
+    border: #624755;
     font-size: 2.5vmin;
     font-weight: bold;
-    color: #FFF9F9;
-    background-color: #785957;
-    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
+    color: #DDD8DB;
+    background-color: #624755;
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
     transition: all 0.5s ease-in-out;
     float: right;
 }
@@ -100,21 +96,29 @@ form button + p {
     clear: both;
 }
 
-/* FOOTER *****************************************/
 
-footer {
-    height: 10vh;
-}
-
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 868px) {
     
-    body {
-        flex-direction: column;
+    main {
+        padding-left: 0;
     }
 
+    img {
+        /* border: 1px solid green; */
+        width: 60vmin;
+        height: 60vmin;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    
+    
     aside {
         display: none;
+    }
+    
+    main {
+        justify-content: center;
     }
 }
 

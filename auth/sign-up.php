@@ -121,7 +121,7 @@
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
-        <img src="../images/img.png" alt="image">
+        <img src="../images/login.png" alt="image">
     </aside>
 
     <main>

@@ -1,11 +1,5 @@
-
-/* TO-DO: add background image
-          take all this to auth.css
-*/
-
 body {
-    background-image: url("images/background.png");
-    background-size: 100vw 100vh;
+    background-image: url("images/contact.png");
 }
 
 /* MAIN *****************************************/
@@ -22,7 +16,7 @@ main {
 
 main form {
     border: 1px solid #9B807E;
-    width: 26%;
+    width: 36vw;
     
     background-image: linear-gradient(rgba(255, 249, 249, 0.3), rgba(255, 249, 249, 0.7));
     padding: 3vmin 6vmin;
@@ -31,13 +25,13 @@ main form {
 
 form h2 {
     font-size: 4vmin;
-    color: #785957;
+    
     text-align: center;
     margin: 1vmin 0 3vmin 0;
 }
 
 form label {
-    color: #785957;
+    
     font-weight: bold;
 }
 
@@ -45,16 +39,16 @@ form input {
     height: 5vmin;
     width: 100%;
     border-radius: 1vmin;
-    border: 1px solid #785957;
+    border: 1px solid #624755;
     padding: 1vmin;
     margin-top: 0.5vmin;
     margin-bottom: 2vmin;
-    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
 }
 
 form input:focus {
-    outline: 1px solid #785957;
-    background-color: #E6D7D6;
+    outline: 1px solid #624755;
+    background-color: #BCAFB5;
 }
 
 form button {
@@ -63,12 +57,12 @@ form button {
     
     margin-bottom: 1vmin;
     border-radius: 3vmin;
-    border: #785957;
+    border: #624755;
     font-size: 2.5vmin;
     font-weight: bold;
-    color: #FFF9F9;
-    background-color: #785957;
-    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
+    color: #DDD8DB;
+    background-color: #624755;
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
     transition: all 0.5s ease-in-out;
     float: right;
 }
@@ -88,30 +82,34 @@ textarea {
 
     width: 100%;
     border-radius: 1vmin;
-    border: 1px solid #785957;
+    border: 1px solid #624755;
     padding: 1vmin;
     margin-top: 0.5vmin;
     margin-bottom: 2vmin;
-    box-shadow: 0.5vmin 0.5vmin 1vmin #785957; 
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
 }
 
 form textarea:focus {
-    outline: 1px solid #785957;
-    background-color: #E6D7D6;
+    outline: 1px solid #624755;
+    background-color: #BCAFB5;
 }
 
 
-/* FOOTER *****************************************/
+/* MEDIA QUERIES *****************************************/
 
-footer {
-    height: 10vh;
+@media only screen and (max-width: 968px) {
+
+    main form {
+        width: 60vw;
+    }
+
 }
 
 
 @media only screen and (max-width: 768px) {
-    
-    body {
-        flex-direction: column;
+
+    main form {
+        width: 80vw;
     }
 
 }

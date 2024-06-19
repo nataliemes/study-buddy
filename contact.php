@@ -20,8 +20,7 @@
     }
     else if (!isset($_SESSION['EMAIL'])){
         $msg = "<div class='alert'>
-                You have to be logged in to send feedback!
-                <a href=auth/log-in.php> Log in </a> </div>";
+                You have to be logged in to send feedback! </div>";
     }
 ?>
 
