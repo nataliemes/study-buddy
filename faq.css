@@ -31,9 +31,31 @@ aside img {
     background-color: #DDD8DB;
 }
 
+.eachFaq h4:before{ 
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    width: 15px;
+}
+.eachFaq.close h4:before{ 
+    content: '+'; 
+}
+.eachFaq.open h4:before{ 
+    content: '-'; 
+}
+
+.eachFaq .title {
+    cursor: pointer;
+}
+
+.eachFaq .title:hover {
+    color: #7F6774;
+}
+
 .accordion-content {
     margin-top: 1vmin;
 }
+
 
 @media only screen and (max-width: 868px) {
     
