@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -22,29 +22,21 @@ nav, footer {
 /* NAV ************************************/
 
 nav {
-    
-    /* border: 1px solid black; */
-    min-height: 12vh;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    min-height: 12vh;
     /* border: 1px solid blue; */
 }
 
-nav h1, footer h1 {
+nav h1 {
     font-size: 4vmin;
-    
     /* border: 1px solid red; */
 }
 
-nav h1 i, footer h1 i {
+nav h1 i, footer h2 i {
     margin-right: 1vmin;
 }
-
-
-
 
 nav a {
     padding: 1.5vmin; 
@@ -79,9 +71,17 @@ footer {
     
 }
 
+footer h2 {
+    font-size: 3.4vmin;
+    transition: transform 0.3s linear;
+}
+
+footer h2:hover {
+    transform: scale(1.05);
+}
+
 footer h5 {
     font-size: 2.5vmin;
-    
 }
 
 @keyframes anim {
@@ -115,21 +115,15 @@ footer h5 {
     margin-bottom: 2vmin;
 }
 
-
-
-
+/****************************************/
 
 @media only screen and (max-width: 968px) {
 
     nav {
         flex-direction: column;
         align-items: flex-start;
-        padding: 4vh 4vw;
+        padding: 4vh 0;
         width: 100%;
-    }
-
-    footer {
-        padding: 0 4vw;
     }
 
 }

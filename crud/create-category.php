@@ -13,7 +13,9 @@
 		$description = trim($_POST['description']);
 
         if (empty($name) || empty($description)){
-            $message = "Category could not be added. Make sure not to leave any empty fields!";
+            $message = "<div class='alert'>
+                        Category could not be added.
+                        Make sure not to leave any empty fields! </div>";
         }
         else {
             $name = str_replace(' ', '_', $name);
@@ -24,7 +26,7 @@
                             ->get_result();
         
             if ($selectResult->num_rows > 0){
-                $message = "Category already exists";
+                $message = "<div class='alert'> Category already exists </div>";
             }
             else {            
                 $sql = "INSERT INTO category (user_id, name, description, creation_date)
@@ -32,7 +34,7 @@
 
                 secureQuery($sql, "ss", [$name, $description]);
 
-                $message = "Category added successfully!";
+                $message = "<div class='alert'> Category added successfully! </div>";
             }
         }
 	}
@@ -43,31 +45,44 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../auth/auth.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/side-image-layout.css">
+    <link rel="stylesheet" href="../css/form.css">
 </head>
 <body>
     <?php include '../nav-bar.php'; ?>
-    <h2> Create new category </h2>
-    <?php echo $message ?>
 
-	<form action="" method="post" >
-        Name: <br> <input type="text" name="name" required> <br>
-        Description: <br> <textarea rows="8" cols="60" id="description" name="description"
-                        placeholder="write description here..." required></textarea><br>
+    <aside>
+        <img src="../images/thinking.png" alt="image">
+    </aside>
 
+    <main>
+        <form action="" method="post" >
+            <h2> Create new category </h2>
+            <?php echo $message ?>
 
-        <input type="submit" value="Create" name="submit">
-	</form>
+            <label for="name"> Name: </label> <br>
+            <input type="text" name="name" required> <br>
 
-    <?php
-        if ($_SESSION['IS_ADMIN']) {
-            $link = "http://localhost/web/admin-profile.php";
-        }
-        else {
-            $link = "http://localhost/web/user-profile.php";
-        }
-        echo "<a href={$link}> Back to profile </a>";
-    ?>
+            <label for="description"> Description: </label> <br>
+            <textarea rows="8" cols="60" id="description" name="description"
+                    placeholder="write description here..." required></textarea><br>
+
+            <button name="submit" class="btn" type="submit"> Create </button>
+
+            <?php
+                if ($_SESSION['IS_ADMIN']) {
+                    $link = "http://localhost/web/admin-profile.php";
+                }
+                else {
+                    $link = "http://localhost/web/user-profile.php";
+                }
+                echo "<p> <a href={$link}> Back to profile </a> </p>";
+            ?>
+        </form>
+    </main>
+
+    <?php include '../footer.php'; ?>
 
 </body>
 </html>

@@ -90,9 +90,9 @@
                     echo "<h6> {$row['creation_date']} </h6>";
 
                     if ($page === "user" || $page === "admin"){
-                        // deleting option
+                        // deleting option     AQ ME-3 input marto admins
                         echo "<form action='' method='POST'>
-                                <input type='submit' value='Delete' onclick=\"openTab(event, '$table')\" name='delete'>
+                                <input type='submit' value='Delete' name='delete'>
                                 
                                 <input type='hidden' value= {$row['id']} name='id'>
                                 <input type='hidden' value = {$table} name='table'>
