@@ -2,14 +2,12 @@
 
     $mysqli = new mysqli("localhost", "root", "", "test");
 
-    // Check connection
     if ($mysqli->connect_error) {
         die("Connection failed: ". $mysqli->connect_error);
     }
 
-
-    // TO-DO: fix 'die' & instead show an error page with the appropriate message
-    function secureQuery($sql, $types, $data){
+    // executes queries with prepared statements
+    function secureQuery($sql, $types, $data) {
         global $mysqli;
 
         $stmt = $mysqli->prepare($sql);
@@ -31,34 +29,30 @@
     }
 
 
-    // $table   -   post/category/feedback
-    // $page  -   admin/user
+    // $table -   post / category / feedback
+    // $page  -   admin / user / posts
     function showDBdata($table, $page){
 
         // if table is post, we need to show an extra field: file_path
-        // also we need to get categories of that post
-        $extraField = "";
-        $extraJoin = "";
-        $extraGroupBy = "";
+        // & we also need to get categories of that post
+        $extraFields = $extraJoin = "";
         if ($table === "post"){
-            $extraField = "t.file_path, GROUP_CONCAT(c.name SEPARATOR ', ') as categories, ";
+            $extraFields = "t.file_path, GROUP_CONCAT(c.name SEPARATOR ', ') as categories, ";
             $extraJoin = "JOIN post_category pc ON pc.post_id = t.post_id
-				        JOIN category c ON c.category_id = pc.category_id";
-            $extraGroupBy = "GROUP BY t.post_id";
+				        JOIN category c ON c.category_id = pc.category_id
+                        GROUP BY t.post_id";
         }
 
-        // admin & user need to be shown different things
+        // different pages need different content to be shown
         $sql = "";
         if ($page === "user") {
             $sql = "SELECT * FROM {$table}
                     WHERE user_id={$_SESSION['USER_ID']}";
         }
-        else if ($page === "admin" || $page === "posts"){
-            $sql = "SELECT t.{$table}_id as id, t.name, t.description, t.creation_date, {$extraField} u.username
+        else {   // admin profile or posts page
+            $sql = "SELECT t.{$table}_id, t.name, t.description, t.creation_date, {$extraFields} u.username
             FROM {$table} t JOIN user u ON t.user_id = u.user_id
-            {$extraJoin}
-            WHERE u.registration_date != 0000-00-00
-            {$extraGroupBy}";
+            {$extraJoin}";
         }
 
         global $mysqli;
@@ -89,13 +83,12 @@
 
                     echo "<h6> {$row['creation_date']} </h6>";
 
+                    // deleting option on profiles
                     if ($page === "user" || $page === "admin"){
-                        // deleting option     AQ ME-3 input marto admins
                         echo "<form action='' method='POST'>
                                 <input type='submit' value='Delete' name='delete'>
-                                
-                                <input type='hidden' value= {$row['id']} name='id'>
-                                <input type='hidden' value = {$table} name='table'>
+                                <input type='hidden' value='{$table}' name='table'>
+                                <input type='hidden' value='{$row[$table . '_id']}' name='id'>
                             </form>";
                     }
 
@@ -106,12 +99,11 @@
                     echo "</div>";
                 }
             } else {
-                echo "No {$table} found";
+                echo "<p> No {$table} found. </p>";
             }
         }
         else {
-            echo "Something went wrong with query";
+            die ("ERROR: something went wrong with query");
         }
-    }
-    
+    }   
 ?>

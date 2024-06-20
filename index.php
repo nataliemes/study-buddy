@@ -1,5 +1,5 @@
 <?php 
-    session_start();
+    session_start();  // for nav-bar
 ?>
 
 <!DOCTYPE html>
@@ -11,14 +11,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/side-image-layout.css">
     <link rel="stylesheet" href="css/main.css">
-    <!-- <script src="https://kit.fontawesome.com/92d78ba0ea.js" crossorigin="anonymous"></script> -->
 </head>
 <body>
-
-    <?php include 'nav-bar.php'; ?>
+    <?php require_once 'nav-bar.php'; ?>
 
     <main>
-        
         <h1> Your Ultimate Resource for Academic Success </h1>
 
         <p>
@@ -41,6 +38,5 @@
     </aside>
 
     <?php include_once "footer.php"; ?>
-    
 </body>
 </html>

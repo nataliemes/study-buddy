@@ -1,7 +1,6 @@
-<?php
-    session_start();
+<?php 
+    session_start();  // for nav-bar
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,7 @@
     <link rel="stylesheet" href="css/profile.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="posts.js"></script>
+    <script src="js/posts.js"></script>
 </head>
 <body>
     <?php require_once "nav-bar.php"; ?>
@@ -30,13 +29,9 @@
                 echo "<button class='category-toggle' data-category='{$cat}'> {$cat} </button>";
             }
             echo "</div>";
-        ?>   
-
-        <?php
+    
             showDBdata("post", "posts");
         ?>
-
-
     </main>
 
     <?php include_once 'footer.php'; ?>

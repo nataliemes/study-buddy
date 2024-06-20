@@ -13,8 +13,6 @@
 
     // load Composer's autoloader
     require_once '../vendor/autoload.php';
-
-    require_once '../nav-bar.php';
     require_once '../connection.php';
     $message = "";
 
@@ -27,7 +25,7 @@
 
         if (empty($username)){  // password may contain spaces
             $message = "<div class='alert'>
-                        Invalid username: it only contains spaces. </div>";
+                        Invalid username - it only contains spaces. </div>";
         }
         else if ($password !== $confirmPassword) {
             $message = "<div class='alert'>
@@ -45,26 +43,23 @@
 
                 // if user with this email is already registered
                 if ($result_email['code'] == ''){
-                    $message = "<div class='alert'>
-                                Account with this email address already exists. </div>";
+                    $message = "<div class='alert'> Account with this email address already exists. </div>";
                 }
 
                 // if user with this email tried to register, but isn't verified
                 else {
-                    $message = "<div class='alert'>
-                                You have already tried to register. <br>
+                    $message = "<div class='alert'> You have already tried to register. <br>
                                 Check the email to verify your account. </div>";
                 }
             } 
             else if ($result_username->num_rows > 0){
-                $message = "<div class='alert'>
-                            Account with this username already exists. </div>";
+                $message = "<div class='alert'> Account with this username already exists. </div>";
             }
 
             // if email & username are available
             else {
 
-                $code = md5($email);  // unique & random verification code 
+                $code = md5(uniqid(rand(), true));  // unique & random verification code 
 
                 $sql = "INSERT INTO user (username, email, password_hash, code)
                         VALUES (?, ?, ?, ?)";
@@ -97,12 +92,11 @@
                     $mail->send();
                 }
                 catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    $message = "<div class='alert'> Message could not be sent.
+                                Mailer Error: {$mail->ErrorInfo} </div>";
                 }
                 
-                $message = "<div class='alert alert-info'>
-                            A verification link has been sent on your email address. </div>";
-
+                $message = "<div class='alert'> A verification link has been sent on your email address. </div>";
             }
         }
     }
@@ -139,18 +133,15 @@
             <label for="password"> Password: </label> <br>
             <input type="password" name="password" id="password" required> <br>
 
-            <label for="confirm-password"> Password: </label> <br>
+            <label for="confirm-password"> Confirm Password: </label> <br>
             <input type="password" name="confirm-password" id="confirm-password" required> <br>
 
             <button name="submit" class="btn" type="submit"> Sign up </button>
 
             <p> Have an account? <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
         </form>
-
-
     </main>
 
     <?php include_once "../footer.php"; ?>
-
 </body>
 </html>

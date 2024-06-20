@@ -1,30 +1,25 @@
 <?php
-    session_start();
+    session_start();  // for nav-bar
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/about.css">
-
 </head>
 
 <body>
-    <?php
-        include 'nav-bar.php';
-    ?>
+    <?php require_once 'nav-bar.php'; ?>
 
     <main>
-
         <h1> About us </h1>
 
-        <img src="images/students.png" alt="image">
+        <img src="images/students.png" alt="students-image">
 
         <h3> Welcome to Study Buddy - Your Ultimate Resource for Academic Excellence! </h3>
-
         <p>
             At Study Buddy, we believe that collaboration is the key to success.
             Our platform is dedicated to providing students with a dynamic space to
@@ -46,7 +41,7 @@
         <ul>
             <li>
                 Diverse Categories: Each post on Study Buddy is meticulously categorized,
-                making it simple for you to find exactly what you need. Whether it’s 
+                making it simple for you to find exactly what you need. Whether it's 
                 Mathematics, History, Science, or Literature, our extensive range
                 of categories ensures that you can quickly locate relevant materials.
             </li>
@@ -61,7 +56,7 @@
             </li>
         </ul>
 
-        <img src="images/studying.png" alt="image">
+        <img src="images/studying.png" alt="studying-image">
 
         <h3> Why Choose Study Buddy? </h3>
         <ul>

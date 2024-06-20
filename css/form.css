@@ -111,6 +111,9 @@ textarea {
     margin-top: 0.5vmin;
     margin-bottom: 2vmin;
     box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
+
+    font-family: 'Trebuchet MS';
+    
 }
 
 form textarea:focus {
