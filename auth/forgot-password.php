@@ -1,27 +1,24 @@
 <?php
     // tu shemosulia, forgot-password gverdze agar unda shediodes
     session_start();
-    if (isset($_SESSION['EMAIL'])) {
+    if (isset($_SESSION['USERNAME'])) {
         header("location: http://localhost/web/index.php");
         die();
     }
 
-    // import PHPMailer classes into the global namespace
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    //Load Composer's autoloader
     require_once '../vendor/autoload.php';
-
-    require_once '../nav-bar.php';
     include_once '../connection.php';
     $message="";
+
 
     if (isset($_POST['submit'])) {
     
         $email = trim($_POST['email']);
-        $code = md5($email);
+        $code = md5(uniqid(rand(), true));  // unique & random reset code
 
         $result = secureQuery("SELECT * FROM user WHERE email=?", "s", [$email])
                     ->get_result();
@@ -30,55 +27,46 @@
         if ($result->num_rows > 0) {
             
             if (!empty($result->fetch_assoc()['code'])){
-                $message = "<div class='alert alert-danger'>
-                            Your account has not been verified. <br>
-                            You must first finish the registration process.";
+                $message = "<div class='alert'> Your account has not been verified.
+                            You must first finish the registration process. </div>";
             }
-
             else {
                 secureQuery("UPDATE user SET code=? WHERE email=?", "ss", [$code, $email]);
 
                 $mail = new PHPMailer(true);
 
                 try {
-                    //Server settings
-                    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                    $mail->isSMTP();                                            //Send using SMTP
-                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                    $mail->Username   = 'abaravici36@gmail.com';                     //SMTP username
-                    $mail->Password   = 'klbl nepq ehhy qvok';                               //SMTP password
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                    $mail->isSMTP();                                      // Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                 // Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                             // Enable SMTP authentication
+                    $mail->Username   = 'abaravici36@gmail.com';          // SMTP username
+                    $mail->Password   = 'klbl nepq ehhy qvok';            // SMTP password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      // Enable implicit TLS encryption
+                    $mail->Port       = 465;                              // TCP port to connect to
 
-                    //Recipients
+                    // Recipients
                     $mail->setFrom('abaravici36@gmail.com');
                     $mail->addAddress($email);
 
-                    //Content
-                    $mail->isHTML(true);                                  //Set email format to HTML
+                    // Content
+                    $mail->isHTML(true);
                     $mail->Subject = 'no reply';
-                    $mail->Body    = 'Here is the link to change password
-                    <b><a href="http://localhost/web/auth/change-password.php?reset='.$code.'">
-                                Click here to change password </a></b>';
+                    $mail->Body    = '<a href="http://localhost/web/auth/change-password.php?reset='. $code .'">
+                                        Click here to change password </a>';
 
                     $mail->send();
-                    $message = "<div class='alert alert-info'> A password reset link has been sent to your email address.
+                    $message = "<div class='alert'> A password reset link has been sent to your email address.
                                 <br> You will no longer be able to log in with your old password. </div>";
-
                 }
                 catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                    $message = "<div class='alert alert-info'> Message could not be sent. Mailer Error: {$mail->ErrorInfo} </div>";
+                    $message = "<div class='alert'> Message could not be sent.
+                                Mailer Error: {$mail->ErrorInfo} </div>";
                 }
-            }
-            
+            }    
         } else {
-            $message = "<div class='alert alert-danger'>
-                        Your email address was not found.</div>";
+            $message = "<div class='alert'> Your email address was not found. </div>";
         }
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +80,6 @@
     <title>Web Project Demo</title>
 </head>
 <body>
-    
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
@@ -101,7 +88,7 @@
 
     <main>
         <form action="" method="post">
-            <h2>Forgot Password</h2>
+            <h2> Forgot Password </h2>
             <?php echo $message; ?>
 
             <label for="email"> Enter your e-mail: </label> <br>
@@ -113,9 +100,6 @@
         </form>
     </main>
 
-    <?php include_once "../footer.php"; ?>
-    
-            
+    <?php include_once "../footer.php"; ?>         
 </body>
-
 </html>

@@ -8,7 +8,6 @@
 
     include_once '../connection.php';
     $message="";
-    
 
     // verifying account
     if (isset($_GET['verification'])) {
@@ -24,6 +23,8 @@
                     WHERE registration_date = 0000-00-00 AND code = ?";
             
             secureQuery($sql, "s", [$_GET['verification']]);
+            $message = "<div class='alert'>
+                        Your account has been verified! </div>";
         } 
         else {
             $message = "ERROR: such verification code does not exist.
@@ -46,23 +47,21 @@
                     ->get_result();
         
         if ($result->num_rows === 0) {
-            $message = "<div class='alert alert-danger'>
-                        Wrong email or password </div>";
+            $message = "<div class='alert'> Wrong email or password </div>";
         }
         else {
             $row = $result->fetch_assoc();
 
             if ($row['code']){  // if code is not empty
-                $message = "<div class='alert alert-info'>
-                            Please, verify your account or update the forgotten password and try again.</div>";
+                $message = "<div class='alert'> Please, verify your account or
+                            update the forgotten password and try again.</div>";
             }
             else {
                 $_SESSION['EMAIL'] = $email;
                 $_SESSION['USER_ID'] = $row['user_id'];
                 $_SESSION['USERNAME'] = $row['username'];
                 $_SESSION['IS_ADMIN'] = $row['is_admin'];
-                // $_SESSION['CREATED']   // vada rom gauvides ragac drois mere
-   
+
                 header("Location: http://localhost/web/index.php");
                 die();
             }
@@ -74,15 +73,15 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/side-image-layout.css">
-    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="http://localhost/web/css/style.css">
+    <link rel="stylesheet" href="http://localhost/web/css/side-image-layout.css">
+    <link rel="stylesheet" href="http://localhost/web/css/form.css">
 </head>
 <body>
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
-        <img src="../images/login.png" alt="image">
+        <img src="http://localhost/web/images/login.png" alt="image">
     </aside>
 
     <main>
@@ -104,6 +103,5 @@
     </main>
 
     <?php include_once "../footer.php"; ?>
-    
 </body>
 </html>

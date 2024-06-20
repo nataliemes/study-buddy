@@ -1,5 +1,4 @@
 <?php
-
     session_start();
 
     // if not logged in, shouldn't have access to user profile
@@ -14,28 +13,29 @@
         die();
     }
 
+	$message = "";
 	require_once "connection.php";
+
+	if (isset($_POST['delete'])){
+		$table = $_POST['table'];
+        $mysqli->query("DELETE FROM {$table} WHERE {$table}_id = {$_POST['id']}");
+		$message = "<div class='alert'> {$table} deleted successfully. </div>";
+    }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
 	<link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/profile.css">
-
-    <script src="profile.js" ></script>
-
-    </head>
+    <script src="js/profile.js"></script>
+</head>
 <body>
-
-    <?php
-        include 'nav-bar.php';
-    ?>
+    <?php require_once 'nav-bar.php'; ?>
 
     <header>
-        <h1 style='color: blue'> USER PAGE </h1>
+        <h1> User homepage </h1>
         <a href='auth/log-out.php'> Log out </a>
     </header>
 
@@ -62,9 +62,6 @@
         </div>
     </main>
 
-    <?php
-        include 'footer.php';
-    ?>
-   
+    <?php include_once 'footer.php'; ?>
 </body>
 </html> 

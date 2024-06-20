@@ -25,6 +25,10 @@ main {
     box-shadow: -0.5vmin -0.5vmin 1vmin 0 #9B8892;
 }
 
+main p {
+    margin: 2vmin;
+}
+
 .tab button:nth-child(1){
     border-top-left-radius: 3vmin;
 }

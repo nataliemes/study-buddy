@@ -1,7 +1,6 @@
 <?php
-
     $message = "";
-    include '../connection.php';
+    require_once '../connection.php';
 
     session_start();
     if (!isset($_GET['reset']) || isset($_SESSION['USERNAME'])){
@@ -19,8 +18,7 @@
                 $confirm_password = md5($_POST['confirm-password']);
 
                 if ($password !== $confirm_password){
-                    $message = "<div class='alert'>
-                                Password and Confirm Password do not match.</div>";
+                    $message = "<div class='alert'> Password and Confirm Password do not match. </div>";
                 }
                 else {
                     $sql = "UPDATE user SET password_hash=?, code='' WHERE code=? AND registration_date!=0000-00-00";
@@ -33,12 +31,11 @@
             }
         }
         else {
-            $message = "<div class='alert'> ERROR: such reset code does not exist.
-                        You will be redirected to homepage. </div>";
-            header("refresh: 6, url= http://localhost/web/index.php");
+            $message = "<div class='alert'> Such reset code does not exist.
+                        You will be redirected to log-in page. </div>";
+            header("refresh: 6, url=http://localhost/web/auth/log-in.php");
         }
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -46,13 +43,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/web/css/style.css">   <!-- sheidzleba abs path undodes! -->
+    <link rel="stylesheet" href="http://localhost/web/css/style.css">
     <link rel="stylesheet" href="http://localhost/web/css/side-image-layout.css">
     <link rel="stylesheet" href="http://localhost/web/css/form.css">
     <title>Web Project Demo</title>
 </head>
 <body>
-
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
@@ -76,7 +72,6 @@
         </form>
     </main>
 
-    <?php include_once "../footer.php"; ?>    
-    
+    <?php include_once "../footer.php"; ?> 
 </body>
 </html>

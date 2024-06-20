@@ -1,12 +1,10 @@
 <?php
-
     session_start();
-    $msg = "";
+    $message = "";
     
-    // sesias dawyeba agar unda, nav-bar-shi daiwyo
-    if (isset($_SESSION['EMAIL']) && isset($_POST['submit'])) {
+    if (isset($_SESSION['USERNAME']) && isset($_POST['submit'])) {
 
-        include_once 'connection.php';
+        require_once 'connection.php';
 
         $subject = trim($_POST['subject']);
         $feedback = trim($_POST['feedback-text']);
@@ -15,12 +13,10 @@
                     VALUES ({$_SESSION['USER_ID']}, current_date(), ?, ?)";
 
         secureQuery($sql, "ss", [$subject, $feedback]);
-        $msg = "<div class='alert'>
-                Feedback was sent successfully! </div>";
+        $message = "<div class='alert'> Feedback was sent successfully! </div>";
     }
-    else if (!isset($_SESSION['EMAIL'])){
-        $msg = "<div class='alert'>
-                You have to be logged in to send feedback! </div>";
+    else if (!isset($_SESSION['USERNAME'])){
+        $message = "<div class='alert'> You have to be logged in to send feedback! </div>";
     }
 ?>
 
@@ -32,14 +28,13 @@
     <link rel="stylesheet" href="css/form.css">
 </head>
 <body id="contact-page">
-    <?php
-        require_once 'nav-bar.php';
-    ?>
+
+    <?php require_once 'nav-bar.php'; ?>
 
     <main id="contact-main">
         <form action="" method="post">
             <h2> Send feedback </h2>
-            <?php echo "<p> {$msg} </p>"; ?>
+            <?php echo "<p> {$message} </p>"; ?>
 
             <label for="subject"> Title: </label> <br>
             <input type="text" name="subject" id="subject" required> <br>

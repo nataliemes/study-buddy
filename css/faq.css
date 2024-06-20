@@ -4,7 +4,7 @@ main h1 {
     text-align: center;
 }
 
-.eachFaq {
+.faq-container {
     padding: 2vmin 2vmin;
     margin-bottom: 1vmin;
     border: 1px solid #7F6774;
@@ -12,27 +12,27 @@ main h1 {
     background-color: #DDD8DB;
 }
 
-.eachFaq h4:before{ 
+.faq-container h4:before{ 
     display: inline-block;
     vertical-align: top;
     text-align: center;
     width: 15px;
 }
-.eachFaq.close h4:before{ 
+.faq-container.close h4:before{ 
     content: '+'; 
 }
-.eachFaq.open h4:before{ 
+.faq-container.open h4:before{ 
     content: '-'; 
 }
 
-.eachFaq .title {
+.faq-container .faq-question {
     cursor: pointer;
 }
 
-.eachFaq .title:hover {
+.faq-container .faq-question:hover {
     color: #7F6774;
 }
 
-.accordion-content {
+.faq-answer {
     margin-top: 1vmin;
 }

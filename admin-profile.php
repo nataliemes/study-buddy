@@ -23,13 +23,12 @@
     }
 
 	if (isset($_POST['download'])){
-        // download file with user data in it
 
 		$id = $_POST['id'];
 
 		$sql = "SELECT username, email, is_admin, registration_date FROM user
                 WHERE user_id = {$id}";
-		$user = ($mysqli->query($sql))->fetch_assoc();    // only 1 row
+		$user = ($mysqli->query($sql))->fetch_assoc();    // there's only 1 row
 
 		$file = "{$user['username']}-info.txt";
 		$txt = fopen($file, "w") or die("Unable to open file!");
@@ -124,34 +123,28 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/profile.css">
-
-    <script src="profile.js" ></script>
+    <script src="js/profile.js" ></script>
 </head>
 <body>
-
-	<?php include 'nav-bar.php'; ?>
+	<?php require_once 'nav-bar.php'; ?>
 
 	<header>
 		<h1> Admin homepage </h1>
-
 		<?php echo $message; ?>
-
 		<a href='http://localhost/web/auth/log-out.php'> <i class="fa-solid fa-right-from-bracket"></i> Log out </a>
 	</header>
 
 	<main>
 		<div class="tab">
-			<button class="tablinks active" onclick="openTab(event, 'user')">All users</button>
-			<button class="tablinks" onclick="openTab(event, 'post')">All posts</button>
-			<button class="tablinks" onclick="openTab(event, 'category')">All categories</button>
-			<button class="tablinks" onclick="openTab(event, 'feedback')">All feedback</button>
+			<button class="tablinks active" onclick="openTab(event, 'user')"> All users </button>
+			<button class="tablinks" onclick="openTab(event, 'post')"> All posts </button>
+			<button class="tablinks" onclick="openTab(event, 'category')"> All categories </button>
+			<button class="tablinks" onclick="openTab(event, 'feedback')"> All feedback </button>
 		</div>
 
 		<div id="user" class="tabcontent first">
-			
 			<?php
 				require_once "connection.php";
 				$queryResult = $mysqli->query("SELECT * FROM user WHERE registration_date != 0000-00-00");
@@ -193,29 +186,31 @@
 			?>   
 		</div>
 
+
 		<div id="post" class="tabcontent">
 			<a href="http://localhost/web/crud/create-post.php"> 
-			<i class="fa-solid fa-upload"></i>
+				<i class="fa-solid fa-upload"></i>
 				Create new post 
 			</a>   
 
-			<!-- TO-DO: download file when clicked the file_path -->
 			<?php showDBdata("post", "admin"); ?>   
 		</div>
+
 
 		<div id="category" class="tabcontent">
 
 			<a href="http://localhost/web/crud/create-category.php">
-			<i class="fa-solid fa-upload"></i>
+				<i class="fa-solid fa-upload"></i>
 				Create new category 
 			</a>
 			<?php showDBdata("category", "admin"); ?>
 		</div>
 
+
 		<div id="feedback" class="tabcontent">
-			<a href="http://localhost/web/contact.php">
-			<i class="fa-solid fa-upload"></i>
-			 Create new feedback 
+			<a href="http://localhost/web/contact.php"> 
+				<i class="fa-solid fa-upload"></i>
+			 	Create new feedback 
 			</a> 
 			<?php showDBdata("feedback", "admin"); ?>
 		</div>
@@ -223,6 +218,5 @@
 	</main>
 
 	<?php include 'footer.php'; ?>
-   
 </body>
 </html>
