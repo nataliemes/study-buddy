@@ -91,42 +91,56 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- <link rel="stylesheet" href="../css/side-image-layout.css"> -->
+    <link rel="stylesheet" href="../css/form.css">
+
 </head>
-<body>
+<body id='create-post-page'>
     <?php include '../nav-bar.php'; ?>
-    <h2> Create new post </h2>
-    <?php echo $message ?>
 
-	<form action="" method="post" enctype="multipart/form-data">
+    <!-- <aside>
+        <img src="../images/img.png" alt="image">
+    </aside> -->
 
-        Name: <br> <input type="text" name="name" required> <br>
-        Description: <br> <textarea rows="8" cols="60" id="description" name="description"
-                        placeholder="write description here..." required></textarea><br>
-        Upload File: <br> <input type="file" id="file" name="file"> <br>
+    <main id="create-post-main">
+        <form action="" method="post" enctype="multipart/form-data">
 
-        Choose categories: <br>
-        <?php
-            foreach ($categories as $cat){
-                echo "<input type='checkbox' id={$cat} name={$cat} value={$cat}>";
-                echo "<label for={$cat}> {$cat} </label><br>";
-            }
-        ?>
+            <h2> Create new post </h2>
+            <?php echo $message ?>
 
+            <label for="name"> Name: </label> <br>
+            <input type="text" name="name" required> <br>
 
-        <input type="submit" value="Create" name="submit">
-	</form>
+            <label for="description"> Description: </label> <br>
+            <textarea rows="8" cols="60" id="description" name="description"
+                    placeholder="write description here..." required></textarea><br>
 
-    <?php
-        if ($_SESSION['IS_ADMIN']) {
-            $link = "http://localhost/web/admin-profile.php";
-        }
-        else {
-            $link = "http://localhost/web/user-profile.php";
-        }
-        echo "<a href={$link}> Back to profile </a>";
-    ?>
+            <label for="file"> Upload File: </label>
+            <input type="file" id="file" name="file"> <br>
+
+            <label> Choose categories: </label>
+            <?php
+                foreach ($categories as $cat){
+                    echo "<input type='checkbox' id={$cat} name={$cat} value={$cat}>";
+                    echo "<label for={$cat}> {$cat} </label>";
+                }
+                echo "<br>"
+            ?>
+
+            <button name="submit" class="btn" type="submit"> Create </button>
+
+            <?php
+                if ($_SESSION['IS_ADMIN']) {
+                    $link = "http://localhost/web/admin-profile.php";
+                }
+                else {
+                    $link = "http://localhost/web/user-profile.php";
+                }
+                echo "<p> <a href={$link}> Back to profile </a> </p>";
+            ?>
+        </form>
+    </main>
 
 </body>
 </html>

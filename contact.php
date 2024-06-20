@@ -28,15 +28,15 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="contact.css">
+	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form.css">
 </head>
-<body>
+<body id="contact-page">
     <?php
         require_once 'nav-bar.php';
     ?>
 
-    <main>
+    <main id="contact-main">
         <form action="" method="post">
             <h2> Send feedback </h2>
             <?php echo "<p> {$msg} </p>"; ?>

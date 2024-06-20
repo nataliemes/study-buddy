@@ -1,0 +1,54 @@
+/* ASIDE ****************************************/
+
+aside {
+    /* border: 1px solid red; */
+    flex: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+aside img {
+    height: 68vmin;   /* tu 72? */
+    width: 68vmin;
+}
+
+
+/* MAIN *****************************************/
+
+main {
+    /* border: 1px solid green; */
+    flex: 50%;
+    
+    
+    
+    /* display: flex;
+    align-items: center;
+    justify-content: flex-start; */
+}
+
+
+/* MEDIA ***************************************/
+
+
+@media only screen and (max-width: 968px) {
+
+    aside img {
+        /* border: 1px solid green; */
+        width: 48vmin;
+        height: 48vmin;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    
+    main {
+        justify-content: center;
+    }
+
+    aside {
+        display: none;
+    }
+
+}

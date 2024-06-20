@@ -1,0 +1,58 @@
+/* MAIN 1 ***************************************/
+
+main {
+    min-height: 78vh;
+}
+
+main h1 {
+    font-size: 8vmin;
+    padding: 4vmin 0;
+}
+
+main p {
+    padding-right: 4vmin;
+}
+
+main a {
+    text-decoration: none;
+    color: #DDD8DB;
+    font-size: 2.5vmin;
+    font-weight: bold;
+
+    background-color: #624755;
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
+    transition: all 0.5s ease-in-out;
+    
+    
+    border-radius: 3vmin;
+    border: #624755;
+    
+    padding: 2vmin;
+
+    
+    
+}
+
+main a:hover{
+    transform: scale(0.95);
+    background-color: #7F6774;
+}
+    
+main img {
+    width: 48vmin;
+    height: 28vmin;
+}
+
+main div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 2vh;
+}
+
+@media only screen and (max-width: 968px) {
+    aside {
+        display: none;
+    }
+}
+

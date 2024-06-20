@@ -19,23 +19,23 @@
                 $confirm_password = md5($_POST['confirm-password']);
 
                 if ($password !== $confirm_password){
-                    $message = "<div class='alert alert-danger'>
+                    $message = "<div class='alert'>
                                 Password and Confirm Password do not match.</div>";
                 }
                 else {
                     $sql = "UPDATE user SET password_hash=?, code='' WHERE code=? AND registration_date!=0000-00-00";
                     secureQuery($sql, "ss", [$password, $_GET['reset']]);
-                    $message = "<div class='alert alert-danger'>
+                    $message = "<div class='alert'>
                             Password updated successfully. <br>
                             You will be redirected to log-in page. </div>";
-                    header("refresh: 3, url=http://localhost/web/auth/log-in.php");
+                    header("refresh: 6, url=http://localhost/web/auth/log-in.php");
                 }
             }
         }
         else {
-            $message = "ERROR: such reset code does not exist.
-                    <br> You will be redirected to homepage.";
-            header("refresh: 3, url= http://localhost/web/index.php");
+            $message = "<div class='alert'> ERROR: such reset code does not exist.
+                        You will be redirected to homepage. </div>";
+            header("refresh: 6, url= http://localhost/web/index.php");
         }
     }
 
@@ -46,8 +46,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/web/style.css">
-    <link rel="stylesheet" href="http://localhost/web/auth/auth.css">
+    <link rel="stylesheet" href="http://localhost/web/css/style.css">   <!-- sheidzleba abs path undodes! -->
+    <link rel="stylesheet" href="http://localhost/web/css/side-image-layout.css">
+    <link rel="stylesheet" href="http://localhost/web/css/form.css">
     <title>Web Project Demo</title>
 </head>
 <body>
