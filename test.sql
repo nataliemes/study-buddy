@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 20, 2024 at 06:51 PM
+-- Generation Time: Jun 21, 2024 at 06:57 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `creation_date` date NOT NULL,
   PRIMARY KEY (`category_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `category`
@@ -48,7 +48,7 @@ INSERT INTO `category` (`category_id`, `user_id`, `name`, `description`, `creati
 (3, 1, 'javascript', 'A versatile programming language that allows you to implement complex features on web pages, such as interactive content, animations, form validations, and dynamic updates.', '2024-06-20'),
 (5, 5, 'sql', 'A domain-specific language used in programming and designed for managing and manipulating relational databases. SQL is essential for backend development to handle database queries.', '2024-06-20'),
 (6, 6, 'algebra', 'A branch of mathematics dealing with symbols and the rules for manipulating those symbols. It includes the study of equations, functions, and algebraic structures.', '2024-06-20'),
-(7, 6, 'calculus', 'A branch of mathematics that studies continuous change. It includes differential calculus (concerned with rates of change and slopes of curves) and integral calculus (concerned with the accumulation o', '2024-06-20');
+(9, 2, 'statistics', 'Statistics is the study of data collection, analysis, interpretation, and presentation. It helps in identifying patterns, making decisions, and predicting outcomes across various fields using tools li', '2024-06-21');
 
 -- --------------------------------------------------------
 
@@ -65,15 +65,14 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `creation_date` date NOT NULL,
   PRIMARY KEY (`feedback_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `feedback`
 --
 
 INSERT INTO `feedback` (`feedback_id`, `user_id`, `name`, `description`, `creation_date`) VALUES
-(1, 1, 'Bug Report', 'I encountered a bug when trying to upload a file. The system freezes and doesn\'t allow me to complete the action. Please look into this.', '2024-06-17'),
-(2, 3, 'Great Experience!', 'I had a fantastic experience using your service. The interface is user-friendly, and everything works smoothly. Keep up the great work!', '2024-06-18');
+(3, 2, 'Bug Report', 'I\'ve been experiencing a problem with logging in. Sometimes the login page doesn\'t load properly. Please look into this as it affects my ability to access the service.', '2024-06-21');
 
 -- --------------------------------------------------------
 
@@ -85,13 +84,24 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `post_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `description` varchar(200) NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `file_path` varchar(256) NOT NULL,
   `creation_date` date NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`post_id`, `user_id`, `name`, `description`, `file_path`, `creation_date`) VALUES
+(34, 2, 'Web basics: markup & style', 'Understanding the fundamentals of web development starts with mastering HTML and CSS. HTML (HyperText Markup Language) structures the content of a webpage, while CSS (Cascading Style Sheets) is used to style and layout the content, creating visually appealing and user-friendly websites. In this post, we\'ll explore the basics of HTML and CSS, demonstrating how they work together to form the foundation of web development.', 'stuff_on_html___css.pdf', '2024-06-21'),
+(35, 4, 'Exploring JavaScript: Powering', 'JavaScript is a versatile programming language known for its ability to add interactivity and dynamic behavior to web pages. JavaScript, often abbreviated as JS, is a scripting language that enables developers to create interactive elements within web pages. It runs on the client side (in the user\'s browser) and is essential for building modern web applications. In this post, we\'ll delve into the fundamentals of JavaScript, exploring its key features and demonstrating how it enhances user experiences on the web.', 'things_about_js.pdf', '2024-06-21'),
+(36, 5, 'The Language of Data Management', 'SQL, or Structured Query Language, is a domain-specific language used in programming and designed for managing data in relational database management systems (RDBMS). It allows users to perform tasks such as querying data, updating records, and defining database schema. In this post, we\'ll explore the basics of SQL, its key features, and how it enables efficient data management and retrieval.', 'discovering_sql.pdf', '2024-06-21'),
+(37, 6, 'Bridging Algebra and Statistics', 'Algebra and statistics are foundational branches of mathematics that synergize to analyze and interpret data across various fields. In this post, we\'ll explore how algebraic principles enhance statistical analysis, providing insights into data trends, patterns, and relationships.', 'algebra_and_statistics.pdf', '2024-06-21'),
+(38, 1, 'test', 'test', 'algebra_and_statistics (1).pdf', '2024-06-21');
 
 -- --------------------------------------------------------
 
@@ -106,6 +116,18 @@ CREATE TABLE IF NOT EXISTS `post_category` (
   KEY `post_id` (`post_id`),
   KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `post_category`
+--
+
+INSERT INTO `post_category` (`post_id`, `category_id`) VALUES
+(34, 1),
+(34, 2),
+(35, 3),
+(36, 5),
+(37, 6),
+(37, 9);
 
 -- --------------------------------------------------------
 
@@ -123,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `registration_date` date NOT NULL,
   `code` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `user`
