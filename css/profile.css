@@ -25,7 +25,7 @@ main {
     box-shadow: -0.5vmin -0.5vmin 1vmin 0 #9B8892;
 }
 
-main p {
+main > p {
     margin: 2vmin;
 }
 
@@ -81,6 +81,10 @@ main p {
 
 .infobox > * {
     margin: 2vmin;
+}
+
+.post > * {
+    margin: 1vmin;
 }
 
 input[type=submit], .tabcontent > a, header a {

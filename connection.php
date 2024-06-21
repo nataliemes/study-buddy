@@ -35,24 +35,27 @@
 
         // if table is post, we need to show an extra field: file_path
         // & we also need to get categories of that post
-        $extraFields = $extraJoin = "";
+        $extraFields = $extraJoin = $extraGroupBy = "";
         if ($table === "post"){
             $extraFields = "t.file_path, GROUP_CONCAT(c.name SEPARATOR ', ') as categories, ";
             $extraJoin = "JOIN post_category pc ON pc.post_id = t.post_id
-				        JOIN category c ON c.category_id = pc.category_id
-                        GROUP BY t.post_id";
+				        JOIN category c ON c.category_id = pc.category_id";
+            $extraGroupBy = "GROUP BY t.post_id";
         }
 
         // different pages need different content to be shown
         $sql = "";
         if ($page === "user") {
-            $sql = "SELECT * FROM {$table}
-                    WHERE user_id={$_SESSION['USER_ID']}";
+            $sql = "SELECT {$extraFields} t.{$table}_id, t.name, t.description, t.creation_date
+                    FROM {$table} t {$extraJoin}
+                    WHERE t.user_id={$_SESSION['USER_ID']}
+                    {$extraGroupBy}";
         }
         else {   // admin profile or posts page
             $sql = "SELECT t.{$table}_id, t.name, t.description, t.creation_date, {$extraFields} u.username
             FROM {$table} t JOIN user u ON t.user_id = u.user_id
-            {$extraJoin}";
+            {$extraJoin}
+            {$extraGroupBy}";
         }
 
         global $mysqli;
@@ -77,7 +80,7 @@
                         echo "<a href=uploads/{$row['file_path']} target=_blank> {$row['file_path']} </a>";
                     }
 
-                    if ($page === "admin") {
+                    if ($page !== "user") {
                         echo "<h6> by: {$row['username']} </h6>";
                     }
 

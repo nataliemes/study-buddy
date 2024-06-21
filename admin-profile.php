@@ -67,7 +67,7 @@
 		$output .= "Categories:\n";
 		$output .= "----------\n";
 		
-		if ($feedbacks) {
+		if ($categories) {
 			foreach ($categories as $category) {
 				$output .= "Name: {$category['name']}\n";
 				$output .= "Description: {$category['description']}\n";
