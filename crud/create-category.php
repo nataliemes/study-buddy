@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="../css/form.css">
 </head>
 <body>
-    <?php include '../nav-bar.php'; ?>
+    <?php require_once '../nav-bar.php'; ?>
 
     <aside>
         <img src="../images/thinking.png" alt="image">
@@ -82,7 +82,7 @@
         </form>
     </main>
 
-    <?php include '../footer.php'; ?>
+    <?php include_once '../footer.php'; ?>
 
 </body>
 </html>

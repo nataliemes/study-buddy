@@ -23,9 +23,7 @@
             $categories = array_column($categories->fetch_all(MYSQLI_ASSOC), 'name');
 
             echo "<div id='categories'>";
-            foreach ($categories as $cat){
-                // echo "<button class='category active' onclick='showCategories(event, \"$cat\")'> {$cat} </button>";
-                
+            foreach ($categories as $cat){                
                 echo "<button class='category-toggle' data-category='{$cat}'> {$cat} </button>";
             }
             echo "</div>";
