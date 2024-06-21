@@ -1,0 +1,19 @@
+User Information:
+------------------
+Username: test1
+Email: test@gmail.com
+Is Admin: Yes
+Registration Date: 2024-06-18
+
+Feedbacks:
+----------
+No feedbacks found.
+
+Categories:
+----------
+No categories found.
+
+Posts:
+------
+No posts found.
+

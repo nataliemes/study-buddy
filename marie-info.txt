@@ -1,0 +1,25 @@
+User Information:
+------------------
+Username: marie
+Email: marie@gmail.com
+Is Admin: No
+Registration Date: 2024-06-18
+
+Feedbacks:
+----------
+No feedbacks found.
+
+Categories:
+----------
+Name: sql
+Description: A domain-specific language used in programming and designed for managing and manipulating relational databases. SQL is essential for backend development to handle database queries.
+Creation Date: 2024-06-20
+
+Posts:
+------
+Name: The Language of Data Management
+Description: SQL, or Structured Query Language, is a domain-specific language used in programming and designed for managing data in relational database management systems (RDBMS). It allows users to perform tasks such as querying data, updating records, and defining database schema. In this post, we'll explore the basics of SQL, its key features, and how it enables efficient data management and retrieval.
+File: discovering_sql.pdf
+Creation Date: 2024-06-21
+Categories: sql
+

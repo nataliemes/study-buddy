@@ -31,6 +31,8 @@
 
 	if (isset($_POST['saveUpdate'])) {
 
+		echo "HEREEEEEEE";
+
 		$new_username = trim($_POST['user']);
 		$new_email = trim($_POST['mail']);
 
@@ -64,7 +66,7 @@
 			$mysqli->query($sql);
         }
 
-		$message = "Record updated successfully!";
+		$message = "<div class='alert'> Record updated successfully! </div>";
 	}
 
 ?>
@@ -104,7 +106,7 @@
 			<!--  formas vayolebt id-s, rom submit-ze dacheris mere php-shi gvqondes id  -->
 			<input type="hidden" value="<?php echo $id; ?>" name="user_id">
 			
-			<button name="submit" name="saveUpdate" type="submit"> Update </button>
+			<button name="saveUpdate" type="submit"> Update </button>
 
 			<p> <a href='http://localhost/web/admin-profile.php'> Back to profile </a> </p>
 		</form>
