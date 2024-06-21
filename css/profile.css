@@ -38,6 +38,9 @@ main p {
     cursor: pointer;
     padding: 2vh 2vw;
     font-size: 3vmin;
+    font-weight: bold;
+    font-family: 'Trebuchet MS';
+    color: #624755;
     background-color: #DDD8DB;
     height: 8vh;
     transition: 0.3s;
@@ -114,7 +117,6 @@ header a {
     color: #624755;
 }
 
-
 /**************************************/
 
 .category-toggle {
@@ -131,6 +133,6 @@ header a {
 }
 
 .category-toggle.hidden {
-    background-color: lightgray;
-    color: #624755;
+    background-color: hsl(324, 7%, 86%);
+    color: hsl(329, 16%, 33%);
 }

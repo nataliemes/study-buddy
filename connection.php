@@ -85,11 +85,11 @@
 
                     // deleting option on profiles
                     if ($page === "user" || $page === "admin"){
-                        echo "<form action='' method='POST'>
+                        echo "<div> <form action='' method='POST'>
                                 <input type='submit' value='Delete' name='delete'>
                                 <input type='hidden' value='{$table}' name='table'>
                                 <input type='hidden' value='{$row[$table . '_id']}' name='id'>
-                            </form>";
+                            </form> </div>";
                     }
 
                     if ($page === "posts"){

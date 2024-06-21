@@ -68,26 +68,49 @@
 	}
 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/side-image-layout.css">
+    <link rel="stylesheet" href="../css/form.css">
+</head>
+<body>
 
-	<?php include_once "../nav-bar.php"; ?>
-	<h2>Update Record</h2>
-	<?php echo $message; ?>
-	
+	<?php require_once "../nav-bar.php"; ?>
 
-	<form action="" method="post" >
+	<aside>
+        <img src="../images/notes.png" alt="image">
+    </aside>
 
-	Username: <br> <input type="text" value="<?php echo $username; ?>" name="user"> <br>
-	Email: <br> <input type="text" value="<?php echo $email; ?>"name="mail"> <br>
-	Role: <br>
-	<select name="user-role" id="user-role">
-		<option value="1"> Admin </option>
-		<option value="0"> User </option>
-	</select>
+	<main>
+		<form action="" method="post" >
+			<h2> Update Record </h2>
+			<?php echo $message; ?>
 
-	<!--  formas vayolebt id-s, rom submit-ze dacheris mere php-shi gvqondes id  -->
-	<input type="hidden" value="<?php echo $id; ?>" name="user_id">
+			<label for="user"> Username: </label> <br>
+            <input type="text" value="<?php echo $username; ?>" name="user" id="user"> <br>
+			
+			<label for="mail"> Email: </label> <br>
+			<input type="email" value="<?php echo $email; ?>" name="mail" id="mail"> <br>
+			
+			<label> Role: </label>
+			<select name="user-role" id="user-role">
+				<option value="1"> Admin </option>
+				<option value="0"> User </option>
+			</select>
 
-	<input type="submit" name="saveUpdate" value="Update">
-	</form>
+			<!--  formas vayolebt id-s, rom submit-ze dacheris mere php-shi gvqondes id  -->
+			<input type="hidden" value="<?php echo $id; ?>" name="user_id">
+			
+			<button name="submit" name="saveUpdate" type="submit"> Update </button>
 
-	<a href='http://localhost/web/admin-profile.php'> Back to profile </a>
+			<p> <a href='http://localhost/web/admin-profile.php'> Back to profile </a> </p>
+		</form>
+	</main>
+
+    <?php include_once '../footer.php'; ?>
+
+</body>
+</html>

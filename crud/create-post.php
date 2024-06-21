@@ -27,20 +27,21 @@
         }
 
         if (empty($chosen_categories)){
-            $message = "ERROR: you must choose at least one category.";
+            $message = "<div class='alert'> You must choose at least one category. </div>";
         }
         else if (empty($name) || empty($description)){
-            $message = "Post could not be added. Make sure not to leave any empty fields!";
+            $message = "<div class='alert'> Post could not be added.
+                        Make sure not to leave any empty fields! </div>";
         }
         // empty($_FILES) - might be file_uploads set to "Off" in php.ini
         else if (empty($_FILES) || ($_FILES["file"]["error"] !== UPLOAD_ERR_OK)) {
-            $message = "ERROR: File was not uploaded.";
+            $message = "<div class='alert'> ERROR: File was not uploaded. </div>";
         }
         else if ($_FILES["file"]["size"] > 1048576) {
-            $message = "ERROR: File too large (max 1MB).";
+            $message = "<div class='alert'> ERROR: File too large (max 1MB). </div>";
         }
         else if ($_FILES["file"]["type"] !== "application/pdf") {
-            $message = "ERROR: Invalid file type.";
+            $message = "<div class='alert'> ERROR: Invalid file type. </div>";
         }
         else {
             // Replace any characters not \w- in the original filename
@@ -70,7 +71,6 @@
                 secureQuery($sql, "sss", [$name, $description, $filename]);
                 $post_id = $mysqli->insert_id;
 
-
                 foreach ($chosen_categories as $cat){
                     $category_id = $mysqli->query("SELECT category_id FROM category WHERE name='{$cat}'");
                     $category_id = $category_id->fetch_assoc()['category_id'];
@@ -80,7 +80,7 @@
                     $mysqli->query($query);    
                 }
 
-                $message = "Post added successfully!";
+                $message = "<div class='alert'> Post added successfully! </div>";
             }
         }
     }
@@ -92,16 +92,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <!-- <link rel="stylesheet" href="../css/side-image-layout.css"> -->
     <link rel="stylesheet" href="../css/form.css">
 
 </head>
 <body id='create-post-page'>
-    <?php include '../nav-bar.php'; ?>
-
-    <!-- <aside>
-        <img src="../images/img.png" alt="image">
-    </aside> -->
+    <?php require_once '../nav-bar.php'; ?>
 
     <main id="create-post-main">
         <form action="" method="post" enctype="multipart/form-data">
@@ -117,15 +112,16 @@
                     placeholder="write description here..." required></textarea><br>
 
             <label for="file"> Upload File: </label>
-            <input type="file" id="file" name="file"> <br>
+            <input type="file" id="file" name="file"> <br> <br>
 
             <label> Choose categories: </label>
             <?php
+                echo "<div id='categories-select'>";
                 foreach ($categories as $cat){
-                    echo "<input type='checkbox' id={$cat} name={$cat} value={$cat}>";
-                    echo "<label for={$cat}> {$cat} </label>";
+                    echo "<div> <input type='checkbox' id={$cat} name={$cat} value={$cat}>";
+                    echo "<label for={$cat}> {$cat} </label> </div>";
                 }
-                echo "<br>"
+                echo "</div> <br>";
             ?>
 
             <button name="submit" class="btn" type="submit"> Create </button>
@@ -142,5 +138,6 @@
         </form>
     </main>
 
+    <?php include_once '../footer.php'; ?>
 </body>
 </html>

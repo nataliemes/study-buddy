@@ -1,14 +1,26 @@
 $(document).ready(function() {
-    // Initially all posts are shown
+    
     $('.post').show();
 
-    // Handle click events for category toggle buttons
-    $('.category-toggle').click(function() {
-        var category = $(this).data('category');
+    var actives = {};
 
-        // Toggle visibility of posts in the selected category
-        $('.post.' + category).toggle();
-        
+    $('.category-toggle').each(function() {
+        var category = $(this).data('category');
+        actives[category] = true;
+    });
+
+    $('.category-toggle').click(function() {
+
+        var category = $(this).data('category');
+        actives[category] = !actives[category];
         $(this).toggleClass('hidden');
+
+        $('.post').each(function() {
+            var $post = $(this);
+            var categories = $post.attr('class').split(/\s+/);
+            var showPost = categories.some(cat => actives[cat]);
+        
+            showPost ? $post.show() : $post.hide();
+        });
     });
 });
