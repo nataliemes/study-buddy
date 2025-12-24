@@ -1,0 +1,38 @@
+main h1 {
+    font-size: 6vmin;
+    margin: 4vmin 0;
+    text-align: center;
+}
+
+.faq-container {
+    padding: 2vmin 2vmin;
+    margin-bottom: 1vmin;
+    border: 1px solid #7F6774;
+    border-radius: 3vmin;
+    background-color: #DDD8DB;
+}
+
+.faq-container h4:before{ 
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    width: 15px;
+}
+.faq-container.close h4:before{ 
+    content: '+'; 
+}
+.faq-container.open h4:before{ 
+    content: '-'; 
+}
+
+.faq-container .faq-question {
+    cursor: pointer;
+}
+
+.faq-container .faq-question:hover {
+    color: #7F6774;
+}
+
+.faq-answer {
+    margin-top: 1vmin;
+}

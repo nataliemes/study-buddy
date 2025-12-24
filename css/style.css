@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    background-color: #BCAFB5;
+    font-family: 'Trebuchet MS';
+    color: #624755;
+    padding: 0 8vw;
+}
+
+nav, footer {
+    flex: 100%;
+} 
+
+
+/* NAV ************************************/
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 12vh;
+    /* border: 1px solid blue; */
+}
+
+nav h1 {
+    font-size: 4vmin;
+    /* border: 1px solid red; */
+}
+
+nav h1 i, footer h2 i {
+    margin-right: 1vmin;
+}
+
+nav a {
+    padding: 1.5vmin; 
+    text-decoration: none;
+    color: #624755;
+    font-weight: bold;
+    font-size: 3.3vmin;
+    /* border: 1px solid black; */
+
+    box-shadow: inset 0 -3px 0 -1px #624755;
+    transition: all .3s ease-in-out;
+    
+    line-height: 12vh;
+}
+  
+nav a:hover {
+    box-shadow: inset 0 -12vh 0 -1px #624755;
+    color: #BCAFB5;
+}
+
+
+/* FOOTER *******************************/
+
+footer {
+    /* border: 1px solid blue; */
+    height: 10vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    
+}
+
+footer h2 {
+    font-size: 3.4vmin;
+    transition: transform 0.3s linear;
+}
+
+footer h2:hover {
+    transform: scale(1.05);
+}
+
+footer h5 {
+    font-size: 2.5vmin;
+}
+
+@keyframes anim {
+    0%, 100% {transform: translateY(0);}
+    25%, 75% {transform: translateY(-1vmin);}
+    50% {transform: translateY(-2vmin);}
+}
+
+#socials a{
+    font-size: 5vmin;
+    padding: 2vmin;
+    color: #624755;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#socials a:hover{
+    animation: anim 0.5s linear;
+}
+
+
+/****************************************/
+.alert {
+    background-color: #624755;
+    color: #DDD8DB;
+    font-size: 2.5vmin;
+    font-weight: bold;
+    padding: 1vmin 2vmin;
+    border-radius: 1vmin;
+    box-shadow: 0.5vmin 0.5vmin 1vmin #624755; 
+    margin-bottom: 2vmin;
+}
+
+/****************************************/
+
+@media only screen and (max-width: 968px) {
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4vh 0;
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+    body {
+        flex-direction: column;
+    }
+
+    nav div {
+        display: flex;
+        flex-wrap: wrap;
+        
+        width: 100%;
+        margin-top: 2vh;
+    }
+    
+    nav div a {
+        flex: 33.3%;
+        line-height: 4vh;
+    }
+
+}
+

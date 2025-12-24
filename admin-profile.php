@@ -1,32 +1,110 @@
 <?php
+	session_start();
 
-	// nav-bar-shi mowmdeba user shemosulia tu ara
-	include 'nav-bar.php';
-	
-	// sesias dawyeba agar unda, nav-bar-shi daiwyo
-    if (!$_SESSION['IS_ADMIN']) {
-        header("Location: user-profile.php");
+	// if not logged in, shouldn't have access to admin profile
+    if (!isset($_SESSION['EMAIL'])) {
+        header("Location: http://localhost/web/index.php");
         die();
     }
 
-	require_once "connection.php";
-	$message = "";
-
-	if (isset($_POST['Delete'])){
-        $mysqli->query("DELETE FROM user WHERE user_id={$_POST['user_id']}");
-		$message = "User deleted successfully.";
+	// if logged in & normal user, should go to user profile instead
+    if (!$_SESSION['IS_ADMIN']) {
+        header("Location: http://localhost/web/user-profile.php");
+        die();
     }
-	
-	if (isset($_POST['Download'])){
-        // download file with user data in it
 
+	$message = "";
+	require_once "connection.php";
 
-		$file = "user-info.txt";
+	if (isset($_POST['delete'])){
+		$table = $_POST['table'];
+        $mysqli->query("DELETE FROM {$table} WHERE {$table}_id = {$_POST['id']}");
+		$message = "<div class='alert'> {$table} deleted successfully. </div>";
+    }
+
+	if (isset($_POST['download'])){
+
+		$id = $_POST['id'];
+
+		$sql = "SELECT username, email, is_admin, registration_date FROM user
+                WHERE user_id = {$id}";
+		$user = ($mysqli->query($sql))->fetch_assoc();    // there's only 1 row
+
+		$file = "{$user['username']}-info.txt";
 		$txt = fopen($file, "w") or die("Unable to open file!");
 
-		$info = "here's some info"; // write everythign here
+		$output = "User Information:\n";
+		$output .= "------------------\n";
+		$output .= "Username: {$user['username']}\n";
+		$output .= "Email: {$user['email']}\n";
+		$output .= "Is Admin: " . ($user['is_admin'] ? 'Yes' : 'No') . "\n";
+		$output .= "Registration Date: {$user['registration_date']}\n\n";
 
-		fwrite($txt, $info);
+
+		// feedbacks
+		$sql = "SELECT name, description, creation_date FROM feedback
+                WHERE user_id = {$id}";
+		
+		$feedbacks = ($mysqli->query($sql))->fetch_all(MYSQLI_ASSOC);
+		$output .= "Feedbacks:\n";
+		$output .= "----------\n";
+		
+		if ($feedbacks) {
+			foreach ($feedbacks as $feedback) {
+				$output .= "Name: {$feedback['name']}\n";
+				$output .= "Description: {$feedback['description']}\n";
+				$output .= "Creation Date: {$feedback['creation_date']}\n\n";
+			}
+		} else {
+			$output .= "No feedbacks found.\n\n";
+		}
+
+		// categories
+		$sql = "SELECT name, description, creation_date FROM category
+                WHERE user_id = {$id}";
+		
+		$categories = ($mysqli->query($sql))->fetch_all(MYSQLI_ASSOC);
+		$output .= "Categories:\n";
+		$output .= "----------\n";
+		
+		if ($categories) {
+			foreach ($categories as $category) {
+				$output .= "Name: {$category['name']}\n";
+				$output .= "Description: {$category['description']}\n";
+				$output .= "Creation Date: {$category['creation_date']}\n\n";
+			}
+		} else {
+			$output .= "No categories found.\n\n";
+		}
+
+
+		// posts
+		$sql = "SELECT p.name as post_name, p.description, p.file_path, p.creation_date,
+					GROUP_CONCAT(c.name SEPARATOR ', ') as cat_names
+				FROM post p JOIN post_category pc ON pc.post_id = p.post_id
+				JOIN category c ON c.category_id = pc.category_id
+				WHERE p.user_id = {$id}
+				GROUP BY p.post_id";	
+		
+
+		$posts = ($mysqli->query($sql))->fetch_all(MYSQLI_ASSOC);
+		$output .= "Posts:\n";
+		$output .= "------\n";
+
+		if ($posts) {
+			
+			foreach ($posts as $post) {
+				$output .= "Name: {$post['post_name']}\n";
+				$output .= "Description: {$post['description']}\n";
+				$output .= "File: {$post['file_path']}\n";
+				$output .= "Creation Date: {$post['creation_date']}\n";
+				$output .= "Categories: {$post['cat_names']}\n\n";
+			}
+		} else {
+			$output .= "No posts found.\n\n";
+		}
+
+		fwrite($txt, $output);
 		fclose($txt);
 
 		header('Content-Description: File Transfer');
@@ -37,211 +115,108 @@
 		header('Content-Length: ' . filesize($file));
 		header("Content-Type: text/plain");
 		readfile($file);
-		die(); // smth wrong cause it keeps outputing navbar code in file
+		die();
     }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<style>
-        .tab {
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-            height: 50px;
-            
-        }
-
-        .tab button {
-            border: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            font-size: 17px;
-            transition: 0.3s;
-        }
-
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-
-            border: 1px solid #ccc;
-            border-top: none;
-            background-color: lightblue;
-        }
-
-        .tabcontent.first {
-            display: block;
-        }
-
-    </style>
-
-    <script src="profile.js" ></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/profile.css">
+    <script src="js/profile.js" ></script>
 </head>
 <body>
+	<?php require_once 'nav-bar.php'; ?>
 
-	<h1 style='color: red'> ADMIN PAGE </h1>
+	<header>
+		<h1> Admin homepage </h1>
+		<?php echo $message; ?>
+		<a href='http://localhost/web/auth/log-out.php'> <i class="fa-solid fa-right-from-bracket"></i> Log out </a>
+	</header>
 
-	<?php echo $message; ?>
+	<main>
+		<div class="tab">
+			<button class="tablinks active" onclick="openTab(event, 'user')"> All users </button>
+			<button class="tablinks" onclick="openTab(event, 'post')"> All posts </button>
+			<button class="tablinks" onclick="openTab(event, 'category')"> All categories </button>
+			<button class="tablinks" onclick="openTab(event, 'feedback')"> All feedback </button>
+		</div>
 
-	<a href='log-out.php'> Log out </a>
+		<div id="user" class="tabcontent first">
+			<?php
+				require_once "connection.php";
+				$queryResult = $mysqli->query("SELECT * FROM user WHERE registration_date != 0000-00-00");
 
+				if($queryResult) {
+					if($queryResult->num_rows > 0) {					
 
-    <div class="tab">
-	<button class="tablinks active" onclick="openTab(event, 'users')">All users</button>
-        <button class="tablinks" onclick="openTab(event, 'posts')">All posts</button>
-        <button class="tablinks" onclick="openTab(event, 'categories')">All categories</button>
-        <button class="tablinks" onclick="openTab(event, 'feedback')">All feedback</button>
-    </div>
-
-	<div id="users" class="tabcontent first">
-        
-        
-
-        <?php
-            //Select records from table 
-			$queryResult = $mysqli->query("SELECT * FROM user");
-
-			if($queryResult) {
-				if($queryResult->num_rows > 0) {
-
-					// Display results into a table
-					echo "
-					<table border=1>
-					<tr>
-						<th> user_id </th>
-						<th> username </th>
-						<th> email </th>
-						<th> is_admin </th>
-						<th> registration date </th>
-						<th> operations </th>
-					</tr>
-					";
-
-					while($row = $queryResult->fetch_assoc()) {
-						echo "<tr>
-							<td>". $row['user_id'] ."</td>
-							<td>". $row['username']. "</td>
-							<td>". $row['email']."</td>
-							<td>". $row['is_admin']."</td>
-							<td>". $row['registration_date']."</td>";
-						echo '<td>
-							<a href="view-user.php?id='. $row['user_id'] .'" > View Posts </a>';
-						if ($_SESSION['EMAIL'] !== $row['email']) {  // tavisi tavi rom ar shecvalos
-							// echo '<a href="update-user.php?id='. $row['user_id'] .'" > Update </a>
-							// <a href="delete-user.php?id='. $row['user_id'] .'" > Delete </a>
-							// <a href="download-user-data.php?id='. $row['user_id'] .'" > Download data </a>';
-							echo "<form action='' method='POST'>
-									<input type='submit' value='Update' name='Update'>
-									<input type='submit' value='Delete' name='Delete'>
-									<input type='submit' value='Download' name='Download'>
+						while($row = $queryResult->fetch_assoc()) {
+							echo " <div class='infobox'>
+									<p> username: {$row['username']} </p>
+									<p> email: {$row['email']} </p>
+									<p> is_admin: {$row['is_admin']} </p>
+									<p> registration date: {$row['registration_date']} </p>";
+							
+							if ($_SESSION['EMAIL'] !== $row['email']) {  // tavisi tavi rom ar shecvalos
+								echo " <div class='buttons'>
+									<form action='crud/update-user.php' method='POST'>
+									<input type='submit' value='Update' name='update'>
 									<input type='hidden' value='{$row['user_id']}' name='user_id'>
 								</form>";
-						}
-					echo '</td>
-						</tr>';
+								echo "<form action='' method='POST'>
+										<input type='submit' value='Delete' name='delete'>
+										<input type='submit' value='Download' name='download'>
+										<input type='hidden' value='{$row['user_id']}' name='id'>
+										<input type='hidden' value='user' name='table'>
+									</form>
+								 </div>";
+							}
+							echo "</div>";
+						}			
+					}			
+					else {
+						echo "No users found";
 					}
-					echo "</table>";			
-				}			
+				} 
 				else {
-					echo "No users found";
+					echo "Something wrong with query";
 				}
-			} 
-			else {
-				echo "Something wrong with query";
-			}
-        ?>   
-    </div>
+			?>   
+		</div>
 
-    <div id="posts" class="tabcontent">
-        
-        <a href="create-post.php"> Create new post </a>    
 
-        <?php  // TO-DO: download file when clicked the file_path
-		    $queryResult = $mysqli->query("
-				SELECT p.title, p.description, p.file_path, p.upload_date, u.username
-				FROM post p	JOIN user u ON p.user_id = u.user_id");
-			
-			if ($queryResult) {
-				if ($queryResult->num_rows > 0) {
-					while ($row = $queryResult->fetch_assoc()) {
-						echo "<h3> {$row['title']} </h3>
-							<p> {$row['description']} </p>
-							<h5> {$row['file_path']} </h5>
-							<h5> {$row['username']} </h5>
-							<h5> {$row['upload_date']} </h5>";
-					}
-				} else {
-					echo "No categories found";
-				}
-			} else {
-				echo "Something went wrong with query";
-			}  
-        ?>   
-    </div>
+		<div id="post" class="tabcontent">
+			<a href="http://localhost/web/crud/create-post.php"> 
+				<i class="fa-solid fa-upload"></i>
+				Create new post 
+			</a>   
 
-    <div id="categories" class="tabcontent">
+			<?php showDBdata("post", "admin"); ?>   
+		</div>
 
-        <a href="create-category.php"> Create new category </a>
-        
-        <?php
-			$queryResult = $mysqli->query("
-				SELECT c.name, c.description, c.creation_date, u.username
-				FROM category c	JOIN user u ON c.user_id = u.user_id");
-			
-			if ($queryResult) {
-				if ($queryResult->num_rows > 0) {
-					while ($row = $queryResult->fetch_assoc()) {
-						echo "<h3> {$row['name']} </h3>
-							<p> {$row['description']} </p>
-							<h5> {$row['username']} </h5>
-							<h5> {$row['creation_date']} </h5>";
-					}
-				} else {
-					echo "No categories found";
-				}
-			} else {
-				echo "Something went wrong with query";
-			}   
-        ?>
-    </div>
 
-    <div id="feedback" class="tabcontent">
+		<div id="category" class="tabcontent">
 
-		<a href="contact.php"> Create new feedback </a>
-		
-		<?php
-			$queryResult = $mysqli->query("
-				SELECT f.subject, f.text, f.upload_date, u.username
-				FROM feedback f JOIN user u ON f.user_id = u.user_id");
-			
-			if ($queryResult) {
-				if ($queryResult->num_rows > 0) {
-					while ($row = $queryResult->fetch_assoc()) {
-						echo "<h3> {$row['subject']} </h3>
-							<p> {$row['text']} </p>
-							<h5> {$row['username']} </h5>
-							<h5> {$row['upload_date']} </h5>";
-					}
-				} else {
-					echo "No feedback found";
-				}
-			} else {
-				echo "Something went wrong with query";
-			}
-        ?>
-    
-    </div>
-   
+			<a href="http://localhost/web/crud/create-category.php">
+				<i class="fa-solid fa-upload"></i>
+				Create new category 
+			</a>
+			<?php showDBdata("category", "admin"); ?>
+		</div>
+
+
+		<div id="feedback" class="tabcontent">
+			<a href="http://localhost/web/contact.php"> 
+				<i class="fa-solid fa-upload"></i>
+			 	Create new feedback 
+			</a> 
+			<?php showDBdata("feedback", "admin"); ?>
+		</div>
+
+	</main>
+
+	<?php include 'footer.php'; ?>
 </body>
 </html>

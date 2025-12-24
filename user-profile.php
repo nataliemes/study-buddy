@@ -1,170 +1,67 @@
 <?php
+    session_start();
 
-	// nav-bar-shi mowmdeba user shemosulia tu ara
-	include 'nav-bar.php';
-	
-	// sesias dawyeba agar unda, nav-bar-shi daiwyo
-    if ($_SESSION['IS_ADMIN']) {
-        header("Location: admin-profile.php");
+    // if not logged in, shouldn't have access to user profile
+    if (!isset($_SESSION['EMAIL'])) {
+        header("Location: http://localhost/web/index.php");
         die();
     }
 
-	echo "<h1 style='color: blue'> USER PAGE </h1>";
-    echo "<a href='log-out.php'> Log out </a>";
+    // if logged in & admin, should go to admin profile instead
+    if ($_SESSION['IS_ADMIN']) {
+        header("Location: http://localhost/web/admin-profile.php");
+        die();
+    }
 
+	$message = "";
 	require_once "connection.php";
+
+	if (isset($_POST['delete'])){
+		$table = $_POST['table'];
+        $mysqli->query("DELETE FROM {$table} WHERE {$table}_id = {$_POST['id']}");
+		$message = "<div class='alert'> {$table} deleted successfully. </div>";
+    }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- <link rel="stylesheet" href="style.css"> -->
-
-    <style>
-    
-
-        .tab {
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-            height: 50px;
-            
-        }
-
-        .tab button {
-            border: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            font-size: 17px;
-            transition: 0.3s;
-        }
-
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-
-            border: 1px solid #ccc;
-            border-top: none;
-            background-color: lightblue;
-        }
-
-        .tabcontent.first {
-            display: block;
-        }
-
-    </style>
-
-    <script src="profile.js" ></script>
-
-    </head>
+	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script src="js/profile.js"></script>
+</head>
 <body>
+    <?php require_once 'nav-bar.php'; ?>
 
+    <header>
+        <h1> User homepage </h1>
+        <a href='auth/log-out.php'> Log out </a>
+    </header>
 
-    <div class="tab">
-        <button class="tablinks active" onclick="openTab(event, 'posts')">My posts</button>
-        <button class="tablinks" onclick="openTab(event, 'categories')">My categories</button>
-        <button class="tablinks" onclick="openTab(event, 'feedback')">My feedback</button>
-    </div>
+    <main>
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'posts')">My posts</button>
+            <button class="tablinks" onclick="openTab(event, 'categories')">My categories</button>
+            <button class="tablinks" onclick="openTab(event, 'feedback')">My feedback</button>
+        </div>
 
-    <div id="posts" class="tabcontent first">
-        
-        <a href="create-post.php"> Create new post </a>    
+        <div id="posts" class="tabcontent first">
+            <a href="http://localhost/web/crud/create-post.php"> Create new post </a>    
+            <?php showDBdata("post", "user"); ?>
+        </div>
 
-        <?php
-            //Select records from table 
-            $myQuery = "SELECT * FROM post
-                        WHERE user_id={$_SESSION['USER_ID']}";
-            $queryResult = $mysqli->query($myQuery);
+        <div id="categories" class="tabcontent">
+            <a href="http://localhost/web/crud/create-category.php"> Create new category </a>
+            <?php showDBdata("category", "user"); ?>
+        </div>
 
+        <div id="feedback" class="tabcontent">
+            <a href="http://localhost/web/contact.php"> Create new feedback </a>
+            <?php showDBdata("feedback", "user"); ?>
+        </div>
+    </main>
 
-            if($queryResult) {
-                if($queryResult->num_rows > 0) {
-                    while($row = $queryResult->fetch_assoc()) {
-                        echo "<h3> {$row['title']} </h3>
-                            <p> {$row['description']} </p>
-                            <p> {$row['file_path']} </p>
-                            <h5> {$row['upload_date']} </h5>";
-                    }
-                }
-                else {
-                    echo "No posts found";
-                }
-            } 
-            else {
-                echo "Something went wrong with query";
-            }
-
-        ?>   
-    </div>
-
-    <div id="categories" class="tabcontent">
-
-        <a href="create-category.php"> Create new category </a>
-        
-        <?php
-            //Select records from table 
-            $myQuery = "SELECT * FROM category
-                        WHERE user_id={$_SESSION['USER_ID']}";
-            $queryResult = $mysqli->query($myQuery);
-
-
-            if($queryResult) {
-                if($queryResult->num_rows > 0) {
-                    while($row = $queryResult->fetch_assoc()) {
-                        echo "<h3> {$row['name']} </h3>
-                            <p> {$row['description']} </p>
-                            <h5> {$row['creation_date']} </h5>";
-                    }
-                }
-                else {
-                    echo "No categories found";
-                }
-            } 
-            else {
-                echo "Something went wrong with query";
-            }
-        ?>
-    </div>
-
-    <div id="feedback" class="tabcontent">
-
-        <a href="contact.php"> Create new feedback </a>
-    
-        <?php
-            //Select records from table 
-            $myQuery = "SELECT * FROM feedback
-                        WHERE user_id={$_SESSION['USER_ID']}";
-            $queryResult = $mysqli->query($myQuery);
-
-
-            if($queryResult) {
-                if($queryResult->num_rows > 0) {
-                    while($row = $queryResult->fetch_assoc()) {
-                        echo "<h3> {$row['subject']} </h3>
-                            <p> {$row['text']} </p>
-                            <h5> {$row['upload_date']} </h5>";
-                    }
-                }
-                else {
-                    echo "No feedback found";
-                }
-            } 
-            else {
-                echo "Something went wrong with query";
-            }
-        
-
-        ?>
-    
-    </div>
-   
+    <?php include_once 'footer.php'; ?>
 </body>
 </html> 

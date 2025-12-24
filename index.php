@@ -1,6 +1,5 @@
-<?php
-    // nav-bar-shi mowmdeba user shemosulia tu ara
-    include 'nav-bar.php';
+<?php 
+    session_start();  // for nav-bar
 ?>
 
 <!DOCTYPE html>
@@ -9,83 +8,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Project Demo</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- <script src="https://kit.fontawesome.com/92d78ba0ea.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/side-image-layout.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <?php require_once 'nav-bar.php'; ?>
 
-    <main id="landing-page">
-        <img src="images/img2.png" alt="image">
-        
-        <h1> Develop skills <br>
-             from the best <br>
-             source
-        </h1>
+    <main>
+        <h1> Your Ultimate Resource for Academic Success </h1>
 
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Enim hic illum sed aut quos vero labore excepturi cumque
-            asperiores quae illo ratione, soluta reprehenderit,
-            possimus at qui provident quis repudiandae?
+            Discover, share, and enhance your study materials in one collaborative platform.
+            Join our community of students dedicated to achieving excellence through
+            shared knowledge and support. Whether you're looking for detailed notes or 
+            ready to share your own, Study Buddy is here to make your academic journey
+            smoother and more successful. Start exploring now and take your studies to the next level!
         </p>
-
-        <form name="search">
-            <input type="text" name="txt" onmouseout="this.value = ''; this.blur();">
-            <button> Search </button>
-        </form>
-
         
+        <div>
+            <img src="images/books.png" alt="image">
+            <a href="about.php"> Learn More </a>
+        </div>
         
     </main>
 
-    <main id="popular-posts">
-        <h1> Special <br>
-            features are <br>
-            only for you
-        </h1><!--
+    <aside>
+        <img src="images/study.png" alt="image">
+    </aside>
 
-        
-        --><div>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Enim hic illum sed aut quos vero labore excepturi cumque
-                asperiores quae illo ratione, soluta reprehenderit,
-                possimus at qui provident quis repudiandae?
-            </p>
-
-            <button> View all courses </button>
-        </div>
-
-        <div class="post">
-            post 1
-        </div><!--
-        
-        --><div class="post">
-            post 2
-        </div><!--
-
-        --><div class="post">
-            post 3
-        </div>
-    </main>
-
-    <footer>
-        <h1> NAME </h1>
-
-        <div id="more-info">
-            <a href="#"> Terms </a>
-            <a href="#"> Privacy </a>
-            <a href="#"> Cookies </a>
-        </div>
-
-        <div id="socials">
-            <a href="#"> fb </a>
-            <a href="#"> ln </a>
-            <a href="#"> x </a>
-        </div>
-    </footer>
-
-
-    
+    <?php include_once "footer.php"; ?>
 </body>
 </html>

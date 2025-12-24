@@ -1,47 +1,41 @@
 <?php
-
-    session_start();
     $link_name = "";
     $link_address = "";
-    if (!isset($_SESSION['EMAIL'])) {
+    if (!isset($_SESSION['USERNAME'])) {
         $link_name = "Log in";
-        $link_address = "log-in.php";
+        $link_address = "http://localhost/web/auth/log-in.php";
+        $link_icon = "<i class='fa-solid fa-right-to-bracket'></i>";
     }
     else {
-        // TO-DO: bazis magivrad $_SESSION-shi sheinaxe username & is_admin
-        
-        include 'connection.php';
+        $link_name = $_SESSION['USERNAME'];
+        $link_icon = "<i class='fa-solid fa-user'></i>";
 
-        $query = "SELECT * FROM user WHERE email='{$_SESSION['EMAIL']}'";
-        $result = $mysqli->query($query);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $link_name = "{$row['username']}";
-
-            if ($row['is_admin']){   // === TRUE da === 1 ar mushaobs ratomgac
-                $link_address = "http://localhost/PROJECT1/admin-profile.php";
-            }
-            else {
-                $link_address = "http://localhost/PROJECT1/user-profile.php";
-            }
+        if ($_SESSION['IS_ADMIN']){
+            $link_address = "http://localhost/web/admin-profile.php";
         }
         else {
-            die("ERROR: couldn't find user in the database!");
+            $link_address = "http://localhost/web/user-profile.php";
         }
     }
-
-
-    echo "
-        <nav>
-            <h1> NAME </h1>
-            <a href='http://localhost/PROJECT1/index.php'> Home </a>
-            <a href='http://localhost/PROJECT1/about.php'> About </a>
-            <a href='#'> Posts </a>
-            <a href='http://localhost/PROJECT1/contact.php'> Contact </a>
-            <a href='http://localhost/PROJECT1/faq.php'> FAQ </a>
-            <a href='{$link_address}'> {$link_name} </a>
-        </nav>
-    ";
-
 ?>
+
+<!DOCTYPE html>
+<head>
+    <script src="https://kit.fontawesome.com/166339ffbb.js" crossorigin="anonymous"></script>
+</head>
+<html>
+<body>    
+    <nav>
+        <h1> <i class="fa-solid fa-book"></i> Study Buddy </h1>
+        <div>
+            <a href='http://localhost/web/index.php'> <i class="fa-solid fa-house"></i> Home </a>
+            <a href='http://localhost/web/about.php'> <i class="fa-solid fa-circle-info"></i> About </a>
+            <a href='http://localhost/web/posts.php'> <i class="fa-solid fa-file-lines"></i> Posts </a>
+
+            <a href='http://localhost/web/contact.php'> <i class="fa-solid fa-envelope"></i> Contact </a>
+            <a href='http://localhost/web/faq.php'> <i class="fa-solid fa-circle-question"></i> FAQ </a>
+            <?php echo "<a href={$link_address}> {$link_icon} {$link_name} </a>"; ?>
+        </div>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,42 @@
+main {
+	background-color: #DDD8DB;
+	border-radius: 2vmin;
+    margin: 2vmin 0;
+    padding: 4vmin;
+}
+
+main h1 {
+    margin-bottom: 4vmin;
+}
+
+main h3 {
+    margin: 2vmin 0;
+}
+
+main p {
+    margin-bottom: 4vmin;
+}
+
+main ul {
+    list-style: none;
+}
+
+main ul li {
+    padding: 1vmin 0;
+}
+
+ul li:before {
+    content: '\2605';
+}
+
+h1 + img {
+    height: 50vmin;
+    width: 80vmin;
+    float: left;
+}
+
+ul + img {
+    height: 68vmin;
+    width: 76vmin;
+    float: right;
+}
