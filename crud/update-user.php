@@ -4,13 +4,13 @@
 
 	// if not logged in, shouldn't have access
     if (!isset($_SESSION['EMAIL'])) {
-        header("Location: http://localhost/web/index.php");
+        header("Location: http://localhost/study-buddy/index.php");
         die();
     }
 
 	// if logged in & normal user, shouldn't have access
     if (!$_SESSION['IS_ADMIN']) {
-        header("Location: http://localhost/web/user-profile.php");
+        header("Location: http://localhost/study-buddy/user-profile.php");
         die();
     }
 
@@ -108,7 +108,7 @@
 			
 			<button name="saveUpdate" type="submit"> Update </button>
 
-			<p> <a href='http://localhost/web/admin-profile.php'> Back to profile </a> </p>
+			<p> <a href='http://localhost/study-buddy/admin-profile.php'> Back to profile </a> </p>
 		</form>
 	</main>
 

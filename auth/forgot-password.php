@@ -2,7 +2,7 @@
     // tu shemosulia, forgot-password gverdze agar unda shediodes
     session_start();
     if (isset($_SESSION['USERNAME'])) {
-        header("location: http://localhost/web/index.php");
+        header("location: http://localhost/study-buddy/index.php");
         die();
     }
 
@@ -51,7 +51,7 @@
                     // Content
                     $mail->isHTML(true);
                     $mail->Subject = 'no reply';
-                    $mail->Body    = '<a href="http://localhost/web/auth/change-password.php?reset='. $code .'">
+                    $mail->Body    = '<a href="http://localhost/study-buddy/auth/change-password.php?reset='. $code .'">
                                         Click here to change password </a>';
 
                     $mail->send();
@@ -96,7 +96,7 @@
 
             <button name="submit" class="btn" type="submit"> Send Link </button>
 
-            <p> Back to: <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
+            <p> Back to: <a href="http://localhost/study-buddy/auth/log-in.php"> Log in </a> </p>
         </form>
     </main>
 

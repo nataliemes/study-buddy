@@ -4,7 +4,7 @@
 
     session_start();
     if (!isset($_GET['reset']) || isset($_SESSION['USERNAME'])){
-        header("location: http://localhost/web/index.php");
+        header("location: http://localhost/study-buddy/index.php");
         die();
     }
 
@@ -26,14 +26,14 @@
                     $message = "<div class='alert'>
                             Password updated successfully. <br>
                             You will be redirected to log-in page. </div>";
-                    header("refresh: 6, url=http://localhost/web/auth/log-in.php");
+                    header("refresh: 6, url=http://localhost/study-buddy/auth/log-in.php");
                 }
             }
         }
         else {
             $message = "<div class='alert'> Such reset code does not exist.
                         You will be redirected to log-in page. </div>";
-            header("refresh: 6, url=http://localhost/web/auth/log-in.php");
+            header("refresh: 6, url=http://localhost/study-buddy/auth/log-in.php");
         }
     }
 ?>
@@ -43,16 +43,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/web/css/style.css">
-    <link rel="stylesheet" href="http://localhost/web/css/side-image-layout.css">
-    <link rel="stylesheet" href="http://localhost/web/css/form.css">
+    <link rel="stylesheet" href="http://localhost/study-buddy/css/style.css">
+    <link rel="stylesheet" href="http://localhost/study-buddy/css/side-image-layout.css">
+    <link rel="stylesheet" href="http://localhost/study-buddy/css/form.css">
     <title>Web Project Demo</title>
 </head>
 <body>
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
-        <img src="http://localhost/web/images/reset.png" alt="image">
+        <img src="http://localhost/study-buddy/images/reset.png" alt="image">
     </aside>
 
     <main>
@@ -68,7 +68,7 @@
 
             <button name="submit" class="btn" type="submit"> Update </button>
 
-            <p> Back to: <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
+            <p> Back to: <a href="http://localhost/study-buddy/auth/log-in.php"> Log in </a> </p>
         </form>
     </main>
 

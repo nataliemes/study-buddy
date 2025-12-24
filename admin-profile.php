@@ -3,13 +3,13 @@
 
 	// if not logged in, shouldn't have access to admin profile
     if (!isset($_SESSION['EMAIL'])) {
-        header("Location: http://localhost/web/index.php");
+        header("Location: http://localhost/study-buddy/index.php");
         die();
     }
 
 	// if logged in & normal user, should go to user profile instead
     if (!$_SESSION['IS_ADMIN']) {
-        header("Location: http://localhost/web/user-profile.php");
+        header("Location: http://localhost/study-buddy/user-profile.php");
         die();
     }
 
@@ -133,7 +133,7 @@
 	<header>
 		<h1> Admin homepage </h1>
 		<?php echo $message; ?>
-		<a href='http://localhost/web/auth/log-out.php'> <i class="fa-solid fa-right-from-bracket"></i> Log out </a>
+		<a href='http://localhost/study-buddy/auth/log-out.php'> <i class="fa-solid fa-right-from-bracket"></i> Log out </a>
 	</header>
 
 	<main>
@@ -188,7 +188,7 @@
 
 
 		<div id="post" class="tabcontent">
-			<a href="http://localhost/web/crud/create-post.php"> 
+			<a href="http://localhost/study-buddy/crud/create-post.php"> 
 				<i class="fa-solid fa-upload"></i>
 				Create new post 
 			</a>   
@@ -199,7 +199,7 @@
 
 		<div id="category" class="tabcontent">
 
-			<a href="http://localhost/web/crud/create-category.php">
+			<a href="http://localhost/study-buddy/crud/create-category.php">
 				<i class="fa-solid fa-upload"></i>
 				Create new category 
 			</a>
@@ -208,7 +208,7 @@
 
 
 		<div id="feedback" class="tabcontent">
-			<a href="http://localhost/web/contact.php"> 
+			<a href="http://localhost/study-buddy/contact.php"> 
 				<i class="fa-solid fa-upload"></i>
 			 	Create new feedback 
 			</a> 

@@ -2,7 +2,7 @@
     // tu shemosulia, registraciis gverdze agar unda shediodes
     session_start();
     if (isset($_SESSION['USERNAME'])) {
-        header("location: http://localhost/web/index.php");
+        header("location: http://localhost/study-buddy/index.php");
         die();
     }
 
@@ -86,7 +86,7 @@
                     // Content
                     $mail->isHTML(true);
                     $mail->Subject = 'no reply';
-                    $mail->Body    = '<b><a href="http://localhost/web/auth/log-in.php/?verification='. $code. '">
+                    $mail->Body    = '<b><a href="http://localhost/study-buddy/auth/log-in.php/?verification='. $code. '">
                                     Click here to verify your account </a></b>';
 
                     $mail->send();
@@ -138,7 +138,7 @@
 
             <button name="submit" class="btn" type="submit"> Sign up </button>
 
-            <p> Have an account? <a href="http://localhost/web/auth/log-in.php"> Log in </a> </p>
+            <p> Have an account? <a href="http://localhost/study-buddy/auth/log-in.php"> Log in </a> </p>
         </form>
     </main>
 

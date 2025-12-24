@@ -2,7 +2,7 @@
 
     session_start();
     if (!isset($_SESSION['EMAIL'])) {
-        header("Location: http://localhost/web/index.php");
+        header("Location: http://localhost/study-buddy/index.php");
         die();
     }
 
@@ -128,10 +128,10 @@
 
             <?php
                 if ($_SESSION['IS_ADMIN']) {
-                    $link = "http://localhost/web/admin-profile.php";
+                    $link = "http://localhost/study-buddy/admin-profile.php";
                 }
                 else {
-                    $link = "http://localhost/web/user-profile.php";
+                    $link = "http://localhost/study-buddy/user-profile.php";
                 }
                 echo "<p> <a href={$link}> Back to profile </a> </p>";
             ?>

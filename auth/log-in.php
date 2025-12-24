@@ -2,7 +2,7 @@
     // tu shemosulia, loginis gverdze agar unda shediodes
     session_start();
     if (isset($_SESSION['EMAIL'])) {
-        header("Location: http://localhost/web/index.php");
+        header("Location: http://localhost/study-buddy/index.php");
         die();
     }
 
@@ -29,7 +29,7 @@
         else {
             $message = "ERROR: such verification code does not exist.
                         <br> You will be redirected to sign-up page.";
-            header("refresh: 3, url=http://localhost/web/auth/sign-up.php");
+            header("refresh: 3, url=http://localhost/study-buddy/auth/sign-up.php");
             die();
         }
     }
@@ -62,7 +62,7 @@
                 $_SESSION['USERNAME'] = $row['username'];
                 $_SESSION['IS_ADMIN'] = $row['is_admin'];
 
-                header("Location: http://localhost/web/index.php");
+                header("Location: http://localhost/study-buddy/index.php");
                 die();
             }
         }
@@ -73,19 +73,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/web/css/style.css">
-    <link rel="stylesheet" href="http://localhost/web/css/side-image-layout.css">
-    <link rel="stylesheet" href="http://localhost/web/css/form.css">
+    <link rel="stylesheet" href="http://localhost/study-buddy/css/style.css">
+    <link rel="stylesheet" href="http://localhost/study-buddy/css/side-image-layout.css">
+    <link rel="stylesheet" href="http://localhost/study-buddy/css/form.css">
 </head>
 <body>
     <?php require_once "../nav-bar.php"; ?>
 
     <aside>
-        <img src="http://localhost/web/images/login.png" alt="image">
+        <img src="http://localhost/study-buddy/images/login.png" alt="image">
     </aside>
 
     <main>
-        <form action="http://localhost/web/auth/log-in.php" method="post">
+        <form action="http://localhost/study-buddy/auth/log-in.php" method="post">
             <h2> Log in </h2>
             <?php echo $message; ?>
 
@@ -98,7 +98,7 @@
             <p><a href="forgot-password.php"> Forgot Password? </a></p>
             <button name="submit" class="btn" type="submit"> Log in </button>
 
-            <p> Don't have an account? <a href="http://localhost/web/auth/sign-up.php"> Sign up </a></p>
+            <p> Don't have an account? <a href="http://localhost/study-buddy/auth/sign-up.php"> Sign up </a></p>
         </form>
     </main>
 
