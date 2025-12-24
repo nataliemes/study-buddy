@@ -14,42 +14,42 @@ A web application that allows students to share notes with each other. Users can
 - MySQL (database)
 
 ## Screenshots
-- Landing Page
+### Landing Page
 
 ![landing-page](screenshots/index.png)
 
-- Sign Up
+### Sign Up
 
 ![sign-up-page](screenshots/sign-up.png)
 
-- Log In
+### Log In
 
 ![log-in-page](screenshots/log-in.png)
 
-- About
+### About
 
 ![about-page](screenshots/about.png)
 
-- Frequently Asked Questions
+### Frequently Asked Questions
 
 ![faq-page](screenshots/faq.png)
 
-- Contact
+### Contact
 
 ![contact-page](screenshots/contact.png)
 
-- User homepage
+### User homepage
 
 ![user-page](screenshots/user-homepage.png)
 
-- Admin homepage
+### Admin homepage
 
 ![admin-page](screenshots/admin-homepage.png)
 
-- Posts
+### Posts
 
 ![posts-page](screenshots/posts.png)
 
-- Creating a New Post
+### Creating a New Post
 
 ![new-post-page](screenshots/new-post.png)
