@@ -37,12 +37,12 @@
 
                 try {
                     $mail->isSMTP();                                      // Send using SMTP
-                    $mail->Host       = 'REMOVED';                 // Set the SMTP server to send through
+                    $mail->Host       = getenv('SMTP_HOST');              // Set the SMTP server to send through
                     $mail->SMTPAuth   = true;                             // Enable SMTP authentication
                     $mail->Username = getenv('SMTP_USERNAME');            // SMTP username
                     $mail->Password = getenv('SMTP_PASSWORD');            // SMTP password
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;      // Enable implicit TLS encryption
-                    $mail->Port       = REMOVED;                              // TCP port to connect to
+                    $mail->Port       = getenv('SMTP_PORT');              // TCP port to connect to
 
                     // Recipients
                     $mail->setFrom(getenv('SMTP_USERNAME'););
